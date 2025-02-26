@@ -1,8 +1,8 @@
-name: Build image
+name: Build branch
 
 on:
   push:
-    branches:
+    branches-ignore:
       - main
 
 jobs:
