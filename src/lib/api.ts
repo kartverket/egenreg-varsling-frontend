@@ -1,20 +1,20 @@
-import axios from "axios";
+import axios from "axios"
 
 export const api = axios.create({
-  baseURL: "http://localhost:8080",
+  baseURL: "http://localhost:8869",
   headers: {
     "Content-Type": "application/json",
   },
-});
+})
 
 api.interceptors.response.use(
-  (response) => {
-    return response.data;
+  response => {
+    return response.data
   },
-  (error) => {
+  error => {
     if (error.response) {
-      console.error(`Error ${error.response.status}: ${error.response.data}`);
+      console.error(`Error ${error.response.status}: ${error.response.data}`)
     }
-    return Promise.reject(error);
+    return Promise.reject(error)
   },
-);
+)

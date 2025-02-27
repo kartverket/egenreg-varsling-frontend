@@ -1,29 +1,37 @@
-import { Table, Thead, Tr, Th, Tbody, Td, Tag } from "@kvib/react";
-import { formatDate, statusTranslation } from "../../../utils/utils";
-import { getSuccessRate, getOrderStatusColorTag } from "../utils";
-import { PaginationOrder } from "../api/types";
-import { useNavigate } from "react-router-dom";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableColumnHeader,
+  TableHeader,
+  TableRow,
+  Tag,
+} from "@kvib/react"
+import { useNavigate } from "react-router-dom"
+import { formatDate, statusTranslation } from "../../../utils/utils"
+import { PaginationOrder } from "../api/types"
+import { getOrderStatusColorTag, getSuccessRate } from "../utils"
 
 type TableContentProps = {
-  ordersFiltered: PaginationOrder[] | undefined;
-};
+  ordersFiltered: PaginationOrder[] | undefined
+}
 
 export const TableContent = ({ ordersFiltered }: TableContentProps) => {
-  const navigate = useNavigate();
+  const navigate = useNavigate()
   return (
     <Table>
-      <Thead>
-        <Tr>
-          <Th>Ordre</Th>
-          <Th>Utsending</Th>
-          <Th>Antall varsler</Th>
-          <Th>Suksessrate</Th>
-          <Th width={200}>Status</Th>
-        </Tr>
-      </Thead>
-      <Tbody>
-        {ordersFiltered?.map((order) => (
-          <Tr
+      <TableHeader>
+        <TableRow>
+          <TableColumnHeader>Ordre</TableColumnHeader>
+          <TableColumnHeader>Utsending</TableColumnHeader>
+          <TableColumnHeader>Antall varsler</TableColumnHeader>
+          <TableColumnHeader>Suksessrate</TableColumnHeader>
+          <TableColumnHeader width={200}>Status</TableColumnHeader>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {ordersFiltered?.map(order => (
+          <TableRow
             key={order.id}
             onClick={() => navigate(`${order.id}`)}
             _hover={{
@@ -31,26 +39,22 @@ export const TableContent = ({ ordersFiltered }: TableContentProps) => {
               cursor: "pointer",
             }}
           >
-            <Td>{order.id}</Td>
-            <Td>{formatDate(order.requestedSendTime)}</Td>
-            <Td>{order.notificationsSummary.count}</Td>
-            <Td>{getSuccessRate(order)}</Td>
-            <Td>
+            <TableCell>{order.id}</TableCell>
+            <TableCell>{formatDate(order.requestedSendTime)}</TableCell>
+            <TableCell>{order.notificationsSummary.count}</TableCell>
+            <TableCell>{getSuccessRate(order)}</TableCell>
+            <TableCell>
               <Tag
-                textColor={
-                  order.orderStatus === "Scheduled" ? "Black" : undefined
-                }
-                variant={
-                  order.orderStatus === "Scheduled" ? "outline" : "subtle"
-                }
+                color={order.orderStatus === "Scheduled" ? "Black" : undefined}
+                variant={order.orderStatus === "Scheduled" ? "outline" : "subtle"}
                 colorScheme={getOrderStatusColorTag(order.orderStatus)}
               >
                 {statusTranslation[order.orderStatus]}
               </Tag>
-            </Td>
-          </Tr>
+            </TableCell>
+          </TableRow>
         ))}
-      </Tbody>
+      </TableBody>
     </Table>
-  );
-};
+  )
+}

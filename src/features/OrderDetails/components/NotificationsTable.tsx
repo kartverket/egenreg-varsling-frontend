@@ -2,61 +2,60 @@ import {
   Button,
   Stack,
   Table,
-  Tbody,
+  TableBody,
+  TableCell,
+  TableColumnHeader,
+  TableHeader,
+  TableRow,
   Td,
   Text,
-  Th,
-  Thead,
-  Tr,
-} from "@kvib/react";
-import { useState } from "react";
-import { Notification } from "../api/types.ts";
-import { getNotificationChannelLabel } from "../utils.ts";
-import { statusTranslation } from "../../../utils/utils.ts";
+} from "@kvib/react"
+import { useState } from "react"
+import { statusTranslation } from "../../../utils/utils.ts"
+import { Notification } from "../api/types.ts"
+import { getNotificationChannelLabel } from "../utils.ts"
 
 type NotificationsTableProps = {
-  notifications: Notification[];
-};
+  notifications: Notification[]
+}
 
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 10
 
-export const NotificationsTable = ({
-  notifications,
-}: NotificationsTableProps) => {
-  const [listSize, setListSize] = useState(PAGE_SIZE);
-  const total = notifications.length;
+export const NotificationsTable = ({ notifications }: NotificationsTableProps) => {
+  const [listSize, setListSize] = useState(PAGE_SIZE)
+  const total = notifications.length
 
   return (
     <>
       <Table>
-        <Thead>
-          <Tr>
-            <Th>Mottaker</Th>
-            <Th>Kanal</Th>
-            <Th>Status</Th>
-          </Tr>
-        </Thead>
-        <Tbody>
-          {notifications.slice(0, listSize).map((notification) => (
-            <Tr key={crypto.randomUUID()}>
-              <Td>
+        <TableHeader>
+          <TableRow>
+            <TableColumnHeader>Mottaker</TableColumnHeader>
+            <TableColumnHeader>Kanal</TableColumnHeader>
+            <TableColumnHeader>Status</TableColumnHeader>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {notifications.slice(0, listSize).map(notification => (
+            <TableRow key={crypto.randomUUID()}>
+              <TableCell>
                 {notification.recipient.nationalIdentityNumber ||
                   notification.recipient.emailAddress ||
                   notification.recipient.mobileNumber}
-              </Td>
-              <Td>{getNotificationChannelLabel(notification)}</Td>
+              </TableCell>
+              <TableCell>{getNotificationChannelLabel(notification)}</TableCell>
               <Td>{statusTranslation[notification.status]}</Td>
-            </Tr>
+            </TableRow>
           ))}
-        </Tbody>
+        </TableBody>
       </Table>
 
       <Stack direction="row" align="center">
         <Button
-          isDisabled={listSize >= total}
+          disabled={listSize >= total}
           variant="tertiary"
           rightIcon="arrow_downward"
-          onClick={() => setListSize((prev) => prev + PAGE_SIZE)}
+          onClick={() => setListSize(prev => prev + PAGE_SIZE)}
         >
           Last inn flere varsler
         </Button>
@@ -65,5 +64,5 @@ export const NotificationsTable = ({
         </Text>
       </Stack>
     </>
-  );
-};
+  )
+}

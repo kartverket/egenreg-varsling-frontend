@@ -1,47 +1,32 @@
-import { Card, Divider, Heading } from "@kvib/react";
-import { OrderResponse } from "../api/types.ts";
-import DetailRow from "../../../components/DetailRow.tsx";
+import { Card, Divider, Heading } from "@kvib/react"
+import DetailRow from "../../../components/DetailRow.tsx"
+import { OrderResponse } from "../api/types.ts"
 
 type OrderSuccessRateProps = {
-  order: OrderResponse;
-};
+  order: OrderResponse
+}
 
 export const OrderSuccessRate = ({ order }: OrderSuccessRateProps) => {
-  const {
-    delivered,
-    count: notifications,
-    failed,
-    notIdentified,
-  } = order.notifications.summary;
-  const isCancelled = order.orderStatus === "Cancelled";
+  const { delivered, count: notifications, failed, notIdentified } = order.notifications.summary
+  const isCancelled = order.orderStatus === "Cancelled"
 
-  const successRate = (delivered / notifications) * 100;
+  const successRate = (delivered / notifications) * 100
 
-  const totalFailed = failed + notIdentified;
+  const totalFailed = failed + notIdentified
 
-  const totalFailedRate = (totalFailed / notifications) * 100;
-  const notIdentifiedRate = (notIdentified / notifications) * 100;
-  const otherFailuresRate = (failed / notifications) * 100;
+  const totalFailedRate = (totalFailed / notifications) * 100
+  const notIdentifiedRate = (notIdentified / notifications) * 100
+  const otherFailuresRate = (failed / notifications) * 100
 
   return (
-    <Card
-      variant="filled"
-      py={8}
-      px={12}
-      gap={2}
-      color={isCancelled ? "gray.500" : "inherit"}
-    >
+    <Card variant="outline" py={8} px={12} gap={2} color={isCancelled ? "gray.500" : "inherit"}>
       <Heading as="h3" size="md" mb={2}>
         Suksessrate
       </Heading>
       <DetailRow label="Totalt" value={notifications.toString()} />
       <DetailRow
         label="Vellykket kontakt"
-        value={
-          delivered > 0
-            ? `${delivered} (${successRate.toFixed(0)}%)`
-            : delivered.toString()
-        }
+        value={delivered > 0 ? `${delivered} (${successRate.toFixed(0)}%)` : delivered.toString()}
       />
       <DetailRow
         label="Totalt feilet"
@@ -62,12 +47,8 @@ export const OrderSuccessRate = ({ order }: OrderSuccessRateProps) => {
       />
       <DetailRow
         label="Feilet av andre årsaker"
-        value={
-          failed > 0
-            ? `${failed} (${otherFailuresRate.toFixed(0)}%)`
-            : failed.toString()
-        }
+        value={failed > 0 ? `${failed} (${otherFailuresRate.toFixed(0)}%)` : failed.toString()}
       />
     </Card>
-  );
-};
+  )
+}

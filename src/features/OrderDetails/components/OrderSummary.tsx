@@ -1,24 +1,20 @@
-import { Card, SimpleGrid, Stack, Text } from "@kvib/react";
-import { OrderResponse } from "../api/types.ts";
-import { formatDate } from "../../../utils/utils.ts";
-import {
-  EmailTemplate,
-  NotificationChannel,
-  SmsTemplate,
-} from "../../../types/types.ts";
+import { Card, SimpleGrid, Stack, Text } from "@kvib/react"
+import { EmailTemplate, NotificationChannel, SmsTemplate } from "../../../types/types.ts"
+import { formatDate } from "../../../utils/utils.ts"
+import { OrderResponse } from "../api/types.ts"
 
 type OrderSummaryProps = {
-  order: OrderResponse;
-};
+  order: OrderResponse
+}
 
 const NotificationDetails = ({
   notificationChannel,
   emailTemplate,
   smsTemplate,
 }: {
-  notificationChannel: NotificationChannel;
-  emailTemplate?: EmailTemplate | null;
-  smsTemplate?: SmsTemplate | null;
+  notificationChannel: NotificationChannel
+  emailTemplate?: EmailTemplate | null
+  smsTemplate?: SmsTemplate | null
 }) => {
   return (
     <>
@@ -51,27 +47,16 @@ const NotificationDetails = ({
         </Stack>
       )}
     </>
-  );
-};
+  )
+}
 
 export const OrderSummary = ({ order }: OrderSummaryProps) => {
-  const {
-    emailTemplate,
-    smsTemplate,
-    notifications,
-    notificationChannel,
-    requestedSendTime,
-  } = order;
-  const isCancelled = order.orderStatus === "Cancelled";
+  const { emailTemplate, smsTemplate, notifications, notificationChannel, requestedSendTime } =
+    order
+  const isCancelled = order.orderStatus === "Cancelled"
 
   return (
-    <Card
-      variant="filled"
-      py={8}
-      px={12}
-      gap={4}
-      color={isCancelled ? "gray.500" : "inherit"}
-    >
+    <Card variant="outline" py={8} px={12} gap={4} color={isCancelled ? "gray.500" : "inherit"}>
       <SimpleGrid autoColumns="1fr 1fr" gridAutoFlow="column" gap={6}>
         <Stack gap={6}>
           <div>
@@ -94,5 +79,5 @@ export const OrderSummary = ({ order }: OrderSummaryProps) => {
         />
       </SimpleGrid>
     </Card>
-  );
-};
+  )
+}

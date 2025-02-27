@@ -1,11 +1,10 @@
 import {
   Button,
   Container,
+  Field,
   Flex,
-  FormControl,
   FormErrorMessage,
-  FormHelperText,
-  FormLabel,
+  Grid,
   Heading,
   Input,
   Radio,
@@ -13,22 +12,17 @@ import {
   Stack,
   Textarea,
   useDisclosure,
-  Grid,
-} from "@kvib/react";
-import { Form, Formik, FormikProps } from "formik";
-import { toFormikValidationSchema } from "zod-formik-adapter";
-import { ChannelTooltip } from "./components/ChannelTooltip.tsx";
-import { ConfirmDialog } from "./components/ConfirmDialog.tsx";
-import { RequestedSendTime } from "./components/RequestedSendTime.tsx";
-import { FormSchema, FormValues, initialValues } from "./formSchema.ts";
-import { isInvalid } from "./utils.ts";
+} from "@kvib/react"
+import { Form, Formik, FormikProps } from "formik"
+import { toFormikValidationSchema } from "zod-formik-adapter"
+import { ChannelTooltip } from "./components/ChannelTooltip.tsx"
+import { ConfirmDialog } from "./components/ConfirmDialog.tsx"
+import { RequestedSendTime } from "./components/RequestedSendTime.tsx"
+import { FormSchema, FormValues, initialValues } from "./formSchema.ts"
+import { isInvalid } from "./utils.ts"
 
 export const CreateOrder = () => {
-  const {
-    isOpen: isDialogOpen,
-    onOpen: onOpenDialog,
-    onClose: onCloseDialog,
-  } = useDisclosure();
+  const { open: isDialogOpen, onOpen: onOpenDialog, onClose: onCloseDialog } = useDisclosure()
 
   return (
     <Formik
@@ -41,25 +35,28 @@ export const CreateOrder = () => {
           <Container maxW="container.sm" display="grid" gap={8} p={0}>
             <Heading>Bestill utsending av varsel</Heading>
             <Stack gap={6}>
-              <FormControl isInvalid={isInvalid(form, "recipients")}>
-                <FormLabel>Mottakere av varselet</FormLabel>
-                <FormHelperText>
-                  Skriv inn fødselsnummer til mottaker. Flere mottakere skilles
-                  med et komma.
-                </FormHelperText>
+              <Field invalid={isInvalid(form, "recipients")}>
+                <Field label="Mottakere av varselet" />
+                <Field helperText=" Skriv inn fødselsnummer til mottaker. Flere mottakere skilles med et komma." />
+
                 <Textarea
                   value={form.values.recipients}
                   onChange={form.handleChange("recipients")}
                 />
                 <FormErrorMessage>{form.errors.recipients}</FormErrorMessage>
-              </FormControl>
+              </Field>
 
-              <FormControl as="fieldset">
+              <Field as="fieldset">
                 <Flex gap={1} display="flex" alignItems="center" height="24px">
-                  <FormLabel as="legend">
-                    Kanal
-                    <ChannelTooltip />
-                  </FormLabel>
+                  <Field
+                    as="legend"
+                    label={
+                      <>
+                        Kanal
+                        <ChannelTooltip />
+                      </>
+                    }
+                  ></Field>
                 </Flex>
                 <RadioGroup
                   defaultValue={form.values.channel}
@@ -72,47 +69,42 @@ export const CreateOrder = () => {
                     <Radio value="SmsPreferred">Foretrekk SMS</Radio>
                   </Stack>
                 </RadioGroup>
-              </FormControl>
+              </Field>
 
               {form.values.channel !== "Sms" && (
                 <Grid gap={2}>
-                  <FormControl isInvalid={isInvalid(form, "emailSubject")}>
-                    <FormLabel>Emne på e-post</FormLabel>
+                  <Field invalid={isInvalid(form, "emailSubject")}>
+                    <Field label="Emne på e-post" />
                     <Input
                       value={form.values.emailSubject}
                       onChange={form.handleChange("emailSubject")}
                     />
-                    <FormErrorMessage>
-                      {form.errors.emailSubject}
-                    </FormErrorMessage>
-                  </FormControl>
+                    <Field errorText={form.errors.emailSubject} />
+                  </Field>
 
-                  <FormControl isInvalid={isInvalid(form, "emailBody")}>
-                    <FormLabel>Melding på e-post</FormLabel>
+                  <Field invalid={isInvalid(form, "emailBody")}>
+                    <Field label="Melding på e-post" />
                     <Textarea
                       value={form.values.emailBody}
                       onChange={form.handleChange("emailBody")}
                     />
-                    <FormErrorMessage>{form.errors.emailBody}</FormErrorMessage>
-                  </FormControl>
+                    <Field errorText={form.errors.emailBody} />
+                  </Field>
                 </Grid>
               )}
 
               {form.values.channel !== "Email" && (
-                <FormControl isInvalid={isInvalid(form, "smsBody")}>
-                  <FormLabel>Melding på SMS</FormLabel>
-                  <FormHelperText>Maks 157 tegn.</FormHelperText>
-                  <Textarea
-                    value={form.values.smsBody}
-                    onChange={form.handleChange("smsBody")}
-                  />
-                  <FormErrorMessage>{form.errors.smsBody}</FormErrorMessage>
-                </FormControl>
+                <Field invalid={isInvalid(form, "smsBody")}>
+                  <Field label="Melding på SMS" />
+                  <Field helperText="Maks 157 tegn." />
+                  <Textarea value={form.values.smsBody} onChange={form.handleChange("smsBody")} />
+                  <Field errorText={form.errors.smsBody} />
+                </Field>
               )}
               <RequestedSendTime />
             </Stack>
 
-            <Button type="submit" w="max-content" isLoading={form.isSubmitting}>
+            <Button type="submit" w="max-content" loading={form.isSubmitting}>
               Send varsel
             </Button>
 
@@ -121,5 +113,5 @@ export const CreateOrder = () => {
         </Form>
       )}
     </Formik>
-  );
-};
+  )
+}
