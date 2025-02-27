@@ -65,9 +65,9 @@ export const OrderDetails = () => {
     <Container maxW="container.lg" display="grid" gap={8} p={0} position="relative">
       <Breadcrumb position="absolute" top="-40px">
         <BreadcrumbItem>
-          <BreadcrumbLink as={Link} href="/orders">
+          <Link to="/orders">
             Oversikt
-          </BreadcrumbLink>
+          </Link>
         </BreadcrumbItem>
         <BreadcrumbItem>
           <BreadcrumbLink href="#">Informasjon om ordren</BreadcrumbLink>

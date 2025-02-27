@@ -57,17 +57,19 @@ export const OrderStatus = ({ order }: OrderStatusProps) => {
   const { title, description, icon, bg } = getStatusMeta(order)
 
   return (
-    <Card variant="outline" py={8} px={12} justifyContent="space-between" direction="row" bg={bg}>
-      <Flex direction="column" justify="center" maxW="50%">
-        <Text as="b">ORDRE-ID</Text>
-        <Text>{order.id}</Text>
-      </Flex>
-      <Flex gap={3} align="center" textAlign="right">
-        <div>
-          <Text as="b">{title}</Text>
-          <Text gridColumn={1}>{description}</Text>
-        </div>
-        <Icon size={48} icon={icon} />
+    <Card variant="outline" py={8} px={12} justifyContent="space-between" bg={bg}>
+      <Flex justifyContent="space-between">
+        <Flex direction="column" justify="center" maxW="50%">
+          <Text as="b">ORDRE-ID</Text>
+          <Text>{order.id}</Text>
+        </Flex>
+        <Flex gap={3} align="center" textAlign="right">
+          <div>
+            <Text as="b">{title}</Text>
+            <Text gridColumn={1}>{description}</Text>
+          </div>
+          <Icon size={48} icon={icon} />
+        </Flex>
       </Flex>
     </Card>
   )
