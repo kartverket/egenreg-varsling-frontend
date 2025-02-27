@@ -1,40 +1,39 @@
 import {
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogCloseButton,
-  AlertDialogContent,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogOverlay,
   Button,
+  Dialog,
+  DialogBackdrop,
+  DialogBody,
+  DialogCloseTrigger,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
   Flex,
   useDisclosure,
-} from "@kvib/react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useRef } from "react";
-import { CustomAlert } from "../../../components/Alert";
-import { cancelOrder } from "../api/cancelOrder";
-import { OrderResponse } from "../api/types";
+} from "@kvib/react"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { useRef } from "react"
+import { CustomAlert } from "../../../components/Alert"
+import { cancelOrder } from "../api/cancelOrder"
+import { OrderResponse } from "../api/types"
 
 type CancelOrderProps = {
-  order: OrderResponse;
-};
+  order: OrderResponse
+}
 
 export const CancelOrder = ({ order }: CancelOrderProps) => {
-  const queryClient = useQueryClient();
+  const queryClient = useQueryClient()
   const { mutate, isError, isPending } = useMutation({
     mutationFn: (id: string) => cancelOrder(id),
-  });
+  })
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const cancelRef = useRef<HTMLButtonElement>(null);
+  const { open, onOpen, onClose } = useDisclosure()
+  const cancelRef = useRef<HTMLButtonElement>(null)
 
   const handleCancelOrder = () => {
     mutate(order.id, {
-      onSuccess: () =>
-        queryClient.invalidateQueries({ queryKey: ["order", order.id] }),
-    });
-  };
+      onSuccess: () => queryClient.invalidateQueries({ queryKey: ["order", order.id] }),
+    })
+  }
 
   return (
     <>
@@ -47,20 +46,15 @@ export const CancelOrder = ({ order }: CancelOrderProps) => {
       >
         Kanseller ordren
       </Button>
-      <AlertDialog
-        isOpen={isOpen}
-        leastDestructiveRef={cancelRef}
-        onClose={onClose}
-        isCentered
-      >
-        <AlertDialogOverlay>
-          <AlertDialogContent>
-            <AlertDialogHeader fontSize="lg" fontWeight="bold">
+      <Dialog open={open} onOpenChange={onClose} placement="center">
+        <DialogBackdrop>
+          <DialogContent>
+            <DialogHeader fontSize="lg" fontWeight="bold">
               Bekreft kansellering
-            </AlertDialogHeader>
-            <AlertDialogCloseButton />
+            </DialogHeader>
+            <DialogCloseTrigger />
 
-            <AlertDialogBody>
+            <DialogBody>
               Du er nå i ferd med å kansellere ordren.
               {isError && (
                 <CustomAlert
@@ -71,9 +65,9 @@ export const CancelOrder = ({ order }: CancelOrderProps) => {
                     tjenester og Altinn. Vennligst prøv igjen senere."
                 />
               )}
-            </AlertDialogBody>
+            </DialogBody>
 
-            <AlertDialogFooter>
+            <DialogFooter>
               <Flex gap={2}>
                 <Button
                   variant="secondary"
@@ -84,18 +78,14 @@ export const CancelOrder = ({ order }: CancelOrderProps) => {
                 >
                   Avbryt
                 </Button>
-                <Button
-                  colorScheme="red"
-                  isLoading={isPending}
-                  onClick={handleCancelOrder}
-                >
+                <Button colorScheme="red" loading={isPending} onClick={handleCancelOrder}>
                   Bekreft kansellering
                 </Button>
               </Flex>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialogOverlay>
-      </AlertDialog>
+            </DialogFooter>
+          </DialogContent>
+        </DialogBackdrop>
+      </Dialog>
     </>
-  );
-};
+  )
+}

@@ -1,34 +1,34 @@
 import {
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogCloseButton,
-  AlertDialogContent,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogOverlay,
   Button,
-} from "@kvib/react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useFormikContext } from "formik";
-import { useRef } from "react";
-import { useNavigate } from "react-router-dom";
-import { postOrder } from "../api/postOrder.ts";
-import { OrderConfirmation, OrderRequest } from "../api/types.ts";
-import { FormValues } from "../formSchema.ts";
-import { getRecipientList, mapFormValuesToOrderRequest } from "../utils.ts";
-import { CustomAlert } from "../../../components/Alert.tsx";
-import { fetchOrderQueryOptions } from "../../OrderDetails/api/getOrder.ts";
+  Dialog,
+  DialogBackdrop,
+  DialogBody,
+  DialogCloseTrigger,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+} from "@kvib/react"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
+import { useFormikContext } from "formik"
+import { useRef } from "react"
+import { useNavigate } from "react-router-dom"
+import { CustomAlert } from "../../../components/Alert.tsx"
+import { fetchOrderQueryOptions } from "../../OrderDetails/api/getOrder.ts"
+import { postOrder } from "../api/postOrder.ts"
+import { OrderConfirmation, OrderRequest } from "../api/types.ts"
+import { FormValues } from "../formSchema.ts"
+import { getRecipientList, mapFormValuesToOrderRequest } from "../utils.ts"
 
 type ConfirmDialogProps = {
-  isOpen: boolean;
-  closeDialog: () => void;
-};
+  isOpen: boolean
+  closeDialog: () => void
+}
 
 export const ConfirmDialog = ({ isOpen, closeDialog }: ConfirmDialogProps) => {
-  const queryClient = useQueryClient();
-  const navigate = useNavigate();
-  const cancelRef = useRef<HTMLButtonElement | null>(null);
-  const { values, setSubmitting } = useFormikContext<FormValues>();
+  const queryClient = useQueryClient()
+  const navigate = useNavigate()
+  const cancelRef = useRef<HTMLButtonElement | null>(null)
+  const { values, setSubmitting } = useFormikContext<FormValues>()
 
   const {
     mutate,
@@ -37,42 +37,36 @@ export const ConfirmDialog = ({ isOpen, closeDialog }: ConfirmDialogProps) => {
     reset: resetMutation,
   } = useMutation({
     mutationFn: (body: OrderRequest) => postOrder(body),
-  });
+  })
 
   const onClose = () => {
-    resetMutation();
-    closeDialog();
-    setSubmitting(false);
-  };
+    resetMutation()
+    closeDialog()
+    setSubmitting(false)
+  }
 
   const onConfirm = () => {
-    const orderRequest = mapFormValuesToOrderRequest(values);
+    const orderRequest = mapFormValuesToOrderRequest(values)
     mutate(orderRequest, {
       onSuccess: (res: OrderConfirmation) => {
         // prefetch detail page data
-        queryClient.prefetchQuery(fetchOrderQueryOptions(res.id));
-        navigate(`/orders/${res.id}`);
-        setSubmitting(false);
+        queryClient.prefetchQuery(fetchOrderQueryOptions(res.id))
+        navigate(`/orders/${res.id}`)
+        setSubmitting(false)
       },
       onError: () => setSubmitting(false),
-    });
-  };
+    })
+  }
 
   return (
-    <AlertDialog
-      motionPreset="slideInBottom"
-      leastDestructiveRef={cancelRef}
-      onClose={onClose}
-      isOpen={isOpen}
-      isCentered
-    >
-      <AlertDialogOverlay />
-      <AlertDialogContent>
-        <AlertDialogHeader>Bekreft utsending</AlertDialogHeader>
-        <AlertDialogCloseButton />
-        <AlertDialogBody>
-          Du er nå i ferd med å sende ut et varsel til{" "}
-          {getRecipientList(values.recipients).length} mottaker(e)
+    <Dialog motionPreset="slide-in-bottom" onOpenChange={onClose} open={isOpen} placement="center">
+      <DialogBackdrop />
+      <DialogContent>
+        <DialogHeader>Bekreft utsending</DialogHeader>
+        <DialogCloseTrigger />
+        <DialogBody>
+          Du er nå i ferd med å sende ut et varsel til {getRecipientList(values.recipients).length}{" "}
+          mottaker(e)
           {isError && (
             <CustomAlert
               status="error"
@@ -82,16 +76,16 @@ export const ConfirmDialog = ({ isOpen, closeDialog }: ConfirmDialogProps) => {
                     tjenester og Altinn. Vennligst prøv igjen senere."
             />
           )}
-        </AlertDialogBody>
-        <AlertDialogFooter gap={3}>
-          <Button onClick={onConfirm} isLoading={isPending}>
+        </DialogBody>
+        <DialogFooter gap={3}>
+          <Button onClick={onConfirm} loading={isPending}>
             Bekreft og send
           </Button>
           <Button ref={cancelRef} variant="secondary" onClick={onClose}>
             Gå tilbake
           </Button>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
-  );
-};
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  )
+}

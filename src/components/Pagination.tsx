@@ -19,9 +19,9 @@ export const Pagination = ({
   return (
     <HStack>
       <Button
-        isLoading={isFetching}
+        loading={isFetching}
         onClick={onShowMore}
-        isDisabled={isDisabled}
+        disabled={isDisabled}
         variant="tertiary"
         rightIcon="arrow_downward"
       >

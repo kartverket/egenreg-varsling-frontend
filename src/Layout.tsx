@@ -1,45 +1,35 @@
 import {
   Container,
+  Flex,
   Footer,
   Header,
   Heading,
   SimpleGrid,
-  Tab,
-  TabList,
   Tabs,
-} from "@kvib/react";
-import { matchPath, Outlet, useLocation, useNavigate } from "react-router-dom";
+  TabsTrigger,
+} from "@kvib/react"
+import { Outlet, useNavigate } from "react-router-dom"
 
 const tabs = [
   { label: "Sending av varsel", url: "/" },
   { label: "Oversikt", url: `/orders` },
-];
+]
 
 export const Layout = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const activeTab = tabs.findIndex((route) =>
-    matchPath(location.pathname, route.url),
-  );
+  const navigate = useNavigate()
 
   return (
     <SimpleGrid templateRows="auto 1fr auto" minH="100vh">
-      <Header>
-        <Heading as="h1" size="lg">
-          Varslinger
-        </Heading>
-        <Tabs
-          size="md"
-          ml="auto"
-          index={activeTab}
-          onChange={(index) => navigate(tabs[index].url)}
-        >
-          <TabList>
-            {tabs.map((tab, index) => (
-              <Tab key={index}>{tab.label}</Tab>
-            ))}
-          </TabList>
+      <Header showChildrenInMenu={false}>
+        <Heading>Varslinger</Heading>
+        <Tabs size="md" ml="auto">
+          {tabs.map((tab, index) => (
+            <Flex key={index}>
+              <TabsTrigger value={index.toString()} onClick={() => navigate(tab.url)}>
+                {tab.label}
+              </TabsTrigger>
+            </Flex>
+          ))}
         </Tabs>
       </Header>
       <main>
@@ -47,13 +37,7 @@ export const Layout = () => {
           <Outlet />
         </Container>
       </main>
-      <Footer
-        excludeContactInfo
-        excludeHelp
-        excludeNews
-        excludeOpeningHours
-        excludeSocialMedia
-      />
+      <Footer excludeContactInfo excludeHelp excludeNews excludeOpeningHours excludeSocialMedia />
     </SimpleGrid>
-  );
-};
+  )
+}
