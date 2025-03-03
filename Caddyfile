@@ -26,7 +26,7 @@ header * {
     X-Content-Type-Options nosniff
     X-XSS-Protection "1"
     Referrer-Policy "strict-origin"
-    Content-Security-Policy "default-src 'none'; style-src 'self' 'unsafe-inline' script-src 'self' blob: https://cdn.jsdelivr.net/; font-src 'self' https://fonts.gstatic.com; media-src 'self'; img-src 'self'; data:; form-action 'self'; connect-src 'self' https://faro.atgcp1-prod.kartverket.cloud; base-uri 'none'; worker-src 'self' blob:; frame-ancestors 'self';"
+    Content-Security-Policy "default-src 'none'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' blob: https://cdn.jsdelivr.net/; font-src 'self' https://fonts.gstatic.com; media-src 'self'; img-src 'self' https://cache.kartverket.no/ data:; form-action 'self'; connect-src 'self'; base-uri 'none'; worker-src 'self' blob:; frame-ancestors 'self';"
     Permissions-Policy "geolocation=(),midi=(),microphone=(),camera=(),magnetometer=(),gyroscope=(),payment=()"
 }
 
