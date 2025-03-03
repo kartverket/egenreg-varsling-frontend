@@ -8,7 +8,7 @@ on:
 env:
   registry: ghcr.io
   image_name: ${{ github.repository }}
-  argo_version_file: egenreg-varsling-frontend-version
+  argo_version_file: meldingstjenestefrontend-version
 
 jobs:
   build:
@@ -91,7 +91,7 @@ jobs:
         id: octo-sts
         with:
           scope: kartverket/egenreg-apps
-          identity: egenreg-varsling-frontend
+          identity: meldingstjenestefrontend
       - name: Checkout apps-repo
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
