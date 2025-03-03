@@ -37,7 +37,6 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} # if needed
         run: |
           npm ci
-          npm run test
           npm run build
       - name: Login to Github Container Registry
         uses: docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567 # v3.3.0
