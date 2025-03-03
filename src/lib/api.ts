@@ -1,9 +1,9 @@
 import axios from "axios"
 
 const baseUrl =
-  window.location.hostname === "localhost"
+  window.location.hostname != "localhost"
     ? "http://localhost:8081"
-    : "meldingstjeneste.atkv3-dev.kartverket-intern.cloud"
+    : "https://meldingstjeneste.atkv3-dev.kartverket-intern.cloud"
 
 export const api = axios.create({
   baseURL: baseUrl,
