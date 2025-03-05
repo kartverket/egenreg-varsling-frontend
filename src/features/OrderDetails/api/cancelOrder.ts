@@ -1,6 +1,7 @@
-import { AltinnCancelOrderResponse } from "./types";
-import { api } from "../../../lib/api";
+import { api } from "../../../lib/api"
 
-export const cancelOrder = (id: string): Promise<AltinnCancelOrderResponse> => {
-  return api.put(`/notifications/api/v1/orders/${id}/cancel`);
-};
+export const cancelOrder = async (id: string): Promise<number> => {
+
+  const response = await api.put(`/orders/${id}/cancel`)
+  return response.status
+}

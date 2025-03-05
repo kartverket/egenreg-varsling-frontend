@@ -14,13 +14,12 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { useRef } from "react"
 import { CustomAlert } from "../../../components/Alert"
 import { cancelOrder } from "../api/cancelOrder"
-import { OrderResponse } from "../api/types"
 
 type CancelOrderProps = {
-  order: OrderResponse
+  orderID: string
 }
 
-export const CancelOrder = ({ order }: CancelOrderProps) => {
+export const CancelOrder = ({ orderID }: CancelOrderProps) => {
   const queryClient = useQueryClient()
   const { mutate, isError, isPending } = useMutation({
     mutationFn: (id: string) => cancelOrder(id),
@@ -30,8 +29,8 @@ export const CancelOrder = ({ order }: CancelOrderProps) => {
   const cancelRef = useRef<HTMLButtonElement>(null)
 
   const handleCancelOrder = () => {
-    mutate(order.id, {
-      onSuccess: () => queryClient.invalidateQueries({ queryKey: ["order", order.id] }),
+    mutate(orderID, {
+      onSuccess: () => queryClient.invalidateQueries({ queryKey: ["order", orderID] }),
     })
   }
 
