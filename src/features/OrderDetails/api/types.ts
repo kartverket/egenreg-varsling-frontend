@@ -43,17 +43,3 @@ export type NotificationsSummary = {
   failed: number;
   notIdentified: number;
 };
-
-export type AltinnCancelOrderResponse = {
-  id: string;
-  sendersReference: string | null;
-  requestedSendTime: string;
-  creator: string | null;
-  created: string;
-  notificationChannel: NotificationChannel;
-  processingStatus: {
-    status: string | null;
-    description: string | null;
-    lastUpdate: string | null;
-  };
-};

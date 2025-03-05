@@ -88,7 +88,7 @@ export const OrderDetails = () => {
           <TabsContent value="1" display="grid" gap={4} px={0}>
             <OrderSummary order={order} />
             <OrderSuccessRate order={order} />
-            {shouldRenderCancelButton() && <CancelOrder order={order} />}
+            {shouldRenderCancelButton() && <CancelOrder orderID={order?.id} />}
           </TabsContent>
           <TabsContent value="2" display="grid" gap={2} px={0} py={9}>
             {order.notifications.summary.count &&
