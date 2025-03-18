@@ -45,10 +45,9 @@ export const TableContent = ({ ordersFiltered }: TableContentProps) => {
             <TableCell>{getSuccessRate(order)}</TableCell>
             <TableCell>
               <Tag
-                color={order.orderStatus === "Scheduled" ? "Black" : undefined}
+                colorPalette={getOrderStatusColorTag(order.orderStatus)}
                 variant={order.orderStatus === "Scheduled" ? "outline" : "subtle"}
-                colorScheme={getOrderStatusColorTag(order.orderStatus)}
-              >
+               >
                 {statusTranslation[order.orderStatus]}
               </Tag>
             </TableCell>
