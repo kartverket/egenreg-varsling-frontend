@@ -1,0 +1,12 @@
+# nonk8s
+apiVersion: "backstage.io/v1alpha1"
+kind: "Component"
+metadata:
+  name: "egenreg-varsling-frontend"
+  tags:
+  - "internal"
+spec:
+  type: "website"
+  lifecycle: "production"
+  owner: "egenregistrering"
+  system: "egenreg"
