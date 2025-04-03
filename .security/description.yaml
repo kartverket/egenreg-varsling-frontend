@@ -1,0 +1,4 @@
+organization: Eiendom
+product: Egenreg
+repo_types: [InternalClient]
+platforms: [SKIP]
