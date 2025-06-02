@@ -59,10 +59,7 @@ export const RequestedSendTime = () => {
                 }
               />
             </Box>
-            <Timepicker
-              defaultValue={getCurrentTime()}
-              onChange={e => form.setFieldValue("time", e)}
-            />
+            <Timepicker onChange={e => form.setFieldValue("time", e)} />
           </HStack>
         </Field>
       )}
