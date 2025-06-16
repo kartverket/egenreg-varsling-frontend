@@ -1,5 +1,6 @@
-import axios from "axios"
-
+import axios from "axios";
+import { getAccessToken } from "../features/Orders/api/getToken";
+ 
 const baseUrl =
   window.location.hostname === "localhost"
     ? "http://localhost:8081"
@@ -12,14 +13,21 @@ export const api = axios.create({
   },
 })
 
+api.interceptors.request.use(async config => {
+  const token = await getAccessToken()
+  if (config.headers) {
+    config.headers.Authorization = `Bearer ${token}`
+  }
+  return config;
+})
+
 api.interceptors.response.use(
-  response => {
-    return response.data
-  },
+  response => response.data,
   error => {
     if (error.response) {
-      console.error(`Error ${error.response.status}: ${error.response.data}`)
+      console.error(`Error ${error.response.status}:`, error.response.data)
     }
-    return Promise.reject(error)
-  },
+    return Promise.reject(error);
+  }
 )
+
