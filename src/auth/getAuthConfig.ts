@@ -1,5 +1,7 @@
+import { baseUrl } from "../lib/api"
+
 export const getAuthConfig = async () => {
-  const response = await fetch("/authConfig")
+  const response = await fetch(`${baseUrl}/authConfig`)
   if (!response.ok) {
     throw new Error("Failed to load MSAL config")
   }

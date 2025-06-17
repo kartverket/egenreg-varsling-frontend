@@ -1,7 +1,7 @@
-import axios from "axios";
-import { getAccessToken } from "../features/Orders/api/getToken";
- 
-const baseUrl =
+import axios from "axios"
+import { getAccessToken } from "../features/Orders/api/getToken"
+
+export const baseUrl =
   window.location.hostname === "localhost"
     ? "http://localhost:8081"
     : "https://meldingstjeneste.atkv3-dev.kartverket-intern.cloud"
@@ -18,7 +18,7 @@ api.interceptors.request.use(async config => {
   if (config.headers) {
     config.headers.Authorization = `Bearer ${token}`
   }
-  return config;
+  return config
 })
 
 api.interceptors.response.use(
@@ -27,7 +27,6 @@ api.interceptors.response.use(
     if (error.response) {
       console.error(`Error ${error.response.status}:`, error.response.data)
     }
-    return Promise.reject(error);
-  }
+    return Promise.reject(error)
+  },
 )
-
