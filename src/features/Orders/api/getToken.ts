@@ -1,8 +1,10 @@
 // src/lib/auth/getAccessToken.ts
-import { AccountInfo } from "@azure/msal-browser";
-import { msalInstance, scopes } from "../../../auth/msal";
- 
+import { AccountInfo } from "@azure/msal-browser"
+import { getAuthState } from "../../../auth/authState"
+
 const getAccessToken = async (): Promise<string> => {
+  const { msalInstance, scopes } = getAuthState()
+
   const accounts = msalInstance.getAllAccounts()
   const activeAccount: AccountInfo | undefined = accounts[0]
 
@@ -10,11 +12,10 @@ const getAccessToken = async (): Promise<string> => {
 
   const result = await msalInstance.acquireTokenSilent({
     account: activeAccount,
-    scopes: scopes, 
-  });
+    scopes: scopes,
+  })
 
-  return result.accessToken;
+  return result.accessToken
 }
 
-export { getAccessToken };
-
+export { getAccessToken }
