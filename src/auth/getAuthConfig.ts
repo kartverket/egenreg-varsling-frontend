@@ -1,11 +1,20 @@
-import { api } from "../lib/api"
+export const getAuthConfig = async () => {
+  const response = await fetch("/authConfig")
+  if (!response.ok) {
+    throw new Error("Failed to load MSAL config")
+  }
 
-type AuthConfigResponse = {
-  AZURE_APP_CLIENT_ID: string
-  AZURE_APP_AUTHORITY: string
-  AZURE_APP_LOGIN_REDIRECT_URI: string
-}
+  const config = await response.json()
 
-export const getAuthConfig = (): Promise<AuthConfigResponse> => {
-  return api.get("/authConfig")
+  return {
+    auth: {
+      clientId: config.AZURE_APP_CLIENT_ID,
+      authority: config.AZURE_APP_AUTHORITY,
+      redirectUri: config.AZURE_APP_LOGIN_REDIRECT_URI,
+    },
+    cache: {
+      cacheLocation: "sessionStorage",
+      storeAuthStateInCookie: false,
+    },
+  }
 }

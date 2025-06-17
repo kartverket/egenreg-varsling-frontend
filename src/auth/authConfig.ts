@@ -24,9 +24,9 @@ export async function loadMsalConfig() {
 
   return {
     auth: {
-      clientId: config.AZURE_APP_CLIENT_ID,
-      authority: config.AZURE_APP_AUTHORITY,
-      redirectUri: config.AZURE_APP_LOGIN_REDIRECT_URI,
+      clientId: config.auth.clientId,
+      authority: config.auth.authority,
+      redirectUri: config.auth.redirectUri,
     },
   }
 }
