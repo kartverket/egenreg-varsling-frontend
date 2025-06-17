@@ -1,7 +1,7 @@
 import { queryOptions, useInfiniteQuery } from "@tanstack/react-query";
 import { SENDERS_REF } from "../../../App.tsx";
-import { PaginationOrders } from "./types";
 import { api } from "../../../lib/api";
+import { PaginationOrders } from "./types";
 
 export const getPaginatedOrders = ({
   pageParam = 0,
@@ -10,8 +10,8 @@ export const getPaginatedOrders = ({
   pageParam: number;
   queryKey: string[];
 }): Promise<PaginationOrders> => {
-  const sendersRef = queryKey[1] || SENDERS_REF; // Use the second element in queryKey as sendersReference
-  const type = queryKey[2] || "active"; // Use the third element in queryKey as type
+  const sendersRef = queryKey[1] || SENDERS_REF; 
+  const type = queryKey[2] || "active"; 
 
   return api.get(
     `orders?type=${type}&sendersReference=${sendersRef}&index=${pageParam}`,
