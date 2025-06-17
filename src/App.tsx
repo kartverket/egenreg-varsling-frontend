@@ -3,8 +3,8 @@ import {
   PopupRequest,
   PublicClientApplication,
   RedirectRequest,
+  SsoSilentRequest,
 } from "@azure/msal-browser"
-import { CommonAuthorizationUrlRequest } from "@azure/msal-common"
 import { MsalAuthenticationTemplate, MsalProvider } from "@azure/msal-react"
 import { KvibProvider } from "@kvib/react"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
@@ -31,20 +31,7 @@ const queryClient = new QueryClient({
 function App() {
   const [msalInstance, setMsalInstance] = useState<PublicClientApplication | null>(null)
   const [authRequest, setAuthRequest] = useState<
-    | RedirectRequest
-    | PopupRequest
-    | Partial<
-        Omit<
-          CommonAuthorizationUrlRequest,
-          | "responseMode"
-          | "earJwk"
-          | "codeChallenge"
-          | "codeChallengeMethod"
-          | "requestedClaimsHash"
-          | "platformBroker"
-        >
-      >
-    | null
+    PopupRequest | RedirectRequest | SsoSilentRequest | null
   >(null)
 
   useEffect(() => {
