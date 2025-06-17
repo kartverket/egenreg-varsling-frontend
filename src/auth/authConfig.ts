@@ -1,15 +1,3 @@
-<<<<<<< Updated upstream
-export const msalConfig = {
-  auth: {
-    clientId: import.meta.env.VITE_CLIENT_ID ?? process.env.VITE_CLIENT_ID,
-    authority: "https://login.microsoftonline.com/" + (import.meta.env.VITE_TENANT_ID ?? process.env.VITE_TENANT_ID) ,
-    redirectUri: import.meta.env.VITE_LOGIN_REDIRECT_URI ?? process.env.VITE_LOGIN_REDIRECT_URI,
-  },
-  cache: {
-    cacheLocation: "localStorage",
-    storeAuthStateInCookie: false,
-  },
-=======
 import { getAuthConfig } from "./getAuthConfig"
 
 export async function loadMsalConfig() {
@@ -41,5 +29,4 @@ export async function loadMsalConfig() {
       redirectUri: config.AZURE_APP_LOGIN_REDIRECT_URI,
     },
   }
->>>>>>> Stashed changes
 }
