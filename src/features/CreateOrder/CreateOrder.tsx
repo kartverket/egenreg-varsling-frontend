@@ -1,9 +1,9 @@
 import {
+  Alert,
   Button,
   Container,
   Field,
   Flex,
-  FormErrorMessage,
   Grid,
   Heading,
   Input,
@@ -43,7 +43,9 @@ export const CreateOrder = () => {
                   value={form.values.recipients}
                   onChange={form.handleChange("recipients")}
                 />
-                <FormErrorMessage>{form.errors.recipients}</FormErrorMessage>
+                {form.errors.recipients && (
+                  <Alert status={"error"} title={form.errors.recipients}></Alert>
+                )}
               </Field>
 
               <Field as="fieldset">

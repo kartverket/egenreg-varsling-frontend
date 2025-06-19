@@ -1,4 +1,4 @@
-import { Flex, Heading, Spinner, Table } from "@kvib/react"
+import { Flex, Heading, Spinner } from "@kvib/react"
 import { SENDERS_REF } from "../../../App.tsx"
 import { CustomAlert } from "../../../components/Alert"
 import { Pagination } from "../../../components/Pagination.tsx"
@@ -41,7 +41,7 @@ export const OrdersTable = ({ type }: OrdersTableProps) => {
       )}
 
       {isSuccess && hasOrders && (
-        <Table>
+        <>
           <TableContent ordersFiltered={orders} />
           <Pagination
             current={orders ? orders.length : data.pages.length}
@@ -50,7 +50,7 @@ export const OrdersTable = ({ type }: OrdersTableProps) => {
             onShowMore={() => !isFetching && fetchNextPage()}
             isDisabled={!hasNextPage}
           />
-        </Table>
+        </>
       )}
     </Flex>
   )

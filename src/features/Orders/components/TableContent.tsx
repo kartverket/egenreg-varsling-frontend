@@ -47,7 +47,7 @@ export const TableContent = ({ ordersFiltered }: TableContentProps) => {
               <Tag
                 colorPalette={getOrderStatusColorTag(order.orderStatus)}
                 variant={order.orderStatus === "Scheduled" ? "outline" : "subtle"}
-               >
+              >
                 {statusTranslation[order.orderStatus]}
               </Tag>
             </TableCell>

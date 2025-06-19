@@ -46,7 +46,7 @@ export const Layout = () => {
           </Flex>
         </Flex>
       </header>
-      <main style={{ flex: 1 }}>
+      <main>
         <Container maxW="1500px" p={0} py={[10, 20]} px={[10, 20, 40]}>
           <Outlet />
         </Container>

@@ -1,4 +1,4 @@
-import { Card, Divider, Heading } from "@kvib/react"
+import { Card, Heading, Separator } from "@kvib/react"
 import DetailRow from "../../../components/DetailRow.tsx"
 import { OrderResponse } from "../api/types.ts"
 
@@ -36,7 +36,7 @@ export const OrderSuccessRate = ({ order }: OrderSuccessRateProps) => {
             : totalFailed.toString()
         }
       />
-      <Divider color="gray.300" />
+      <Separator color="gray.300" />
       <DetailRow
         label="Feilet i KRR (reservert eller mangler)"
         value={

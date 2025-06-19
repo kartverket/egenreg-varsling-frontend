@@ -1,33 +1,24 @@
-import { PaginationOrder } from "./api/types";
+import { PaginationOrder } from "./api/types"
 
 export const getSuccessRate = (order: PaginationOrder) => {
-  const { delivered, count } = order.notificationsSummary;
-  if (order.orderStatus === "Scheduled" || order.orderStatus === "Cancelled")
-    return "-";
-  else return `${((delivered / count) * 100).toFixed(0)}%`;
-};
-
-export const filterOrdersById = (
-  orderList: PaginationOrder[] | undefined,
-  searchTerm: string,
-) =>
-  orderList?.filter((order) =>
-    order.id.toLowerCase().includes(searchTerm.toLowerCase()),
-  );
+  const { delivered, count } = order.notificationsSummary
+  if (order.orderStatus === "Scheduled" || order.orderStatus === "Cancelled") return "-"
+  else return `${((delivered / count) * 100).toFixed(0)}%`
+}
 
 export const getOrderStatusColorTag = (status: string): string => {
   switch (status) {
     case "Processing":
-      return "blue";
+      return "blue"
     case "Completed":
-      return "green";
+      return "green"
     case "Failed":
-      return "red";
+      return "red"
     case "Cancelled":
-      return "red";
+      return "red"
     case "Scheduled":
-      return "gray";
+      return "gray"
     default:
-      throw new Error(`Invalid status: ${status}`);
+      throw new Error(`Invalid status: ${status}`)
   }
-};
+}

@@ -26,7 +26,6 @@ export const Orders = () => {
       <Heading size="xl">Oversikt over alle ordre</Heading>
       <Box maxW="md">
         <SearchAsync
-          multi={false}
           defaultOptions={defaultOptions}
           loadOptions={loadOptions}
           onChange={e => navigate(`${e?.value}`)}
