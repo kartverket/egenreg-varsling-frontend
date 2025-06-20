@@ -1,6 +1,6 @@
 import {
   Breadcrumb,
-  BreadcrumbItem,
+  BreadcrumbCurrentLink,
   BreadcrumbLink,
   Container,
   Flex,
@@ -14,7 +14,7 @@ import {
 } from "@kvib/react"
 import { useQuery } from "@tanstack/react-query"
 import { AxiosError } from "axios"
-import { Link, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import invariant from "tiny-invariant"
 import { CustomAlert } from "../../components/Alert.tsx"
 import { fetchOrderQueryOptions } from "./api/getOrder.ts"
@@ -64,14 +64,8 @@ export const OrderDetails = () => {
   return (
     <Container maxW="container.lg" display="grid" gap={8} p={0} position="relative">
       <Breadcrumb position="absolute" top="-40px">
-        <BreadcrumbItem>
-          <Link to="/orders">
-            Oversikt
-          </Link>
-        </BreadcrumbItem>
-        <BreadcrumbItem>
-          <BreadcrumbLink href="#">Informasjon om ordren</BreadcrumbLink>
-        </BreadcrumbItem>
+        <BreadcrumbLink href="/orders">Oversikt</BreadcrumbLink>
+        <BreadcrumbCurrentLink>Informasjon om ordren</BreadcrumbCurrentLink>
       </Breadcrumb>
       <Heading size="xl">Informasjon om ordren</Heading>
 
