@@ -40,3 +40,6 @@ updates:
       faro:
         patterns:
           - "@grafana/faro*"
+      azure:
+        patterns:
+          - "@azure/*"
