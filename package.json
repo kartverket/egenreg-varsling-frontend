@@ -15,7 +15,7 @@
     "@azure/msal-browser": "^4.15.0",
     "@azure/msal-react": "^3.0.15",
     "@kvib/react": "^5.2.2",
-    "@tanstack/react-query": "^5.82.0",
+    "@tanstack/react-query": "^5.83.0",
     "axios": "^1.10.0",
     "formik": "^2.4.6",
     "knip": "^5.61.3",
