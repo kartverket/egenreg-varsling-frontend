@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { getRecipientList } from "./utils.ts";
+import { z } from "zod"
+import { getRecipientList } from "./utils.ts"
 
 /**
  * Validates a comma-separated list of recipients, checking if each is a valid 11-digit number.
@@ -8,12 +8,10 @@ import { getRecipientList } from "./utils.ts";
  * @returns {boolean} - Returns `true` if all recipients are valid 11-digit numbers, otherwise `false`.
  */
 const validateRecipients = (recipients: string): boolean => {
-  const recipientList = getRecipientList(recipients);
-  const invalidRecipients = recipientList.filter(
-    (r) => !r.match(/^[0-9]{11}$/),
-  );
-  return invalidRecipients.length === 0;
-};
+  const recipientList = getRecipientList(recipients)
+  const invalidRecipients = recipientList.filter(r => !r.match(/^[0-9]{11}$/))
+  return invalidRecipients.length === 0
+}
 
 /**
  * Validates if a date and time is in the future or not.
@@ -22,15 +20,15 @@ const validateRecipients = (recipients: string): boolean => {
  * @returns {boolean} - Returns `true` if the send time is in the future, otherwise `false`.
  */
 const validateDate = (date: Date, time: string, sendTime: string): boolean => {
-  if (sendTime === "Now") return true;
+  if (sendTime === "Now") return true
 
-  const [hours, minutes] = time.toString().split(":").map(Number);
-  const combinedDateTime = new Date(date);
-  combinedDateTime.setHours(hours, minutes, 0, 0);
-  const nowMinusOneMinute = new Date(Date.now() - 60 * 1000);
+  const [hours, minutes] = time.toString().split(":").map(Number)
+  const combinedDateTime = new Date(date)
+  combinedDateTime.setHours(hours, minutes, 0, 0)
+  const nowMinusOneMinute = new Date(Date.now() - 60 * 1000)
 
-  return combinedDateTime >= nowMinusOneMinute;
-};
+  return combinedDateTime >= nowMinusOneMinute
+}
 
 export const FormSchema = z
   .object({
@@ -52,7 +50,7 @@ export const FormSchema = z
       .optional(),
   })
   .refine(
-    (data) =>
+    data =>
       data.channel === "Email" || data.channel === "EmailPreferred"
         ? data.emailSubject && data.emailBody
         : data.channel === "Sms" || data.channel === "SmsPreferred"
@@ -63,18 +61,15 @@ export const FormSchema = z
       path: ["channel"],
     },
   )
-  .refine(
-    (data) => validateDate(new Date(data.date), data.time, data.sendTime),
-    {
-      message: "Sendetid må være i fremtiden",
-      path: ["date"],
-    },
-  );
+  .refine(data => validateDate(new Date(data.date), data.time, data.sendTime), {
+    message: "Sendetid må være i fremtiden",
+    path: ["date"],
+  })
 
-export type FormValues = z.infer<typeof FormSchema>;
+export type FormValues = z.infer<typeof FormSchema>
 
 export const initialValues: FormValues = {
-  channel: "Email",
+  channel: "Sms",
   emailSubject: "",
   emailBody: "",
   smsBody: "",
@@ -82,4 +77,4 @@ export const initialValues: FormValues = {
   sendTime: "Now",
   date: new Date(),
   time: new Date().toLocaleTimeString("en-GB"),
-};
+}
