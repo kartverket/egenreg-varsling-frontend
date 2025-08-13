@@ -1,13 +1,10 @@
 import axios from "axios"
 import { getAccessToken } from "../features/Orders/api/getToken"
 
-export const baseUrl =
-  window.location.hostname === "localhost"
-    ? "http://localhost:8081"
-    : "https://meldingstjeneste.atkv3-dev.kartverket-intern.cloud"
+export const apiRoute = "/api"
 
 export const api = axios.create({
-  baseURL: baseUrl,
+  baseURL: apiRoute,
   headers: {
     "Content-Type": "application/json",
   },
