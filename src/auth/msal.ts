@@ -10,6 +10,7 @@ import { setAuthState } from "./authState"
 export async function initAuth() {
   const msalConfig = await loadMsalConfig()
   const msalInstance = new PublicClientApplication(msalConfig)
+  await msalInstance.initialize()
 
   const clientId = msalConfig.auth.clientId
   const scopes = [`${clientId}/.default`]
