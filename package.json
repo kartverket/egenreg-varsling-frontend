@@ -14,7 +14,7 @@
   "dependencies": {
     "@azure/msal-browser": "^4.15.0",
     "@azure/msal-react": "^3.0.15",
-    "@kvib/react": "^5.2.2",
+    "@kvib/react": "^6.0.4",
     "@tanstack/react-query": "^5.85.3",
     "axios": "^1.10.0",
     "formik": "^2.4.6",
