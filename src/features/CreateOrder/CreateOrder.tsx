@@ -109,10 +109,10 @@ export const CreateOrder = () => {
                     size="sm"
                   >
                     <NativeSelectField placeholder="Velg meldingsvariant">
-                      <option value="Ny tjeneste fra Kartverket - du kan nå oppdatere opplysninger om din eiendom. Logg inn på Eiendomsregisteret på Kartverkets nettsider.">
+                      <option value="Ny tjeneste fra Kartverket: Nå kan du selv oppdatere utvalgte opplysninger om egen eiendom. Gå til våre nettsider og logg inn på Eiendomsregisteret. Mvh Kartverket">
                         Førstegangsvarsling
                       </option>
-                      <option value="Husk at du nå kan sjekke og oppdatere opplysninger om din eiendom. Logg inn på Eiendomsregisteret på Kartverkets nettsider.">
+                      <option value="Husk at du nå kan oppdatere opplysninger om egen eiendom. Gå til våre nettsider og logg inn på Eiendomsregisteret. Mvh Kartverket">
                         Re-varsling
                       </option>
                     </NativeSelectField>
