@@ -19,6 +19,7 @@ import {
 } from "@kvib/react"
 import { Form, Formik, FormikProps } from "formik"
 import { toFormikValidationSchema } from "zod-formik-adapter"
+import { førstegangsvarsling_sms, revarsling_sms } from "../../utils/tekster.ts"
 import { ChannelTooltip } from "./components/ChannelTooltip.tsx"
 import { ConfirmDialog } from "./components/ConfirmDialog.tsx"
 import { RequestedSendTime } from "./components/RequestedSendTime.tsx"
@@ -109,12 +110,8 @@ export const CreateOrder = () => {
                     size="sm"
                   >
                     <NativeSelectField placeholder="Velg meldingsvariant">
-                      <option value="Ny tjeneste fra Kartverket: Nå kan du selv oppdatere utvalgte opplysninger om egen eiendom. Gå til våre nettsider og logg inn på Eiendomsregisteret. Mvh Kartverket">
-                        Førstegangsvarsling
-                      </option>
-                      <option value="Husk at du nå kan oppdatere opplysninger om egen eiendom. Gå til våre nettsider og logg inn på Eiendomsregisteret. Mvh Kartverket">
-                        Re-varsling
-                      </option>
+                      <option value={førstegangsvarsling_sms}>Førstegangsvarsling</option>
+                      <option value={revarsling_sms}>Re-varsling</option>
                     </NativeSelectField>
                   </NativeSelect>
 
