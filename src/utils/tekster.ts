@@ -1,12 +1,7 @@
-export const førstegangsvarsling_sms = `Ny tjeneste fra Kartverket: Nå kan du selv registrere utvalgte opplysninger om din eiendom. 
-
-Gå til våre nettsider og logg inn på Eiendomsregisteret. 
-
+export const førstegangsvarsling_sms = `Ny tjeneste fra Kartverket: Nå kan du registrere utvalgte opplysninger om din eiendom. Gå til våre nettsider og logg inn på Eiendomsregisteret. 
 Mvh Kartverket`
-export const revarsling_sms = `Husk at du nå kan selv registrere utvalgte opplysninger om din eiendom. 
-  
+export const revarsling_sms = `Husk at du nå kan registrere utvalgte opplysninger om din eiendom. 
 Gå til våre nettsider og logg inn på Eiendomsregisteret. 
-  
 Mvh Kartverket`
 
 export const førstegangsvarsling_epost_emnefelt =
@@ -21,7 +16,7 @@ Du kan logge inn i Eiendomsregisteret på Kartverkets nettsider for å se og reg
 Vennlig hilsen
 Kartverket`
 
-export const revarsling_epost_emnefelt = "Påminnelse – oppdater opplysninger om din eiendom"
+export const revarsling_epost_emnefelt = "Påminnelse – registrer opplysninger om din eiendom"
 
 export const revarsling_epost_innhold = `Hei,
 

@@ -46,7 +46,7 @@ export const FormSchema = z
     emailBody: z.string().optional(),
     smsBody: z
       .string()
-      .max(157, { message: "SMS-meldinger kan ikke overstige 157 tegn" })
+      .max(160, { message: "SMS-meldinger kan ikke overstige 157 tegn" })
       .optional(),
   })
   .refine(

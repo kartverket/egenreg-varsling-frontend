@@ -54,7 +54,11 @@ export const CreateOrder = () => {
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={onOpenDialog}
+      onSubmit={(values, helpers) => {
+        console.log("Payload til backend:", values)
+        onOpenDialog()
+        helpers.setSubmitting(false)
+      }}
       validationSchema={toFormikValidationSchema(FormSchema)}
     >
       {(form: FormikProps<FormValues>) => (
@@ -99,7 +103,7 @@ export const CreateOrder = () => {
               {form.values.channel !== "Sms" && (
                 <Grid gap={2}>
                   <Field invalid={isInvalid(form, "emailBody")}>
-                    <Field label="Velg e-postmal" />
+                    <Field label="Velg epost-mal" />
                     <NativeSelect
                       defaultValue={form.values.emailBody}
                       onChange={event => {
@@ -143,18 +147,22 @@ export const CreateOrder = () => {
                 </Grid>
               )}
 
-              {/* SMS */}
               {form.values.channel !== "Email" && (
                 <Field invalid={isInvalid(form, "smsBody")}>
                   <Field label="Melding på SMS" />
                   <Field helperText="Velg en forhåndsdefinert melding." />
                   <NativeSelect
-                    defaultValue={form.values.smsBody}
-                    onChange={event =>
-                      form.setFieldValue("smsBody", (event.target as HTMLSelectElement).value)
+                    defaultValue={
+                      Object.keys(smsOptions).find(
+                        key => smsOptions[key] === form.values.smsBody,
+                      ) || ""
                     }
+                    onChange={event => {
+                      const key = (event.target as HTMLSelectElement).value
+                      form.setFieldValue("smsBody", smsOptions[key])
+                    }}
                   >
-                    <NativeSelectField placeholder="Velg meldingsvariant">
+                    <NativeSelectField placeholder="Velg SMS-mal">
                       <option value="førstegangsvarsling">Førstegangsvarsling</option>
                       <option value="revarsling">Re-varsling</option>
                     </NativeSelectField>
@@ -177,7 +185,7 @@ export const CreateOrder = () => {
                         lineHeight="1.4"
                         whiteSpace="pre-wrap"
                       >
-                        {smsOptions[form.values.smsBody]}
+                        {form.values.smsBody}
                       </Box>
                     </Box>
                   )}
