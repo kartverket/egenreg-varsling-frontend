@@ -11,21 +11,18 @@ export const førstegangsvarsling_epost_emnefelt =
 
 export const førstegangsvarsling_epost_innhold = `Hei,
 
-Nå kan du selv registrere opplysninger om din eiendom i en ny tjeneste fra Kartverket.
+Nå kan du selv registrere opplysninger om din eiendom i en ny tjeneste fra Kartverket. 
 
 Logg inn på Eiendomsregisteret på våre nettsider for å se og registrere informasjonen.
 
 
 
-Hva er egenregistrering? 
+Hva er egenregistrering?
 
-Informasjon fra Eiendomsregisteret brukes av privatpersoner, næringsliv og offentlige myndigheter i en rekke tjenester vi som samfunn er helt avhengig av. Derfor er det viktig at registeret er så oppdatert som mulig. 
+Informasjon fra Eiendomsregisteret brukes av privatpersoner, næringsliv og offentlige myndigheter i en rekke tjenester vi som samfunn er helt avhengig av. Derfor er det viktig at registeret er så oppdatert som mulig.
+Egenregistrering er en prøveordning hvor eiere og festere med eiendom i utvalgte kommuner kan registrere enkelte opplysninger. Du kan når som helst endre eller slette opplysningene du registrerer.
 
-Egenregistrering er en del av en prøveordning hvor eiere og festere med eiendom i utvalgte kommuner selv kan registrere enkelte opplysninger. Du kan når som helst endre eller slette opplysningene du registrerer.
-
-Les mer på kartverket.no.
-
-
+Les mer på kartverket.no/eiendomsregisteret.
 
 Med vennlig hilsen
 Kartverket`
