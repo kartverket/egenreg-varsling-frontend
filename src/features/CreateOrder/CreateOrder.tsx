@@ -21,10 +21,11 @@ import { toFormikValidationSchema } from "zod-formik-adapter"
 import {
   førstegangsvarsling_epost_emnefelt,
   førstegangsvarsling_epost_innhold,
-  førstegangsvarsling_sms,
+  førstegangsvarsling_sms_2,
+  førstegangsvarsling_sms_standard,
   revarsling_epost_emnefelt,
   revarsling_epost_innhold,
-  revarsling_sms,
+  revarsling_sms_standard,
 } from "../../utils/tekster.ts"
 import { ChannelTooltip } from "./components/ChannelTooltip.tsx"
 import { ConfirmDialog } from "./components/ConfirmDialog.tsx"
@@ -33,8 +34,9 @@ import { FormSchema, FormValues, initialValues } from "./formSchema.ts"
 import { isInvalid } from "./utils.ts"
 
 const smsOptions: Record<string, string> = {
-  førstegangsvarsling: førstegangsvarsling_sms,
-  revarsling: revarsling_sms,
+  førstegangsvarsling: førstegangsvarsling_sms_standard,
+  førstegangsvarsling_2: førstegangsvarsling_sms_2,
+  revarsling: revarsling_sms_standard,
 }
 
 const emailOptions: Record<string, { subject: string; body: string }> = {
@@ -163,8 +165,13 @@ export const CreateOrder = () => {
                     }}
                   >
                     <NativeSelectField placeholder="Velg SMS-mal">
-                      <option value="førstegangsvarsling">Førstegangsvarsling</option>
-                      <option value="revarsling">Re-varsling</option>
+                      <option value="førstegangsvarsling">
+                        Førstegangsvarsling - 0 (standard)
+                      </option>
+                      <option value="førstegangsvarsling_2">
+                        Førstegangsvarsling - 1 (mangler)
+                      </option>
+                      <option value="revarsling">Re-varsling - (standard)</option>
                     </NativeSelectField>
                   </NativeSelect>
 

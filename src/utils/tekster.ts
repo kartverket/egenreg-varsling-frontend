@@ -1,7 +1,15 @@
-export const førstegangsvarsling_sms = `Ny tjeneste fra Kartverket: Nå kan du registrere utvalgte opplysninger om din eiendom. 
+export const førstegangsvarsling_sms_standard = `Ny tjeneste fra Kartverket: Nå kan du registrere utvalgte opplysninger om din eiendom. 
 Logg inn på Eiendomsregisteret på våre nettsider. 
 Mvh Kartverket`
-export const revarsling_sms = `Hei, 
+
+export const førstegangsvarsling_sms_2 = `Hei! 
+
+Vi mangler opplysninger om din bolig eller fritidsbolig. 
+Registrer dem enkelt i Eiendomsregisteret på våre nettsider. 
+
+Hilsen Kartverket`
+
+export const revarsling_sms_standard = `Hei, 
 Vi minner om at du kan registrere eiendomsopplysninger i Kartverkets nye tjeneste.
 Logg inn på Eiendomsregisteret på våre nettsider. 
 Mvh Kartverket`
