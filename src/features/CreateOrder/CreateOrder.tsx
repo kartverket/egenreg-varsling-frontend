@@ -20,7 +20,9 @@ import { Form, Formik, FormikProps } from "formik"
 import { toFormikValidationSchema } from "zod-formik-adapter"
 import {
   førstegangsvarsling_epost_emnefelt,
+  førstegangsvarsling_epost_emnefelt_2,
   førstegangsvarsling_epost_innhold,
+  førstegangsvarsling_epost_innhold_2,
   førstegangsvarsling_sms_2,
   førstegangsvarsling_sms_standard,
   revarsling_epost_emnefelt,
@@ -43,6 +45,10 @@ const emailOptions: Record<string, { subject: string; body: string }> = {
   førstegangsvarsling: {
     subject: førstegangsvarsling_epost_emnefelt,
     body: førstegangsvarsling_epost_innhold,
+  },
+  førstegangsvarsling_2: {
+    subject: førstegangsvarsling_epost_emnefelt_2,
+    body: førstegangsvarsling_epost_innhold_2,
   },
   revarsling: {
     subject: revarsling_epost_emnefelt,
@@ -115,7 +121,12 @@ export const CreateOrder = () => {
                       }}
                     >
                       <NativeSelectField placeholder="Velg e-postmal">
-                        <option value="førstegangsvarsling">Førstegangsvarsling</option>
+                        <option value="førstegangsvarsling">
+                          Førstegangsvarsling - 0 (standard)
+                        </option>
+                        <option value="førstegangsvarsling_2">
+                          Førstegangsvarsling - 1 (mangler)
+                        </option>
                         <option value="revarsling">Re-varsling</option>
                       </NativeSelectField>
                     </NativeSelect>

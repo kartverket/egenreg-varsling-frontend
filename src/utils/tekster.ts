@@ -45,3 +45,16 @@ Det tar bare noen minutter, og du bidrar til at eiendomsinformasjonen blir oppda
 
 Vennlig hilsen
 Kartverket`
+
+export const førstegangsvarsling_epost_emnefelt_2 =
+  "Registrer manglende opplysninger i Eiendomsregisteret"
+
+export const førstegangsvarsling_epost_innhold_2 = `Hei!
+
+Vi mangler opplysninger om din bolig eller fritidsbolig i Eiendomsregisteret.
+Nå kan du enkelt se og registrere opplysninger i en ny tjeneste fra Kartverket.
+
+Logg inn i Eiendomsregisteret på våre nettsider.
+
+Med vennlig hilsen
+Kartverket`
