@@ -8,7 +8,7 @@ import {
 import { MsalAuthenticationTemplate, MsalProvider } from "@azure/msal-react"
 import { KvibProvider } from "@kvib/react"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { ErrorBoundary } from "react-error-boundary"
 import { RouterProvider } from "react-router-dom"
 import "./App.css"
@@ -34,11 +34,16 @@ function App() {
     PopupRequest | RedirectRequest | SsoSilentRequest | null
   >(null)
 
+  const authInitialized = useRef(false)
+
   useEffect(() => {
-    initAuth().then(({ msalInstance, authenticationRequest }) => {
-      setMsalInstance(msalInstance)
-      setAuthRequest(authenticationRequest)
-    })
+    if (!authInitialized.current) {
+      initAuth().then(({ msalInstance, authenticationRequest }) => {
+        setMsalInstance(msalInstance)
+        setAuthRequest(authenticationRequest)
+      })
+      authInitialized.current = true
+    }
   }, [])
 
   if (!msalInstance || !authRequest) return <div>Laster autentisering...</div>
