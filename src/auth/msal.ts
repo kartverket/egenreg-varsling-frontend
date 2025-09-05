@@ -4,12 +4,13 @@ import {
   RedirectRequest,
   SsoSilentRequest,
 } from "@azure/msal-browser"
-import { loadMsalConfig } from "./authConfig"
 import { setAuthState } from "./authState"
+import { apiRoute } from "../lib/api"
 
 export async function initAuth() {
   const msalConfig = await loadMsalConfig()
   const msalInstance = new PublicClientApplication(msalConfig)
+  await msalInstance.initialize()
 
   const clientId = msalConfig.auth.clientId
   const scopes = [`${clientId}/.default`]
@@ -25,5 +26,22 @@ export async function initAuth() {
     msalInstance,
     authenticationRequest,
     scopes,
+  }
+}
+
+async function loadMsalConfig() {
+  const response = await fetch(`${apiRoute}/authConfig`)
+  if (!response.ok) {
+    throw new Error("Failed to load MSAL config")
+  }
+
+  const config = await response.json()
+
+  return {
+    auth: {
+      clientId: config.AZURE_APP_CLIENT_ID,
+      authority: config.AZURE_APP_AUTHORITY,
+      redirectUri: config.AZURE_APP_LOGIN_REDIRECT_URI,
+    },
   }
 }
