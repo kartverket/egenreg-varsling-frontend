@@ -125,7 +125,7 @@ export const CreateOrder = () => {
                           Førstegangsvarsling - 0 (standard)
                         </option>
                         <option value="førstegangsvarsling_2">
-                          Førstegangsvarsling - 1 (mangler)
+                          Førstegangsvarsling - E-post 2
                         </option>
                         <option value="revarsling">Re-varsling</option>
                       </NativeSelectField>
@@ -179,9 +179,7 @@ export const CreateOrder = () => {
                       <option value="førstegangsvarsling">
                         Førstegangsvarsling - 0 (standard)
                       </option>
-                      <option value="førstegangsvarsling_2">
-                        Førstegangsvarsling - 1 (mangler)
-                      </option>
+                      <option value="førstegangsvarsling_2">Førstegangsvarsling - SMS 2</option>
                       <option value="revarsling">Re-varsling - (standard)</option>
                     </NativeSelectField>
                   </NativeSelect>

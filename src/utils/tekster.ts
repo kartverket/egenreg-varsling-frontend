@@ -2,10 +2,10 @@ export const førstegangsvarsling_sms_standard = `Ny tjeneste fra Kartverket: N�
 Logg inn på Eiendomsregisteret på våre nettsider. 
 Mvh Kartverket`
 
-export const førstegangsvarsling_sms_2 = `Hei! 
+export const førstegangsvarsling_sms_2 = `Hei!
 
-Vi mangler opplysninger om din bolig eller fritidsbolig. 
-Registrer dem enkelt i Eiendomsregisteret på våre nettsider. 
+Vet du om opplysningene om din bolig eller fritidsbolig er korrekte?
+Registrer dem enkelt i Eiendomsregisteret på våre nettsider.
 
 Hilsen Kartverket`
 
@@ -47,14 +47,14 @@ Vennlig hilsen
 Kartverket`
 
 export const førstegangsvarsling_epost_emnefelt_2 =
-  "Registrer manglende opplysninger i Eiendomsregisteret"
+  "Registrer dine opplysninger i Eiendomsregisteret"
 
 export const førstegangsvarsling_epost_innhold_2 = `Hei!
 
-Vi mangler opplysninger om din bolig eller fritidsbolig i Eiendomsregisteret.
-Nå kan du enkelt se og registrere opplysninger i en ny tjeneste fra Kartverket.
+Vet du om opplysningene om din bolig eller fritidsbolig er korrekte?
 
-Logg inn i Eiendomsregisteret på våre nettsider.
+Nå kan du enkelt se og registrere opplysninger i en ny tjeneste fra Kartverket.
+Gå til Eiendomsregisteret på våre nettsider.
 
 Med vennlig hilsen
 Kartverket`
