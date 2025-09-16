@@ -19,10 +19,13 @@ import {
 import { Form, Formik, FormikProps } from "formik"
 import { toFormikValidationSchema } from "zod-formik-adapter"
 import {
+  førstegangsvarling_sms_3,
   førstegangsvarsling_epost_emnefelt,
   førstegangsvarsling_epost_emnefelt_2,
+  førstegangsvarsling_epost_emnefelt_3,
   førstegangsvarsling_epost_innhold,
   førstegangsvarsling_epost_innhold_2,
+  førstegangsvarsling_epost_innhold_3,
   førstegangsvarsling_sms_2,
   førstegangsvarsling_sms_standard,
   revarsling_epost_emnefelt,
@@ -38,6 +41,7 @@ import { isInvalid } from "./utils.ts"
 const smsOptions: Record<string, string> = {
   førstegangsvarsling: førstegangsvarsling_sms_standard,
   førstegangsvarsling_2: førstegangsvarsling_sms_2,
+  førstegangsvarsling_3: førstegangsvarling_sms_3,
   revarsling: revarsling_sms_standard,
 }
 
@@ -49,6 +53,10 @@ const emailOptions: Record<string, { subject: string; body: string }> = {
   førstegangsvarsling_2: {
     subject: førstegangsvarsling_epost_emnefelt_2,
     body: førstegangsvarsling_epost_innhold_2,
+  },
+  førstegangsvarsling_3: {
+    subject: førstegangsvarsling_epost_emnefelt_3,
+    body: førstegangsvarsling_epost_innhold_3,
   },
   revarsling: {
     subject: revarsling_epost_emnefelt,
@@ -127,6 +135,9 @@ export const CreateOrder = () => {
                         <option value="førstegangsvarsling_2">
                           Førstegangsvarsling - E-post 2
                         </option>
+                        <option value="førstegangsvarsling_3">
+                          Førstegangsvarsling - E-post 3
+                        </option>
                         <option value="revarsling">Re-varsling</option>
                       </NativeSelectField>
                     </NativeSelect>
@@ -180,6 +191,8 @@ export const CreateOrder = () => {
                         Førstegangsvarsling - 0 (standard)
                       </option>
                       <option value="førstegangsvarsling_2">Førstegangsvarsling - SMS 2</option>
+                      <option value="førstegangsvarsling_3">Førstegangsvarsling - SMS 3</option>
+
                       <option value="revarsling">Re-varsling - (standard)</option>
                     </NativeSelectField>
                   </NativeSelect>

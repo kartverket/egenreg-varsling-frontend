@@ -9,6 +9,13 @@ Registrer dem enkelt i Eiendomsregisteret på våre nettsider.
 
 Hilsen Kartverket`
 
+export const førstegangsvarling_sms_3 = `Hei!
+
+Vi kan ha mangelfulle opplysninger om din bolig eller fritidsbolig.
+Registrer dem enkelt i Eiendomsregisteret på våre nettsider.
+
+Hilsen Kartverket`
+
 export const revarsling_sms_standard = `Hei, 
 Vi minner om at du kan registrere eiendomsopplysninger i Kartverkets nye tjeneste.
 Logg inn på Eiendomsregisteret på våre nettsider. 
@@ -54,6 +61,18 @@ export const førstegangsvarsling_epost_innhold_2 = `Hei!
 Vet du om opplysningene om din bolig eller fritidsbolig er korrekte?
 
 Nå kan du enkelt se og registrere opplysninger i en ny tjeneste fra Kartverket.
+Gå til Eiendomsregisteret på våre nettsider.
+
+Med vennlig hilsen
+Kartverket`
+
+export const førstegangsvarsling_epost_emnefelt_3 =
+  "Registrer mangelfulle opplysninger i Eiendomsregisteret"
+
+export const førstegangsvarsling_epost_innhold_3 = `Hei!
+
+Vi kan ha mangelfulle opplysninger om din bolig eller fritidsbolig. Nå kan du enkelt se og registrere dine opplysninger i en ny tjeneste fra Kartverket.
+
 Gå til Eiendomsregisteret på våre nettsider.
 
 Med vennlig hilsen
