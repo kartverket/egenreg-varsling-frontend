@@ -12,7 +12,7 @@ Hilsen Kartverket`
 export const førstegangsvarling_sms_3 = `Hei!
 
 Vi kan ha mangelfulle opplysninger om din bolig eller fritidsbolig.
-Registrer dem enkelt i Eiendomsregisteret på våre nettsider.
+Du kan enkelt registrere dem i Eiendomsregisteret på våre nettsider.
 
 Hilsen Kartverket`
 
@@ -71,9 +71,9 @@ export const førstegangsvarsling_epost_emnefelt_3 =
 
 export const førstegangsvarsling_epost_innhold_3 = `Hei!
 
-Vi kan ha mangelfulle opplysninger om din bolig eller fritidsbolig. Nå kan du enkelt se og registrere dine opplysninger i en ny tjeneste fra Kartverket.
+Vi kan ha mangelfulle opplysninger om din bolig eller fritidsbolig. 
 
-Gå til Eiendomsregisteret på våre nettsider.
+Du kan enkelt se og registrere dine opplysninger i Eiendomsregisteret på våre nettsider.
 
 Med vennlig hilsen
 Kartverket`
