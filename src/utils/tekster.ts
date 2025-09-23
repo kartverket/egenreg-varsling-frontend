@@ -10,10 +10,7 @@ Registrer dem enkelt i Eiendomsregisteret på våre nettsider.
 Hilsen Kartverket`
 
 export const førstegangsvarling_sms_3 = `Hei!
-
-Vi kan ha mangelfulle opplysninger om din bolig eller fritidsbolig.
-Du kan enkelt registrere dem i Eiendomsregisteret på våre nettsider.
-
+Vi kan ha manglende opplysninger om din bolig eller fritidsbolig. Du kan enkelt registrere dem i Eiendomsregisteret på våre nettsider.
 Hilsen Kartverket`
 
 export const revarsling_sms_standard = `Hei, 

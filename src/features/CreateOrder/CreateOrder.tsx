@@ -196,6 +196,7 @@ export const CreateOrder = () => {
                       <option value="revarsling">Re-varsling - (standard)</option>
                     </NativeSelectField>
                   </NativeSelect>
+                  {form.errors.smsBody && <Alert status="error" title={form.errors.smsBody} />}
 
                   {form.values.smsBody && (
                     <Box mt={4}>
