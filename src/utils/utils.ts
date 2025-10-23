@@ -23,3 +23,17 @@ export const statusTranslation = {
   Scheduled: "Planlagt",
   NotIdentified: "Ikke funnet i KRR",
 };
+
+export const getEnvironment = () => {
+  const hostname = window.location.hostname
+  let environment: "dev" | "prod" | "localhost" = "localhost"
+
+  if (hostname.includes("atgcp1-dev")) {
+    environment = "dev"
+  } else if (hostname.includes("atgcp1-prod")) {
+    environment = "prod"
+  } else {
+    environment = "localhost"
+  }
+  return environment
+}
