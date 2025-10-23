@@ -6,12 +6,7 @@ export const ChannelTooltip = () => {
       showArrow
       content={
         <Stack>
-          <Text as="b">Kun e-post / SMS</Text>
-          <Text>
-            Varselet sendes kun på den valgte kanalen. Hvis mottakeren mangler kontaktinformasjon
-            for denne kanalen i KRR, vil varselet ikke bli sendt.
-          </Text>
-          <Text as="b">Foretrekk e-post / SMS</Text>
+          <Text as="b">Foretrekk kanal</Text>
           <Text>
             Varselet sendes på den foretrukne kanalen hvis kontaktinformasjon er tilgjengelig. Hvis
             ikke, forsøker systemet å sende via den andre kanalen.

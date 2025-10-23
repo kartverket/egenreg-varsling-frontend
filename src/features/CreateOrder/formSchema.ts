@@ -33,8 +33,6 @@ const validateDate = (date: Date, time: string, sendTime: string): boolean => {
 export const FormSchema = z
   .object({
     channel: z.union([
-      z.literal("Email"),
-      z.literal("Sms"),
       z.literal("EmailPreferred"),
       z.literal("SmsPreferred"),
     ]),
@@ -51,9 +49,9 @@ export const FormSchema = z
   })
   .refine(
     data =>
-      data.channel === "Email" || data.channel === "EmailPreferred"
+      data.channel === "EmailPreferred"
         ? data.emailSubject && data.emailBody
-        : data.channel === "Sms" || data.channel === "SmsPreferred"
+        : data.channel === "SmsPreferred"
           ? data.smsBody
           : true,
     {
@@ -69,7 +67,7 @@ export const FormSchema = z
 export type FormValues = z.infer<typeof FormSchema>
 
 export const initialValues: FormValues = {
-  channel: "Sms",
+  channel: "SmsPreferred",
   emailSubject: "",
   emailBody: "",
   smsBody: "",

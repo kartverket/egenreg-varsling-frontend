@@ -11,8 +11,6 @@ export type SmsTemplate = {
 };
 
 export type NotificationChannel =
-  | "Email"
-  | "Sms"
   | "EmailPreferred"
   | "SmsPreferred";
 
