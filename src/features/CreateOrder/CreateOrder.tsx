@@ -51,8 +51,8 @@ const emailOptions: Record<string, { subject: string; body: string }> = {
 
 export const CreateOrder = () => {
   const { open: isDialogOpen, onOpen: onOpenDialog, onClose: onCloseDialog } = useDisclosure()
-  const [smsOption, setSmsOption] = useState<string>("")
-  const [emailOption, setEmailOption] = useState<string>("")
+  const [smsVarselstype, setSmsVarselstype] = useState<string>("")
+  const [emailVarselstype, setEmailVarselstype] = useState<string>("")
 
   return (
     <Formik
@@ -70,7 +70,7 @@ export const CreateOrder = () => {
             <Heading>Bestill utsending av varsel</Heading>
             <Stack gap={6}>
               <Field invalid={isInvalid(form, "recipients")}>
-                <Field label="Mottakere av varselet" />
+                <Field label={<strong>Mottakere av varselet</strong>} />
                 <Field helperText="Skriv inn fødselsnummer til mottaker. Flere mottakere skilles med et komma." />
                 <Textarea
                   value={form.values.recipients}
@@ -87,7 +87,7 @@ export const CreateOrder = () => {
                     as="legend"
                     label={
                       <>
-                        Kanal
+                        <strong>Kanal</strong>
                         <ChannelTooltip />
                       </>
                     }
@@ -95,77 +95,23 @@ export const CreateOrder = () => {
                 </Flex>
                 <RadioGroup value={form.values.channel} onChange={form.handleChange("channel")}>
                   <Stack>
-                    <Radio value="Sms">SMS</Radio>
-                    <Radio value="Email">E-post</Radio>
-                    <Radio value="EmailPreferred">Foretrekk e-post</Radio>
                     <Radio value="SmsPreferred">Foretrekk SMS</Radio>
+                    <Radio value="EmailPreferred">Foretrekk e-post</Radio>
                   </Stack>
                 </RadioGroup>
               </Field>
 
-              {/* E-post */}
-              {form.values.channel !== "Sms" && (
-                <Grid gap={2}>
-                  <Field invalid={isInvalid(form, "emailBody")}>
-                    <Field label="Velg epost-mal" />
-                    <NativeSelect
-                      defaultValue={form.values.emailBody}
-                      onChange={event => {
-                        const key = (event.target as HTMLSelectElement).value
-                        form.setFieldValue("emailBody", emailOptions[key].body)
-                        form.setFieldValue("emailSubject", emailOptions[key].subject)
-                        setEmailOption(key)
-                      }}
-                    >
-                      <NativeSelectField placeholder="Velg e-postmal">
-                        <option value="førstegangsvarsling">Førstegangsvarsling</option>
-                        <option value="revarsling">Re-varsling</option>
-                      </NativeSelectField>
-                    </NativeSelect>
-
-                    {form.values.emailBody && (
-                      <Box mt={4}>
-                        <Text fontSize="sm" mb={2}>
-                          Tekst som blir sendt i e-post:
-                        </Text>
-                        <Text as={"b"} fontSize="sm" mb={2}>
-                          Emne: {form.values.emailSubject}
-                        </Text>
-                        <Box
-                          my={4}
-                          maxW="320px"
-                          p={4}
-                          bg="gray.100"
-                          borderRadius="lg"
-                          boxShadow="md"
-                          border="1px solid"
-                          borderColor="gray.300"
-                          fontSize="sm"
-                          lineHeight="1.4"
-                          whiteSpace="pre-wrap"
-                        >
-                          {form.values.emailBody}
-                        </Box>
-                      </Box>
-                    )}
-                  </Field>
-                </Grid>
-              )}
-
-              {form.values.channel !== "Email" && (
+              {/* SMS */}
+              <Grid>
                 <Field invalid={isInvalid(form, "smsBody")}>
-                  <Field label="Melding på SMS" />
+                  <Field label={<strong>Melding på SMS</strong>} />
                   <Field helperText="Velg en forhåndsdefinert melding." />
                   <NativeSelect
-                    defaultValue={
-                      Object.keys(smsOptions).find(
-                        key => smsOptions[key] === form.values.smsBody,
-                      ) || ""
-                    }
+                    defaultValue={form.values.smsBody}
                     onChange={event => {
                       const key = (event.target as HTMLSelectElement).value
                       form.setFieldValue("smsBody", smsOptions[key])
-                      setSmsOption(key)
+                      setSmsVarselstype(key)
                     }}
                   >
                     <NativeSelectField placeholder="Velg SMS-mal">
@@ -197,7 +143,54 @@ export const CreateOrder = () => {
                     </Box>
                   )}
                 </Field>
-              )}
+              </Grid>
+
+              {/* E-post */}
+              <Grid gap={2}>
+                <Field invalid={isInvalid(form, "emailBody")}>
+                  <Field label={<strong>Melding på e-post</strong>} />
+                  <NativeSelect
+                    defaultValue={form.values.emailBody}
+                    onChange={event => {
+                      const key = (event.target as HTMLSelectElement).value
+                      form.setFieldValue("emailBody", emailOptions[key].body)
+                      form.setFieldValue("emailSubject", emailOptions[key].subject)
+                      setEmailVarselstype(key)
+                    }}
+                  >
+                    <NativeSelectField placeholder="Velg e-post-mal">
+                      <option value="førstegangsvarsling">Førstegangsvarsling</option>
+                      <option value="revarsling">Re-varsling</option>
+                    </NativeSelectField>
+                  </NativeSelect>
+
+                  {form.values.emailBody && (
+                    <Box mt={4}>
+                      <Text fontSize="sm" mb={2}>
+                        Tekst som blir sendt i e-post:
+                      </Text>
+                      <Text as={"b"} fontSize="sm" mb={2}>
+                        Emne: {form.values.emailSubject}
+                      </Text>
+                      <Box
+                        my={4}
+                        maxW="320px"
+                        p={4}
+                        bg="gray.100"
+                        borderRadius="lg"
+                        boxShadow="md"
+                        border="1px solid"
+                        borderColor="gray.300"
+                        fontSize="sm"
+                        lineHeight="1.4"
+                        whiteSpace="pre-wrap"
+                      >
+                        {form.values.emailBody}
+                      </Box>
+                    </Box>
+                  )}
+                </Field>
+              </Grid>
 
               <RequestedSendTime />
             </Stack>
@@ -209,8 +202,8 @@ export const CreateOrder = () => {
             <ConfirmDialog
               isOpen={isDialogOpen}
               closeDialog={onCloseDialog}
-              smsTemplate={smsOption}
-              emailTemplate={emailOption}
+              smsVarselstype={smsVarselstype}
+              emailVarselstype={emailVarselstype}
             />
           </Container>
         </Form>

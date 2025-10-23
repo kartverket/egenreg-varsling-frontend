@@ -37,7 +37,7 @@ export const DownloadRecipients = ({ notifications }: DownloadRecipientsProps) =
         onClick={handleDownload}
         leftIcon={isDownloaded ? "check" : "download"}
       >
-        {isDownloaded ? "Lastet ned" : "Last ned mottakere (Levert)"}
+        {isDownloaded ? "Lastet ned" : "Last ned mottakere (Vellykkede varsler)"}
       </Button>
     </Flex>
   )

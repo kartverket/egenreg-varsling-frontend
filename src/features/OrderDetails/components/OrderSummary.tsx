@@ -1,5 +1,5 @@
 import { Card, SimpleGrid, Stack, Text } from "@kvib/react"
-import { EmailTemplate, NotificationChannel, SmsTemplate } from "../../../types/types.ts"
+import { EmailTemplate, SmsTemplate } from "../../../types/types.ts"
 import { formatDate } from "../../../utils/utils.ts"
 import { OrderResponse } from "../api/types.ts"
 
@@ -8,44 +8,38 @@ type OrderSummaryProps = {
 }
 
 const NotificationDetails = ({
-  notificationChannel,
   emailTemplate,
   smsTemplate,
 }: {
-  notificationChannel: NotificationChannel
   emailTemplate?: EmailTemplate | null
   smsTemplate?: SmsTemplate | null
 }) => {
   return (
     <>
-      {notificationChannel !== "Sms" && (
-        <Stack gap={6}>
-          <div>
-            <Text as="b">AVSENDER E-POST</Text>
-            <Text>{emailTemplate?.fromAddress}</Text>
-          </div>
-          <div>
-            <Text as="b">EMNE PÅ E-POST</Text>
-            <Text>{emailTemplate?.subject}</Text>
-          </div>
-          <div>
-            <Text as="b">MELDING PÅ E-POST</Text>
-            <Text whiteSpace="pre-wrap">{emailTemplate?.body}</Text>
-          </div>
-        </Stack>
-      )}
-      {notificationChannel !== "Email" && (
-        <Stack gap={6}>
-          <div>
-            <Text as="b">AVSENDER SMS</Text>
-            <Text>{smsTemplate?.senderNumber}</Text>
-          </div>
-          <div>
-            <Text as="b">MELDING PÅ SMS</Text>
-            <Text whiteSpace="pre-wrap">{smsTemplate?.body}</Text>
-          </div>
-        </Stack>
-      )}
+      <Stack gap={6}>
+        <div>
+          <Text as="b">AVSENDER E-POST</Text>
+          <Text>{emailTemplate?.fromAddress}</Text>
+        </div>
+        <div>
+          <Text as="b">EMNE PÅ E-POST</Text>
+          <Text>{emailTemplate?.subject}</Text>
+        </div>
+        <div>
+          <Text as="b">MELDING PÅ E-POST</Text>
+          <Text whiteSpace="pre-wrap">{emailTemplate?.body}</Text>
+        </div>
+      </Stack>
+      <Stack gap={6}>
+        <div>
+          <Text as="b">AVSENDER SMS</Text>
+          <Text>{smsTemplate?.senderNumber}</Text>
+        </div>
+        <div>
+          <Text as="b">MELDING PÅ SMS</Text>
+          <Text whiteSpace="pre-wrap">{smsTemplate?.body}</Text>
+        </div>
+      </Stack>
     </>
   )
 }
@@ -72,11 +66,7 @@ export const OrderSummary = ({ order }: OrderSummaryProps) => {
             <Text>{formatDate(requestedSendTime)}</Text>
           </div>
         </Stack>
-        <NotificationDetails
-          notificationChannel={notificationChannel}
-          emailTemplate={emailTemplate}
-          smsTemplate={smsTemplate}
-        />
+        <NotificationDetails emailTemplate={emailTemplate} smsTemplate={smsTemplate} />
       </SimpleGrid>
     </Card>
   )

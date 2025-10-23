@@ -35,13 +35,12 @@ export const mapFormValuesToOrderRequest = (
     ),
     sendersReference: SENDERS_REF,
     emailTemplate:
-      formValues.channel !== "Sms" &&
       formValues.emailSubject &&
-      formValues.emailBody
+        formValues.emailBody
         ? { subject: formValues.emailSubject, body: formValues.emailBody }
         : null,
     smsTemplate:
-      formValues.channel !== "Email" && formValues.smsBody
+      formValues.smsBody
         ? { body: formValues.smsBody }
         : null,
   };

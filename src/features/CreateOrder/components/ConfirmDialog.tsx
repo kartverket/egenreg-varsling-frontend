@@ -25,15 +25,15 @@ import { getEnvironment } from "../../../utils/utils.ts"
 type ConfirmDialogProps = {
   isOpen: boolean
   closeDialog: () => void
-  smsTemplate: string
-  emailTemplate: string
+  smsVarselstype: string
+  emailVarselstype: string
 }
 
 export const ConfirmDialog = ({
   isOpen,
   closeDialog,
-  smsTemplate,
-  emailTemplate,
+  smsVarselstype,
+  emailVarselstype,
 }: ConfirmDialogProps) => {
   const queryClient = useQueryClient()
   const navigate = useNavigate()
@@ -79,8 +79,8 @@ export const ConfirmDialog = ({
           mottaker(e) i <strong>{getEnvironment()}</strong>.
           <List>
             <ListItem>Kanal: {values.channel}</ListItem>
-            <ListItem>Varslingstype SMS: {smsTemplate}</ListItem>
-            <ListItem>Varslingstype e-post: {emailTemplate}</ListItem>
+            <ListItem>Varslingstype SMS: {smsVarselstype}</ListItem>
+            <ListItem>Varslingstype e-post: {emailVarselstype}</ListItem>
           </List>
           {isError && (
             <CustomAlert
