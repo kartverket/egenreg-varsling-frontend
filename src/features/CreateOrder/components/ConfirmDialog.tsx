@@ -7,6 +7,8 @@ import {
   DialogContent,
   DialogFooter,
   DialogHeader,
+  List,
+  ListItem,
 } from "@kvib/react"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { useFormikContext } from "formik"
@@ -18,13 +20,21 @@ import { postOrder } from "../api/postOrder.ts"
 import { OrderConfirmation, OrderRequest } from "../api/types.ts"
 import { FormValues } from "../formSchema.ts"
 import { getRecipientList, mapFormValuesToOrderRequest } from "../utils.ts"
+import { getEnvironment } from "../../../utils/utils.ts"
 
 type ConfirmDialogProps = {
   isOpen: boolean
   closeDialog: () => void
+  smsTemplate: string
+  emailTemplate: string
 }
 
-export const ConfirmDialog = ({ isOpen, closeDialog }: ConfirmDialogProps) => {
+export const ConfirmDialog = ({
+  isOpen,
+  closeDialog,
+  smsTemplate,
+  emailTemplate,
+}: ConfirmDialogProps) => {
   const queryClient = useQueryClient()
   const navigate = useNavigate()
   const cancelRef = useRef<HTMLButtonElement | null>(null)
@@ -66,7 +76,12 @@ export const ConfirmDialog = ({ isOpen, closeDialog }: ConfirmDialogProps) => {
         <DialogCloseTrigger />
         <DialogBody>
           Du er nå i ferd med å sende ut et varsel til {getRecipientList(values.recipients).length}{" "}
-          mottaker(e)
+          mottaker(e) i <strong>{getEnvironment()}</strong>.
+          <List>
+            <ListItem>Kanal: {values.channel}</ListItem>
+            <ListItem>Varslingstype SMS: {smsTemplate}</ListItem>
+            <ListItem>Varslingstype e-post: {emailTemplate}</ListItem>
+          </List>
           {isError && (
             <CustomAlert
               status="error"

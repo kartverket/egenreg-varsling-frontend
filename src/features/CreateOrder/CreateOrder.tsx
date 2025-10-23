@@ -30,7 +30,8 @@ import { ChannelTooltip } from "./components/ChannelTooltip.tsx"
 import { ConfirmDialog } from "./components/ConfirmDialog.tsx"
 import { RequestedSendTime } from "./components/RequestedSendTime.tsx"
 import { FormSchema, FormValues, initialValues } from "./formSchema.ts"
-import { isInvalid } from "./utils.ts"
+import { getRecipientList, isInvalid } from "./utils.ts"
+import { useState } from "react"
 
 const smsOptions: Record<string, string> = {
   førstegangsvarsling: førstegangsvarsling_sms,
@@ -50,6 +51,8 @@ const emailOptions: Record<string, { subject: string; body: string }> = {
 
 export const CreateOrder = () => {
   const { open: isDialogOpen, onOpen: onOpenDialog, onClose: onCloseDialog } = useDisclosure()
+  const [smsOption, setSmsOption] = useState<string>("")
+  const [emailOption, setEmailOption] = useState<string>("")
 
   return (
     <Formik
@@ -74,6 +77,7 @@ export const CreateOrder = () => {
                   onChange={form.handleChange("recipients")}
                 />
                 {form.errors.recipients && <Alert status="error" title={form.errors.recipients} />}
+                <Text>Antall mottakere: {getRecipientList(form.values.recipients).length}</Text>
               </Field>
 
               {/* Kanal */}
@@ -110,6 +114,7 @@ export const CreateOrder = () => {
                         const key = (event.target as HTMLSelectElement).value
                         form.setFieldValue("emailBody", emailOptions[key].body)
                         form.setFieldValue("emailSubject", emailOptions[key].subject)
+                        setEmailOption(key)
                       }}
                     >
                       <NativeSelectField placeholder="Velg e-postmal">
@@ -160,6 +165,7 @@ export const CreateOrder = () => {
                     onChange={event => {
                       const key = (event.target as HTMLSelectElement).value
                       form.setFieldValue("smsBody", smsOptions[key])
+                      setSmsOption(key)
                     }}
                   >
                     <NativeSelectField placeholder="Velg SMS-mal">
@@ -200,7 +206,12 @@ export const CreateOrder = () => {
               Send varsel
             </Button>
 
-            <ConfirmDialog isOpen={isDialogOpen} closeDialog={onCloseDialog} />
+            <ConfirmDialog
+              isOpen={isDialogOpen}
+              closeDialog={onCloseDialog}
+              smsTemplate={smsOption}
+              emailTemplate={emailOption}
+            />
           </Container>
         </Form>
       )}
