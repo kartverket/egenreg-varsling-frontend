@@ -23,8 +23,8 @@ import {
   førstegangsvarsling_epost_emnefelt,
   førstegangsvarsling_epost_innhold,
   førstegangsvarsling_sms,
-  informasjonsbrev_epost_emne,
-  informasjonsbrev_epost_innhold,
+  informasjonsbrev_epost_sandnes_emne,
+  informasjonsbrev_epost_sandnes_innhold,
   revarsling_epost_emnefelt,
   revarsling_epost_innhold,
   revarsling_sms,
@@ -49,9 +49,9 @@ const emailOptions: Record<string, { subject: string; body: string }> = {
     subject: revarsling_epost_emnefelt,
     body: revarsling_epost_innhold,
   },
-  informasjonsbrev: {
-    subject: informasjonsbrev_epost_emne,
-    body: informasjonsbrev_epost_innhold,
+  informasjonsbrev_sandnes: {
+    subject: informasjonsbrev_epost_sandnes_emne,
+    body: informasjonsbrev_epost_sandnes_innhold,
   },
 }
 
@@ -167,7 +167,7 @@ export const CreateOrder = () => {
                     <NativeSelectField placeholder="Velg e-post-mal">
                       <option value="førstegangsvarsling">Førstegangsvarsling</option>
                       <option value="revarsling">Re-varsling</option>
-                      <option value="informasjonsbrev">Informasjonsbrev</option>
+                      <option value="informasjonsbrev_sandnes">Informasjonsbrev</option>
                     </NativeSelectField>
                   </NativeSelect>
 

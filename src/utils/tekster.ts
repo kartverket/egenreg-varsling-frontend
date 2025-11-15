@@ -30,9 +30,10 @@ Du kan enkelt registrere dem i Eiendomsregisteret på våre nettsider.
 Med vennlig hilsen
 Kartverket`
 
-export const informasjonsbrev_epost_emne = "Bidra med dine opplysninger i Eiendomsregisteret"
+export const informasjonsbrev_epost_sandnes_emne =
+  "Bidra med dine opplysninger i Eiendomsregisteret"
 
-export const informasjonsbrev_epost_innhold = `Hei,
+export const informasjonsbrev_epost_sandnes_innhold = `Hei,
 
 Som eier av bolig og/eller fritidsbolig i Sandnes kommune kan du nå registrere utvalgte eiendomsopplysninger i Eiendomsregisteret hos Kartverket 
 Kartverket kan ha mangelfulle opplysninger om din bolig eller fritidsbolig, og du kan enkelt registrere dem i Eiendomsregisteret på Kartverket sine nettsider. Eiendomsregisteret er det offisielle registeret over norske eiendommer og inneholder opplysninger om grenser, bygninger, adresser og eierforhold. 
