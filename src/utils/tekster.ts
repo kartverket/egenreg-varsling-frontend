@@ -29,3 +29,24 @@ Du kan enkelt registrere dem i Eiendomsregisteret på våre nettsider.
 
 Med vennlig hilsen
 Kartverket`
+
+export const informasjonsbrev_epost_emne = "Bidra med dine opplysninger i Eiendomsregisteret"
+
+export const informasjonsbrev_epost_innhold = `Hei,
+
+Som eier av bolig og/eller fritidsbolig i Sandnes kommune kan du nå registrere utvalgte eiendomsopplysninger i Eiendomsregisteret hos Kartverket 
+Kartverket kan ha mangelfulle opplysninger om din bolig eller fritidsbolig, og du kan enkelt registrere dem i Eiendomsregisteret på Kartverket sine nettsider. Eiendomsregisteret er det offisielle registeret over norske eiendommer og inneholder opplysninger om grenser, bygninger, adresser og eierforhold. 
+
+Hva er fordelene med å egenregistrere? 
+Det er viktig at opplysninger om din bolig og fritidsbolig er registrert i Eiendomsregisteret, fordi registeret brukes av flere sentrale offentlige og private aktører, blant annet kommuner, banker og forsikringsselskaper. Riktige eiendomsopplysninger gjør at du kan få mer rettferdige betingelser ved lån eller forsikring, skatt og avgift, og bidrar til en trygg og forutsigbar salgsprosess for boligen. 
+
+Hvordan egenregistrere? 
+Opplysningene du kan registrere i første omgang er byggeår, vann, avløp, energi, oppvarming og bruksareal. Du kan finne opplysningene i eksempelvis salgsoppgaver, takstrapporter eller bruke din egen kjennskap til boligen. Du vil ikke bli bedt om å laste opp dokumentasjon. 
+
+Det er frivillig å registrere de seks opplysningene, og det er tilstrekkelig at én eier per bolig eller fritidsbolig gjennomfører registreringen. 
+
+Logg inn Eiendomsregisteret for å egenregistrere dine opplysninger. 
+
+ 
+
+Hilsen Kartverket`

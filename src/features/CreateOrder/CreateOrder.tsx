@@ -17,11 +17,14 @@ import {
   useDisclosure,
 } from "@kvib/react"
 import { Form, Formik, FormikProps } from "formik"
+import { useState } from "react"
 import { toFormikValidationSchema } from "zod-formik-adapter"
 import {
   førstegangsvarsling_epost_emnefelt,
   førstegangsvarsling_epost_innhold,
   førstegangsvarsling_sms,
+  informasjonsbrev_epost_emne,
+  informasjonsbrev_epost_innhold,
   revarsling_epost_emnefelt,
   revarsling_epost_innhold,
   revarsling_sms,
@@ -31,7 +34,6 @@ import { ConfirmDialog } from "./components/ConfirmDialog.tsx"
 import { RequestedSendTime } from "./components/RequestedSendTime.tsx"
 import { FormSchema, FormValues, initialValues } from "./formSchema.ts"
 import { getRecipientList, isInvalid } from "./utils.ts"
-import { useState } from "react"
 
 const smsOptions: Record<string, string> = {
   førstegangsvarsling: førstegangsvarsling_sms,
@@ -46,6 +48,10 @@ const emailOptions: Record<string, { subject: string; body: string }> = {
   revarsling: {
     subject: revarsling_epost_emnefelt,
     body: revarsling_epost_innhold,
+  },
+  informasjonsbrev: {
+    subject: informasjonsbrev_epost_emne,
+    body: informasjonsbrev_epost_innhold,
   },
 }
 
@@ -161,6 +167,7 @@ export const CreateOrder = () => {
                     <NativeSelectField placeholder="Velg e-post-mal">
                       <option value="førstegangsvarsling">Førstegangsvarsling</option>
                       <option value="revarsling">Re-varsling</option>
+                      <option value="informasjonsbrev">Informasjonsbrev</option>
                     </NativeSelectField>
                   </NativeSelect>
 
