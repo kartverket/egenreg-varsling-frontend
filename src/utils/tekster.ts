@@ -49,14 +49,14 @@ export const informasjonsbrev_epost_sandnes_innhold = `<!DOCTYPE html>
         <br/>
         
         <section>
-            <strong>Hva er fordelene med å egenregistrere?</strong>
+            <b>Hva er fordelene med å egenregistrere?</b>
             <p>Det er viktig at opplysninger om din bolig og fritidsbolig er registrert i Eiendomsregisteret, fordi registeret brukes av flere sentrale offentlige og private aktører, blant annet kommuner, banker og forsikringsselskaper. Riktige eiendomsopplysninger gjør at du kan få mer rettferdige betingelser ved lån eller forsikring, skatt og avgift, og bidrar til en trygg og forutsigbar salgsprosess for boligen.</p>
         </section>
         <br/>
 
         
         <section>
-            <strong>Hvordan egenregistrere?</strong>
+            <b>Hvordan egenregistrere?</b>
             <p>Opplysningene du kan registrere i første omgang er byggeår, vann, avløp, energi, oppvarming og bruksareal. Du kan finne opplysningene i eksempelvis salgsoppgaver, takstrapporter eller bruke din egen kjennskap til boligen. Du vil ikke bli bedt om å laste opp dokumentasjon.</p>
             <p>Det er frivillig å registrere de seks opplysningene, og det er tilstrekkelig at én eier per bolig eller fritidsbolig gjennomfører registreringen.</p>
             <p>Logg inn Eiendomsregisteret for å egenregistrere dine opplysninger.</p>
