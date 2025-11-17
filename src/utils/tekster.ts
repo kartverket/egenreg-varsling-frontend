@@ -33,21 +33,40 @@ Kartverket`
 export const informasjonsbrev_epost_sandnes_emne =
   "Bidra med dine opplysninger i Eiendomsregisteret"
 
-export const informasjonsbrev_epost_sandnes_innhold = `Hei,
+export const informasjonsbrev_epost_sandnes_innhold = `<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>    
+    <main>
+        <section>
+            <p>Hei,</p>
+            <p>Som eier av bolig og/eller fritidsbolig i Sandnes kommune kan du nå registrere utvalgte eiendomsopplysninger i Eiendomsregisteret hos Kartverket</p>
+            <p>Kartverket kan ha mangelfulle opplysninger om din bolig eller fritidsbolig, og du kan enkelt registrere dem i Eiendomsregisteret på Kartverket sine nettsider. Eiendomsregisteret er det offisielle registeret over norske eiendommer og inneholder opplysninger om grenser, bygninger, adresser og eierforhold.</p>
+        </section>
+        <br/>
+        
+        <section>
+            <strong>Hva er fordelene med å egenregistrere?</strong>
+            <p>Det er viktig at opplysninger om din bolig og fritidsbolig er registrert i Eiendomsregisteret, fordi registeret brukes av flere sentrale offentlige og private aktører, blant annet kommuner, banker og forsikringsselskaper. Riktige eiendomsopplysninger gjør at du kan få mer rettferdige betingelser ved lån eller forsikring, skatt og avgift, og bidrar til en trygg og forutsigbar salgsprosess for boligen.</p>
+        </section>
+        <br/>
 
-Som eier av bolig og/eller fritidsbolig i Sandnes kommune kan du nå registrere utvalgte eiendomsopplysninger i Eiendomsregisteret hos Kartverket 
-Kartverket kan ha mangelfulle opplysninger om din bolig eller fritidsbolig, og du kan enkelt registrere dem i Eiendomsregisteret på Kartverket sine nettsider. Eiendomsregisteret er det offisielle registeret over norske eiendommer og inneholder opplysninger om grenser, bygninger, adresser og eierforhold. 
-
-Hva er fordelene med å egenregistrere? 
-Det er viktig at opplysninger om din bolig og fritidsbolig er registrert i Eiendomsregisteret, fordi registeret brukes av flere sentrale offentlige og private aktører, blant annet kommuner, banker og forsikringsselskaper. Riktige eiendomsopplysninger gjør at du kan få mer rettferdige betingelser ved lån eller forsikring, skatt og avgift, og bidrar til en trygg og forutsigbar salgsprosess for boligen. 
-
-Hvordan egenregistrere? 
-Opplysningene du kan registrere i første omgang er byggeår, vann, avløp, energi, oppvarming og bruksareal. Du kan finne opplysningene i eksempelvis salgsoppgaver, takstrapporter eller bruke din egen kjennskap til boligen. Du vil ikke bli bedt om å laste opp dokumentasjon. 
-
-Det er frivillig å registrere de seks opplysningene, og det er tilstrekkelig at én eier per bolig eller fritidsbolig gjennomfører registreringen. 
-
-Logg inn Eiendomsregisteret for å egenregistrere dine opplysninger. 
-
- 
-
-Hilsen Kartverket`
+        
+        <section>
+            <strong>Hvordan egenregistrere?</strong>
+            <p>Opplysningene du kan registrere i første omgang er byggeår, vann, avløp, energi, oppvarming og bruksareal. Du kan finne opplysningene i eksempelvis salgsoppgaver, takstrapporter eller bruke din egen kjennskap til boligen. Du vil ikke bli bedt om å laste opp dokumentasjon.</p>
+            <p>Det er frivillig å registrere de seks opplysningene, og det er tilstrekkelig at én eier per bolig eller fritidsbolig gjennomfører registreringen.</p>
+            <p>Logg inn Eiendomsregisteret for å egenregistrere dine opplysninger.</p>
+        </section>
+        <br/>
+    </main>
+    
+    <footer>
+        <p>Hilsen Kartverket</p>
+    </footer>
+</body>
+</html>
+`
