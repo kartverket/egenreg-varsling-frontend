@@ -43,7 +43,7 @@ export const informasjonsbrev_epost_sandnes_innhold = `<!DOCTYPE html>
     <main>
         <section>
             <p>Hei,</p>
-            <p>Som eier av bolig og/eller fritidsbolig i Sandnes kommune kan du nå registrere utvalgte eiendomsopplysninger i Eiendomsregisteret hos Kartverket</p>
+            <b>Som eier av bolig og/eller fritidsbolig i Sandnes kommune kan du nå registrere utvalgte eiendomsopplysninger i Eiendomsregisteret hos Kartverket.</b>
             <p>Kartverket kan ha mangelfulle opplysninger om din bolig eller fritidsbolig, og du kan enkelt registrere dem i Eiendomsregisteret på Kartverket sine nettsider. Eiendomsregisteret er det offisielle registeret over norske eiendommer og inneholder opplysninger om grenser, bygninger, adresser og eierforhold.</p>
         </section>
         <br/>
