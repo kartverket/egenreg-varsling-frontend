@@ -167,7 +167,7 @@ export const CreateOrder = () => {
                     <NativeSelectField placeholder="Velg e-post-mal">
                       <option value="førstegangsvarsling">Førstegangsvarsling</option>
                       <option value="revarsling">Re-varsling</option>
-                      <option value="informasjonsbrev_sandnes">Informasjonsbrev</option>
+                      <option value="informasjonsbrev_sandnes">Informasjonsbrev Sandnes</option>
                     </NativeSelectField>
                   </NativeSelect>
 
