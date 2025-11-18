@@ -23,6 +23,10 @@ import {
   førstegangsvarsling_epost_emnefelt,
   førstegangsvarsling_epost_innhold,
   førstegangsvarsling_sms,
+  informasjonsbrev_epost_hvaler_emne,
+  informasjonsbrev_epost_hvaler_innhold,
+  informasjonsbrev_epost_nesodden_emne,
+  informasjonsbrev_epost_nesodden_innhold,
   informasjonsbrev_epost_sandnes_emne,
   informasjonsbrev_epost_sandnes_innhold,
   revarsling_epost_emnefelt,
@@ -52,6 +56,14 @@ const emailOptions: Record<string, { subject: string; body: string }> = {
   informasjonsbrev_sandnes: {
     subject: informasjonsbrev_epost_sandnes_emne,
     body: informasjonsbrev_epost_sandnes_innhold,
+  },
+  informasjonsbrev_hvaler: {
+    subject: informasjonsbrev_epost_hvaler_emne,
+    body: informasjonsbrev_epost_hvaler_innhold,
+  },
+  informasjonsbrev_nesodden: {
+    subject: informasjonsbrev_epost_nesodden_emne,
+    body: informasjonsbrev_epost_nesodden_innhold,
   },
 }
 
@@ -167,7 +179,9 @@ export const CreateOrder = () => {
                     <NativeSelectField placeholder="Velg e-post-mal">
                       <option value="førstegangsvarsling">Førstegangsvarsling</option>
                       <option value="revarsling">Re-varsling</option>
-                      <option value="informasjonsbrev_sandnes">Informasjonsbrev Sandnes</option>
+                      <option value="informasjonsbrev_sandnes">Informasjonsepost Sandnes</option>
+                      <option value="informasjonsbrev_hvaler">Informasjonsepost Hvaler</option>
+                      <option value="informasjonsbrev_nesodden">Informasjonsepost Nesodden</option>
                     </NativeSelectField>
                   </NativeSelect>
 
