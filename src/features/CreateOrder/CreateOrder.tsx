@@ -29,6 +29,7 @@ import {
   informasjonsbrev_epost_nesodden_innhold,
   informasjonsbrev_epost_sandnes_emne,
   informasjonsbrev_epost_sandnes_innhold,
+  revarsling_epost,
   revarsling_epost_emnefelt,
   revarsling_epost_innhold,
   revarsling_sms,
@@ -42,6 +43,7 @@ import { getRecipientList, isInvalid } from "./utils.ts"
 const smsOptions: Record<string, string> = {
   førstegangsvarsling: førstegangsvarsling_sms,
   revarsling: revarsling_sms,
+  revarsling_epost: revarsling_epost,
 }
 
 const emailOptions: Record<string, { subject: string; body: string }> = {
@@ -135,6 +137,7 @@ export const CreateOrder = () => {
                     <NativeSelectField placeholder="Velg SMS-mal">
                       <option value="førstegangsvarsling">Førstegangsvarsling</option>
                       <option value="revarsling">Re-varsling </option>
+                      <option value="revarsling_epost">Re-varsling e-post</option>
                     </NativeSelectField>
                   </NativeSelect>
                   {form.errors.smsBody && <Alert status="error" title={form.errors.smsBody} />}
