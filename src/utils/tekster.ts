@@ -1,8 +1,7 @@
 export const førstegangsvarsling_sms = `Hei! Vi kan ha mangelfulle opplysninger om din bolig eller fritidsbolig. Du kan enkelt registrere dem i Eiendomsregisteret på vår nettside. Hilsen Kartverket`
 
-export const revarsling_sms = `Hei!
-Vi minner om at du kan si hva du mener er riktig om din bolig eller fritidsbolig.
-Besøk Eiendomsregisteret og gå til Egenregistrering.
+export const revarsling_sms = `Hei! 
+Vi kan mangle opplysninger om din bolig eller fritidsbolig. Minner om at du kan registrere dem i Eiendomsregisteret på vår nettside. 
 Hilsen Kartverket`
 
 export const førstegangsvarsling_epost_emnefelt =
