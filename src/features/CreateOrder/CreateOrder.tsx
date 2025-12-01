@@ -29,6 +29,8 @@ import {
   informasjonsbrev_epost_nesodden_innhold,
   informasjonsbrev_epost_sandnes_emne,
   informasjonsbrev_epost_sandnes_innhold,
+  informasjonsbrev_tonsberg_innhold,
+  informasjonsbrev_tonsberg_tittel,
   revarsling_epost,
   revarsling_epost_emnefelt,
   revarsling_epost_innhold,
@@ -69,10 +71,18 @@ const emailOptions: Record<string, { subject: string; body: string }> = {
   },
 }
 
+const eFormidlingOptions: Record<string, { tittel: string; body: string }> = {
+  førstegangsvarsling_tonsberg: {
+    tittel: informasjonsbrev_tonsberg_tittel,
+    body: informasjonsbrev_tonsberg_innhold,
+  },
+}
+
 export const CreateOrder = () => {
   const { open: isDialogOpen, onOpen: onOpenDialog, onClose: onCloseDialog } = useDisclosure()
   const [smsVarselstype, setSmsVarselstype] = useState<string>("")
   const [emailVarselstype, setEmailVarselstype] = useState<string>("")
+  const [eFormidlingVarseltype, setEFormidlingVarseltype] = useState<string>("")
 
   return (
     <Formik
@@ -117,104 +127,162 @@ export const CreateOrder = () => {
                   <Stack>
                     <Radio value="SmsPreferred">Foretrekk SMS</Radio>
                     <Radio value="EmailPreferred">Foretrekk e-post</Radio>
+                    <Radio value="eFormidling">eFormidling</Radio>
                   </Stack>
                 </RadioGroup>
               </Field>
 
-              {/* SMS */}
-              <Grid>
-                <Field invalid={isInvalid(form, "smsBody")}>
-                  <Field label={<strong>Melding på SMS</strong>} />
-                  <Field helperText="Velg en forhåndsdefinert melding." />
-                  <NativeSelect
-                    defaultValue={form.values.smsBody}
-                    onChange={event => {
-                      const key = (event.target as HTMLSelectElement).value
-                      form.setFieldValue("smsBody", smsOptions[key])
-                      setSmsVarselstype(key)
-                    }}
-                  >
-                    <NativeSelectField placeholder="Velg SMS-mal">
-                      <option value="førstegangsvarsling">Førstegangsvarsling</option>
-                      <option value="revarsling">Re-varsling </option>
-                      <option value="revarsling_epost">Re-varsling e-post</option>
-                    </NativeSelectField>
-                  </NativeSelect>
-                  {form.errors.smsBody && <Alert status="error" title={form.errors.smsBody} />}
-
-                  {form.values.smsBody && (
-                    <Box mt={4}>
-                      <Text fontSize="sm" mb={2}>
-                        Tekst som blir sendt i SMS:
-                      </Text>
-                      <Box
-                        maxW="320px"
-                        p={4}
-                        bg="gray.100"
-                        borderRadius="lg"
-                        boxShadow="md"
-                        border="1px solid"
-                        borderColor="gray.300"
-                        fontSize="sm"
-                        lineHeight="1.4"
-                        whiteSpace="pre-wrap"
+              {form.values.channel !== "eFormidling" && (
+                /* SMS */
+                <>
+                  <Grid gap={2}>
+                    <Field invalid={isInvalid(form, "smsBody")}>
+                      <Field label={<strong>Melding på SMS</strong>} />
+                      <Field helperText="Velg en forhåndsdefinert melding." />
+                      <NativeSelect
+                        defaultValue={form.values.smsBody}
+                        onChange={event => {
+                          const key = (event.target as HTMLSelectElement).value
+                          form.setFieldValue("smsBody", smsOptions[key])
+                          setSmsVarselstype(key)
+                        }}
                       >
-                        {form.values.smsBody}
-                      </Box>
-                    </Box>
-                  )}
-                </Field>
-              </Grid>
+                        <NativeSelectField placeholder="Velg SMS-mal">
+                          <option value="førstegangsvarsling">Førstegangsvarsling</option>
+                          <option value="revarsling">Re-varsling </option>
+                          <option value="revarsling_epost">Re-varsling e-post</option>
+                        </NativeSelectField>
+                      </NativeSelect>
+                      {form.errors.smsBody && <Alert status="error" title={form.errors.smsBody} />}
 
-              {/* E-post */}
-              <Grid gap={2}>
-                <Field invalid={isInvalid(form, "emailBody")}>
-                  <Field label={<strong>Melding på e-post</strong>} />
-                  <NativeSelect
-                    defaultValue={form.values.emailBody}
-                    onChange={event => {
-                      const key = (event.target as HTMLSelectElement).value
-                      form.setFieldValue("emailBody", emailOptions[key].body)
-                      form.setFieldValue("emailSubject", emailOptions[key].subject)
-                      setEmailVarselstype(key)
-                    }}
-                  >
-                    <NativeSelectField placeholder="Velg e-post-mal">
-                      <option value="førstegangsvarsling">Førstegangsvarsling</option>
-                      <option value="revarsling">Re-varsling</option>
-                      <option value="informasjonsbrev_sandnes">Informasjonsepost Sandnes</option>
-                      <option value="informasjonsbrev_hvaler">Informasjonsepost Hvaler</option>
-                      <option value="informasjonsbrev_nesodden">Informasjonsepost Nesodden</option>
-                    </NativeSelectField>
-                  </NativeSelect>
-
-                  {form.values.emailBody && (
-                    <Box mt={4}>
-                      <Text fontSize="sm" mb={2}>
-                        Tekst som blir sendt i e-post:
-                      </Text>
-                      <Text as={"b"} fontSize="sm" mb={2}>
-                        Emne: {form.values.emailSubject}
-                      </Text>
-                      <Box
-                        my={4}
-                        maxW="320px"
-                        p={4}
-                        bg="gray.100"
-                        borderRadius="lg"
-                        boxShadow="md"
-                        border="1px solid"
-                        borderColor="gray.300"
-                        fontSize="sm"
-                        lineHeight="1.4"
-                        whiteSpace="pre-wrap"
+                      {form.values.smsBody && (
+                        <Box mt={4}>
+                          <Text fontSize="sm" mb={2}>
+                            Tekst som blir sendt i SMS:
+                          </Text>
+                          <Box
+                            maxW="320px"
+                            p={4}
+                            bg="gray.100"
+                            borderRadius="lg"
+                            boxShadow="md"
+                            border="1px solid"
+                            borderColor="gray.300"
+                            fontSize="sm"
+                            lineHeight="1.4"
+                            whiteSpace="pre-wrap"
+                          >
+                            {form.values.smsBody}
+                          </Box>
+                        </Box>
+                      )}
+                    </Field>
+                  </Grid>
+                  {/* E-post */}
+                  <Grid gap={2}>
+                    <Field invalid={isInvalid(form, "emailBody")}>
+                      <Field label={<strong>Melding på e-post</strong>} />
+                      <NativeSelect
+                        defaultValue={form.values.emailBody}
+                        onChange={event => {
+                          const key = (event.target as HTMLSelectElement).value
+                          form.setFieldValue("emailBody", emailOptions[key].body)
+                          form.setFieldValue("emailSubject", emailOptions[key].subject)
+                          setEmailVarselstype(key)
+                        }}
                       >
-                        {form.values.emailBody}
+                        <NativeSelectField placeholder="Velg e-post-mal">
+                          <option value="førstegangsvarsling_tonsberg">Førstegangsvarsling</option>
+                          <option value="revarsling">Re-varsling</option>
+                          <option value="informasjonsbrev_sandnes">
+                            Informasjonsepost Sandnes
+                          </option>
+                          <option value="informasjonsbrev_hvaler">Informasjonsepost Hvaler</option>
+                          <option value="informasjonsbrev_nesodden">
+                            Informasjonsepost Nesodden
+                          </option>
+                        </NativeSelectField>
+                      </NativeSelect>
+
+                      {form.values.emailBody && (
+                        <Box mt={4}>
+                          <Text fontSize="sm" mb={2}>
+                            Tekst som blir sendt i e-post:
+                          </Text>
+                          <Text as={"b"} fontSize="sm" mb={2}>
+                            Emne: {form.values.emailSubject}
+                          </Text>
+                          <Box
+                            my={4}
+                            maxW="320px"
+                            p={4}
+                            bg="gray.100"
+                            borderRadius="lg"
+                            boxShadow="md"
+                            border="1px solid"
+                            borderColor="gray.300"
+                            fontSize="sm"
+                            lineHeight="1.4"
+                            whiteSpace="pre-wrap"
+                          >
+                            {form.values.emailBody}
+                          </Box>
+                        </Box>
+                      )}
+                    </Field>
+                  </Grid>
+                </>
+              )}
+
+              {/* eFormidling */}
+              {form.values.channel === "eFormidling" && (
+                <Grid gap={2}>
+                  <Field invalid={isInvalid(form, "eFormidlingMelding")}>
+                    <Field label={<strong>Melding gjennom Digital postkasse</strong>} />
+                    <NativeSelect
+                      defaultValue={form.values.eFormidlingMelding}
+                      onChange={event => {
+                        const key = (event.target as HTMLSelectElement).value
+                        form.setFieldValue("eFormidlingMelding", eFormidlingOptions[key].body)
+                        form.setFieldValue("eFormidlingTittel", eFormidlingOptions[key].tittel)
+                        setEFormidlingVarseltype(key)
+                      }}
+                    >
+                      <NativeSelectField placeholder="Velg malverk">
+                        <option value="førstegangsvarsling_tonsberg">
+                          Førstegangsvarsling Tønsberg
+                        </option>
+                      </NativeSelectField>
+                    </NativeSelect>
+
+                    {form.values.eFormidlingMelding && (
+                      <Box mt={4}>
+                        <Text fontSize="sm" mb={2}>
+                          Tekst som blir sendt gjennom eFormidling:
+                        </Text>
+                        <Text as={"b"} fontSize="sm" mb={2}>
+                          Emne: {form.values.eFormidlingTittel}
+                        </Text>
+                        <Box
+                          my={4}
+                          maxW="320px"
+                          p={4}
+                          bg="gray.100"
+                          borderRadius="lg"
+                          boxShadow="md"
+                          border="1px solid"
+                          borderColor="gray.300"
+                          fontSize="sm"
+                          lineHeight="1.4"
+                          whiteSpace="pre-wrap"
+                        >
+                          {form.values.eFormidlingMelding}
+                        </Box>
                       </Box>
-                    </Box>
-                  )}
-                </Field>
-              </Grid>
+                    )}
+                  </Field>
+                </Grid>
+              )}
 
               <RequestedSendTime />
             </Stack>
@@ -228,6 +296,7 @@ export const CreateOrder = () => {
               closeDialog={onCloseDialog}
               smsVarselstype={smsVarselstype}
               emailVarselstype={emailVarselstype}
+              eFormidlingVarselstype={eFormidlingVarseltype}
             />
           </Container>
         </Form>
