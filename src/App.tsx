@@ -6,7 +6,7 @@ import {
   SsoSilentRequest,
 } from "@azure/msal-browser"
 import { MsalAuthenticationTemplate, MsalProvider } from "@azure/msal-react"
-import { KvibProvider } from "@kvib/react"
+import { KvibProvider, Toaster } from "@kvib/react"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { useEffect, useRef, useState } from "react"
 import { ErrorBoundary } from "react-error-boundary"
@@ -57,6 +57,7 @@ function App() {
           <QueryClientProvider client={queryClient}>
             <KvibProvider>
               <RouterProvider router={router} />
+              <Toaster />
             </KvibProvider>
           </QueryClientProvider>
         </ErrorBoundary>

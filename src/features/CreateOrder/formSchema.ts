@@ -35,6 +35,7 @@ export const FormSchema = z
     channel: z.union([
       z.literal("EmailPreferred"),
       z.literal("SmsPreferred"),
+      z.literal("eFormidling"),
     ]),
     recipients: z.string().refine(validateRecipients, "Ugyldig fødselsnummer"),
     sendTime: z.union([z.literal("Now"), z.literal("Later")]),
@@ -46,6 +47,8 @@ export const FormSchema = z
       .string()
       .max(157, { message: "SMS-meldinger kan ikke overstige 157 tegn" })
       .optional(),
+    eFormidlingTittel: z.string().optional(),
+    eFormidlingMelding: z.string().optional(),
   })
   .refine(
     data =>
@@ -72,6 +75,7 @@ export const initialValues: FormValues = {
   emailBody: "",
   smsBody: "",
   recipients: "",
+  eFormidlingMelding: "",
   sendTime: "Now",
   date: new Date(),
   time: new Date().toLocaleTimeString("en-GB"),

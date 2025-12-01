@@ -1,24 +1,25 @@
 export type EmailTemplate = {
-  fromAddress: string;
-  subject: string;
-  body: string;
-  contentType: string;
-};
+  fromAddress: string
+  subject: string
+  body: string
+  contentType: string
+}
 
 export type SmsTemplate = {
-  senderNumber: string;
-  body: string;
-};
+  senderNumber: string
+  body: string
+}
 
-export type NotificationChannel =
-  | "EmailPreferred"
-  | "SmsPreferred";
+export type NotificationChannel = "EmailPreferred" | "SmsPreferred" | "eFormidling"
 
-export type OrderStatus =
-  | "Processing"
-  | "Completed"
-  | "Failed"
-  | "Cancelled"
-  | "Scheduled";
+export type OrderStatus = "Processing" | "Completed" | "Failed" | "Cancelled" | "Scheduled"
 
-export type NotificationStatus = "Processing" | "Delivered" | "Failed";
+export type NotificationStatus = "Processing" | "Delivered" | "Failed"
+
+type Fnr = string
+
+export interface EformidlingRequestDTO {
+  identifikatorer: Fnr[]
+  tittel: string
+  melding: string
+}
