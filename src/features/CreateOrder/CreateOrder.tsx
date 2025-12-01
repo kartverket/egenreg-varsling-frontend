@@ -258,7 +258,7 @@ export const CreateOrder = () => {
                     {form.values.eFormidlingMelding && (
                       <Box mt={4}>
                         <Text fontSize="sm" mb={2}>
-                          Tekst som blir sendt i e-post:
+                          Tekst som blir sendt i gjennom eFormidling:
                         </Text>
                         <Text as={"b"} fontSize="sm" mb={2}>
                           Emne: {form.values.eFormidlingTittel}
