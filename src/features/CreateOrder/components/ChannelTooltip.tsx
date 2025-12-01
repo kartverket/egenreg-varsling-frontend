@@ -8,8 +8,9 @@ export const ChannelTooltip = () => {
         <Stack>
           <Text as="b">Foretrekk kanal</Text>
           <Text>
-            Varselet sendes på den foretrukne kanalen hvis kontaktinformasjon er tilgjengelig. Hvis
-            ikke, forsøker systemet å sende via den andre kanalen.
+            Sms og epost sendes på den foretrukne kanalen hvis kontaktinformasjon er tilgjengelig. Hvis
+            ikke, forsøker systemet å sende via den andre kanalen. Dersom du velger eFormidling, vil
+            meldingen bli sendt til digital postkasse såfremt bruker har satt opp dette.
           </Text>
         </Stack>
       }
