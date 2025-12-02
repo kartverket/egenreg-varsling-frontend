@@ -38,6 +38,7 @@ import {
 } from "../../utils/tekster.ts"
 import { ChannelTooltip } from "./components/ChannelTooltip.tsx"
 import { ConfirmDialog } from "./components/ConfirmDialog.tsx"
+import HtmlPreview from "./components/Preview.tsx"
 import { RequestedSendTime } from "./components/RequestedSendTime.tsx"
 import { FormSchema, FormValues, initialValues } from "./formSchema.ts"
 import { getRecipientList, isInvalid } from "./utils.ts"
@@ -265,7 +266,7 @@ export const CreateOrder = () => {
                         </Text>
                         <Box
                           my={4}
-                          maxW="320px"
+                          maxW="560px"
                           p={4}
                           bg="gray.100"
                           borderRadius="lg"
@@ -274,9 +275,12 @@ export const CreateOrder = () => {
                           borderColor="gray.300"
                           fontSize="sm"
                           lineHeight="1.4"
-                          whiteSpace="pre-wrap"
+                          width="100%"
                         >
-                          {form.values.eFormidlingMelding}
+                          <HtmlPreview
+                            html={form.values.eFormidlingMelding}
+                            title="Forhåndsvisning av eFormidling"
+                          />
                         </Box>
                       </Box>
                     )}
