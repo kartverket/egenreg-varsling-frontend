@@ -19,6 +19,8 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
+    cooldown:
+      default-days: 2
     ignore:
       - dependency-name: "posthog-js"
         update-types: ["version-update:semver-patch"]
