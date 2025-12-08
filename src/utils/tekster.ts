@@ -306,9 +306,7 @@ export const informasjonsbrev_tonsberg_innhold = `<!DOCTYPE html>
             eier.
           </p>
 
-          <a href="https://mineiendom.kartverket.no/egenregistreringer"
-            >Logg inn og kom i gang</a
-          >
+          <a href="https://mineiendom.kartverket.no/egenregistreringer?from=dpi">Logg inn og kom i gang</a>
         </div>
 
         <div class="content">
@@ -347,15 +345,13 @@ export const informasjonsbrev_tonsberg_innhold = `<!DOCTYPE html>
           </p>
           <p>Det er frivillig å registrere de seks opplysningene, og vi trenger bare at én eier gjennomfører registreringen.</p>
         </div>
-                <div class="content">
+        <div class="content">
           <p>
             Takk for at du bidrar.</p>
             <p>
                 Hilsen Kartverket
             </p>
-                      <a href="https://mineiendom.kartverket.no/egenregistreringer"
-            >Logg inn og kom i gang</a
-          >
+            <a href="https://mineiendom.kartverket.no/egenregistreringer?from=dpi">Logg inn og kom i gang</a>
         </div>
     </div>
   </body>
