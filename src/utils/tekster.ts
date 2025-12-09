@@ -379,13 +379,13 @@ export const informasjonsbrev_tonsberg_innhold = `<!DOCTYPE html>
           <p>
             Mer informasjon om Eiendomsregisteret og egenregistrering finner du
             på
-            <a href="https://kartverket.no/Eiendomsregisteret?from=dpi"
+            <a href="https://kartverket.no/Eiendomsregisteret"
               >kartverket.no/eiendomsregisteret</a
             >.
           </p>
           <p>
             Du kan også gå direkte til registreringen gjennom følgende lenke:
-            <a href="https://mineiendom.kartverket.no/egenregistreringer"
+            <a href="https://mineiendom.kartverket.no/egenregistreringer?from=dpi"
               >mineiendom.kartverket.no/egenregistreringer</a
             >.
           </p>
