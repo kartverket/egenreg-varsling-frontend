@@ -193,7 +193,7 @@ export const CreateOrder = () => {
                         }}
                       >
                         <NativeSelectField placeholder="Velg e-post-mal">
-                          <option value="førstegangsvarsling_tonsberg">Førstegangsvarsling</option>
+                          <option value="førstegangsvarsling">Førstegangsvarsling</option>
                           <option value="revarsling">Re-varsling</option>
                           <option value="informasjonsbrev_sandnes">
                             Informasjonsepost Sandnes
