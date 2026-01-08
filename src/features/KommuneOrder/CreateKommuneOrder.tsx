@@ -17,8 +17,8 @@ import { useMutation } from "@tanstack/react-query"
 import { useActionState, useState } from "react"
 import { useFormStatus } from "react-dom"
 import {
-  informasjonsbrev_tonsberg_innhold,
-  informasjonsbrev_tonsberg_tittel,
+  informasjonsbrev_innhold,
+  informasjonsbrev_tittel,
 } from "../../utils/tekster"
 import HtmlPreview from "../CreateOrder/components/Preview"
 import { createKommuneOrder } from "./api/kommuneOrderApi"
@@ -38,9 +38,9 @@ const SubmitButton = () => {
 
 const CreateKommuneOrder = () => {
   const eFormidlingOptions: Record<string, { tittel: string; body: string }> = {
-    førstegangsvarsling_tonsberg: {
-      tittel: informasjonsbrev_tonsberg_tittel,
-      body: informasjonsbrev_tonsberg_innhold,
+    førstegangsvarsling: {
+      tittel: informasjonsbrev_tittel,
+      body: informasjonsbrev_innhold,
     },
   }
 

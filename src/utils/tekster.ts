@@ -152,8 +152,8 @@ export const informasjonsbrev_epost_hvaler_innhold = `<!DOCTYPE html>
 </html>
 `
 
-export const informasjonsbrev_tonsberg_tittel = "Registrer opplysninger i Eiendomsregisteret"
-export const informasjonsbrev_tonsberg_innhold = `<!DOCTYPE html>
+export const informasjonsbrev_tittel = "Registrer opplysninger i Eiendomsregisteret"
+export const informasjonsbrev_innhold = `<!DOCTYPE html>
 <html lang="nb">
   <head>
     <meta
@@ -313,7 +313,7 @@ export const informasjonsbrev_tonsberg_innhold = `<!DOCTYPE html>
         <div class="cta-box">
           <p>
             Kartverket kan ha mangelfulle opplysninger om din bolig eller
-            fritidsbolig i Tønsberg kommune. Som eier eller fester kan du nå
+            fritidsbolig. Som eier eller fester kan du nå
             registrere opplysninger i Eiendomsregisteret.
           </p>
 
@@ -364,7 +364,7 @@ export const informasjonsbrev_tonsberg_innhold = `<!DOCTYPE html>
             Ved å logge inn på Eiendomsregisteret kan du se og registrere
             opplysninger om dine eiendommer. Du kan registrere byggeår,
             bruksareal, vann, avløp, energi- og oppvarmingskilde om din bolig
-            eller fritidsbolig i Tønsberg kommune.
+            eller fritidsbolig.
           </p>
           <p>
             Du kan finne informasjonen i for eksempel salgsoppgaver,

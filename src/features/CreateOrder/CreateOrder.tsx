@@ -29,8 +29,8 @@ import {
   informasjonsbrev_epost_nesodden_innhold,
   informasjonsbrev_epost_sandnes_emne,
   informasjonsbrev_epost_sandnes_innhold,
-  informasjonsbrev_tonsberg_innhold,
-  informasjonsbrev_tonsberg_tittel,
+  informasjonsbrev_innhold,
+  informasjonsbrev_tittel,
   revarsling_epost,
   revarsling_epost_emnefelt,
   revarsling_epost_innhold,
@@ -73,9 +73,9 @@ const emailOptions: Record<string, { subject: string; body: string }> = {
 }
 
 const eFormidlingOptions: Record<string, { tittel: string; body: string }> = {
-  førstegangsvarsling_tonsberg: {
-    tittel: informasjonsbrev_tonsberg_tittel,
-    body: informasjonsbrev_tonsberg_innhold,
+  førstegangsvarsling: {
+    tittel: informasjonsbrev_tittel,
+    body: informasjonsbrev_innhold,
   },
 }
 
@@ -250,8 +250,8 @@ export const CreateOrder = () => {
                       }}
                     >
                       <NativeSelectField placeholder="Velg malverk">
-                        <option value="førstegangsvarsling_tonsberg">
-                          Førstegangsvarsling Tønsberg
+                        <option value="førstegangsvarsling">
+                          Førstegangsvarsling
                         </option>
                       </NativeSelectField>
                     </NativeSelect>
