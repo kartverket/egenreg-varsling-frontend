@@ -120,7 +120,8 @@ const CreateKommuneOrder = () => {
 
           <Textarea required name="sms" />
         </FieldRoot>
-        <Field invalid={state.status === "error"}>
+
+        <FieldRoot invalid={state.status === "error"}>
           <Field label={<strong>Melding gjennom Digital postkasse</strong>} />
           <NativeSelect
             defaultValue=""
@@ -134,27 +135,24 @@ const CreateKommuneOrder = () => {
               ))}
             </NativeSelectField>
           </NativeSelect>
+        </FieldRoot>
+        {selectedEformidling && (
+          <Flex alignItems="baseline" gap={4} mt={4}>
+            <Text as="b" fontSize="sm" mb={2}>
+              Emne: {eFormidlingOptions[selectedEformidling]?.tittel}
+            </Text>
 
-          {selectedEformidling && (
-            <Flex alignItems="baseline" gap={4} mt={4}>
-              <Text as="b" fontSize="sm" mb={2}>
-                Emne: {eFormidlingOptions[selectedEformidling]?.tittel}
-              </Text>
-
-              <ForhåndsvisDigitalPost
-                tittel={"Emne: " + eFormidlingOptions[selectedEformidling]?.tittel}
-              >
-                <HtmlPreview
-                  html={eFormidlingOptions[selectedEformidling]?.body ?? ""}
-                  title="Forhåndsvisning av eFormidling"
-                />
-              </ForhåndsvisDigitalPost>
-            </Flex>
-          )}
-        </Field>
-        {state?.status === "error" && state.message === "Kunne ikke opprette kommunal ordre" && (
-          <FieldErrorText>{state.message}</FieldErrorText>
+            <ForhåndsvisDigitalPost
+              tittel={"Emne: " + eFormidlingOptions[selectedEformidling]?.tittel}
+            >
+              <HtmlPreview
+                html={eFormidlingOptions[selectedEformidling]?.body ?? ""}
+                title="Forhåndsvisning av eFormidling"
+              />
+            </ForhåndsvisDigitalPost>
+          </Flex>
         )}
+
         <SubmitButton />
       </form>
     </Box>
