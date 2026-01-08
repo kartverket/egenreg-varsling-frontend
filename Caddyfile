@@ -8,8 +8,18 @@
     path /api/*
 }
 
+@varslingbackendUrls {
+    path /kommuneordre/*
+}
+
 route @backendUrls {
     reverse_proxy meldingstjeneste:8080 {
+        header_up Host {upstream_hostport}
+    }
+}
+
+@route @varslingbackendUrls {
+    reverse_proxy egenreg-varsling-backend:8080 {
         header_up Host {upstream_hostport}
     }
 }

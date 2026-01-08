@@ -19,6 +19,11 @@ export default defineConfig({
         secure: false,
         ws: true,
       },
+      "/kommuneordre": {
+        target: "http://0.0.0.0:8080",
+        changeOrigin: true,
+        secure: false,
+      },
     },
   },
 })

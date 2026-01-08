@@ -16,6 +16,7 @@ import { getAuthState } from "./auth/authState"
 const tabs = [
   { label: "Sending av varsel", url: "/" },
   { label: "Oversikt", url: `/orders` },
+  { label: "Kommunevarsling", url: `/kommuneorder` },
 ]
 
 export const Layout = () => {

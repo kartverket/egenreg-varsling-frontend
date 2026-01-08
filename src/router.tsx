@@ -1,10 +1,11 @@
-import { Flex, Heading, Text } from "@kvib/react";
-import { createBrowserRouter } from "react-router-dom";
-import { ErrorElement } from "./components/ErrorElement.tsx";
-import { CreateOrder } from "./features/CreateOrder/CreateOrder.tsx";
-import { OrderDetails } from "./features/OrderDetails/OrderDetails.tsx";
-import { Orders } from "./features/Orders/Orders.tsx";
-import { Layout } from "./Layout.tsx";
+import { Flex, Heading, Text } from "@kvib/react"
+import { createBrowserRouter } from "react-router-dom"
+import { ErrorElement } from "./components/ErrorElement.tsx"
+import { CreateOrder } from "./features/CreateOrder/CreateOrder.tsx"
+import KommuneOrder from "./features/KommuneOrder/KommuneOrder.tsx"
+import { OrderDetails } from "./features/OrderDetails/OrderDetails.tsx"
+import { Orders } from "./features/Orders/Orders.tsx"
+import { Layout } from "./Layout.tsx"
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +32,7 @@ export const router = createBrowserRouter([
           },
         ],
       },
+      { path: "kommuneorder", element: <KommuneOrder />  },
       {
         path: "*",
         element: (
@@ -42,4 +44,4 @@ export const router = createBrowserRouter([
       },
     ],
   },
-]);
+])
