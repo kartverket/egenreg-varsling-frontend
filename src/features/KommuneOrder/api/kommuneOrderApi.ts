@@ -45,7 +45,7 @@ export interface CreateKommuneOrderDTO {
 export interface KommuneOrder {
   ordreId: string
   kommunenummer: string
-  gardsnummer: number
+  gardsnummer: number | null
   totaltAntallVarslinger: number
   sendtDPI: number
   sendtSMS: number

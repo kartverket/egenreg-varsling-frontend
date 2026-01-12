@@ -14,9 +14,9 @@ import { Outlet, useNavigate } from "react-router-dom"
 import { getAuthState } from "./auth/authState"
 
 const tabs = [
-  { label: "Varsle med innbyggeridentifikator", url: "/" },
+  { label: "Varsling med innbyggeridentifikator", url: "/" },
   { label: "Oversikt", url: `/orders` },
-  { label: "Varsle med kommunenummer", url: `opprett` },
+  { label: "Varsling med kommunenummer", url: `opprett` },
   { label: "Kommuneordre status", url: `status` },
 ]
 

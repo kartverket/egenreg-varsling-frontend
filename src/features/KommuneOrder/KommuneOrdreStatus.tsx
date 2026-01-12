@@ -72,7 +72,7 @@ const KommuneOrdreStatus = () => {
             <TableRow key={ordre.ordreId}>
               <TableCell>{ordre.ordreId}</TableCell>
               <TableCell>{ordre.kommunenummer}</TableCell>
-              <TableCell>{ordre.gardsnummer}</TableCell>
+              <TableCell>{ordre.gardsnummer ?? "-"}</TableCell>
               <TableCell>{ordre.totaltAntallVarslinger}</TableCell>
               <TableCell>
                 <Tag colorPalette="green" variant="subtle">
