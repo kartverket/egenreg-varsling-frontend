@@ -1,6 +1,6 @@
 const kommuneApiRoute = "/kommuneordre"
 
-export const createKommuneOrder = async (kommuneOrder: KommuneOrder) => {
+export const createKommuneOrder = async (kommuneOrder: CreateKommuneOrderDTO) => {
   const response = await fetch(`${kommuneApiRoute}/start`, {
     method: "POST",
     headers: {
@@ -16,7 +16,23 @@ export const createKommuneOrder = async (kommuneOrder: KommuneOrder) => {
   return response.status === 202
 }
 
-export interface KommuneOrder {
+export const getKommuneOrder = async () => {
+  const response = await fetch(`${kommuneApiRoute}/status`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch kommune orders")
+  }
+
+  const data: KommuneOrder[] = await response.json()
+  return data
+}
+
+export interface CreateKommuneOrderDTO {
   kommunenr: string
   gardsnummer: number
   smsmelding: string
@@ -24,4 +40,16 @@ export interface KommuneOrder {
     tittel: string
     body: string
   }
+}
+
+export interface KommuneOrder {
+  ordreId: string
+  kommunenummer: string
+  gardsnummer: number
+  totaltAntallVarslinger: number
+  sendtDPI: number
+  sendtSMS: number
+  ikkeTilgjengelig: number
+  feilede: number
+  startet: string
 }

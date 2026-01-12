@@ -46,10 +46,10 @@ const CreateKommuneOrder = () => {
   const { mutateAsync } = useMutation({
     mutationFn: createKommuneOrder,
     onSuccess: () => {
-      toaster.create({ type: "success", title: "Kommunal ordre opprettet" })
+      toaster.create({ type: "success", title: "Opprettet ordre med kommunenummer" })
     },
     onError: () => {
-      toaster.create({ type: "error", title: "Feil ved opprettelse av kommunal ordre" })
+      toaster.create({ type: "error", title: "Feil ved opprettelse av ordre med kommunenummer" })
     },
   })
   const [state, action] = useActionState<FormState, FormData>(
@@ -82,7 +82,7 @@ const CreateKommuneOrder = () => {
         return { status: "success" }
       } catch (error) {
         console.error("Failed to create kommune order", error)
-        return { status: "error", message: "Kunne ikke opprette kommunal ordre" }
+        return { status: "error", message: "Kunne ikke opprette ordre med kommunenummer" }
       }
     },
     { status: "idle" },
@@ -91,7 +91,7 @@ const CreateKommuneOrder = () => {
   return (
     <Box maxW="900px" mx="auto" p={{ base: 4, md: 8 }}>
       <Text as="h1" fontSize="xl" fontWeight="semibold" mb={2}>
-        Opprett kommunal varsling
+        Opprett varsling med kommunenummer
       </Text>
       <Text color="gray.600" fontSize="sm" mb={6}>
         Fyll ut informasjonen under for å sende varsler til innbyggere. Velg malverk for digital
