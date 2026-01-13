@@ -62,16 +62,16 @@ const CreateKommuneOrder = () => {
         return { status: "error", message: "Kommunenummer er påkrevd" }
       }
 
-      const gardsnummer = Number(gardsnummerRaw)
+      const gardsnummer = gardsnummerRaw ? Number(gardsnummerRaw) : null
 
-      if (!gardsnummerRaw || Number.isNaN(gardsnummer)) {
+      if (gardsnummerRaw && Number.isNaN(gardsnummer)) {
         return { status: "error", message: "Gårdsnummer må være et tall" }
       }
 
       try {
         const data = {
           kommunenr: kommunenummer,
-          gardsnummer: gardsnummer,
+          gardsnummer,
           smsmelding: smsMelding,
           dpimelding: eFormidlingOptions[selectedEformidling],
         }
@@ -111,7 +111,7 @@ const CreateKommuneOrder = () => {
 
             <FieldRoot>
               <FieldLabel>Gårdsnummer</FieldLabel>
-              <Input name="gardsnummer" required type="number"></Input>
+              <Input name="gardsnummer" type="number"></Input>
               {state?.status === "error" && state.message === "Gårdsnummer må være et tall" && (
                 <FieldErrorText>{state.message}</FieldErrorText>
               )}
