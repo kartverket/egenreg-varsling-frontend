@@ -42,6 +42,7 @@ const CreateKommuneOrder = () => {
   }
 
   const [selectedEformidling, setSelectedEformidling] = useState<string>("")
+  const [skipGardsnummer, setSkipGardsnummer] = useState<boolean>(false)
 
   const { mutateAsync } = useMutation({
     mutationFn: createKommuneOrder,
@@ -55,16 +56,23 @@ const CreateKommuneOrder = () => {
   const [state, action] = useActionState<FormState, FormData>(
     async (_previousState: FormState, formData: FormData): Promise<FormState> => {
       const kommunenummer = formData.get("kommunenummer")?.toString().trim() ?? ""
-      const gardsnummerRaw = formData.get("gardsnummer")?.toString().trim()
+      const ignoreGardsnummer = formData.get("ignoreGardsnummer")?.toString() === "on"
+      const gardsnummerRaw = ignoreGardsnummer
+        ? null
+        : formData.get("gardsnummer")?.toString().trim()
       const smsMelding = formData.get("sms")?.toString().trim() ?? ""
 
       if (!kommunenummer) {
         return { status: "error", message: "Kommunenummer er påkrevd" }
       }
 
+      if (!ignoreGardsnummer && !gardsnummerRaw) {
+        return { status: "error", message: "Gårdsnummer er påkrevd" }
+      }
+
       const gardsnummer = gardsnummerRaw ? Number(gardsnummerRaw) : null
 
-      if (gardsnummerRaw && Number.isNaN(gardsnummer)) {
+      if (!ignoreGardsnummer && gardsnummerRaw && Number.isNaN(gardsnummer)) {
         return { status: "error", message: "Gårdsnummer må være et tall" }
       }
 
@@ -111,10 +119,30 @@ const CreateKommuneOrder = () => {
 
             <FieldRoot>
               <FieldLabel>Gårdsnummer</FieldLabel>
-              <Input name="gardsnummer" type="number"></Input>
-              {state?.status === "error" && state.message === "Gårdsnummer må være et tall" && (
-                <FieldErrorText>{state.message}</FieldErrorText>
-              )}
+              <Flex alignItems="center" gap={4} wrap="wrap">
+                <Input
+                  name="gardsnummer"
+                  type="number"
+                  disabled={skipGardsnummer}
+                  required={!skipGardsnummer}
+                />
+                <label style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
+                  <input
+                    type="checkbox"
+                    name="ignoreGardsnummer"
+                    checked={skipGardsnummer}
+                    onChange={event => setSkipGardsnummer(event.target.checked)}
+                    style={{ accentColor: "#16a34a", width: "16px", height: "16px" }}
+                  />
+                  <span>Ikke bruk gårdsnummer</span>
+                </label>
+              </Flex>
+              {!skipGardsnummer &&
+                state?.status === "error" &&
+                (state.message === "Gårdsnummer må være et tall" ||
+                  state.message === "Gårdsnummer er påkrevd") && (
+                  <FieldErrorText>{state.message}</FieldErrorText>
+                )}
             </FieldRoot>
 
             <FieldRoot>
