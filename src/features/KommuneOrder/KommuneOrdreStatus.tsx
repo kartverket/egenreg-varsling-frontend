@@ -25,6 +25,7 @@ const KommuneOrdreStatus = () => {
   const { data: ordreStatus, isPending } = useQuery<KommuneOrder[]>({
     queryKey: ["kommuneOrderStatus"],
     queryFn: getKommuneOrder,
+    refetchInterval: 5000,
   })
 
   const hasOrders = (ordreStatus?.length ?? 0) > 0
@@ -65,6 +66,7 @@ const KommuneOrdreStatus = () => {
             <TableColumnHeader>Ikke tilgjengelig</TableColumnHeader>
             <TableColumnHeader>Feilede</TableColumnHeader>
             <TableColumnHeader>Opprettet</TableColumnHeader>
+            <TableColumnHeader>Status</TableColumnHeader>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -95,6 +97,17 @@ const KommuneOrdreStatus = () => {
                 </Tag>
               </TableCell>
               <TableCell>{dateFormatter(new Date(ordre.startet))}</TableCell>
+              <TableCell>
+                {ordre.status === "KJØRER" ? (
+                  <Tag colorPalette="yellow" variant="subtle">
+                    KJØRER
+                  </Tag>
+                ) : (
+                  <Tag colorPalette="green" variant="subtle">
+                    FERDIG
+                  </Tag>
+                )}
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
