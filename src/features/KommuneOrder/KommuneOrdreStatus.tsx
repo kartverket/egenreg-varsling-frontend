@@ -14,6 +14,7 @@ import {
 } from "@kvib/react"
 import { useQuery } from "@tanstack/react-query"
 import { getKommuneOrder, type KommuneOrder } from "./api/kommuneOrderApi"
+import useKommuner from "./hooks/useKommuner"
 
 const dateFormatter = (date: Date) =>
   new Intl.DateTimeFormat("nb-NO", {
@@ -28,9 +29,11 @@ const KommuneOrdreStatus = () => {
     refetchInterval: 5000,
   })
 
+  const { data: kommuner, isPending: isKommunerPending } = useKommuner()
+
   const hasOrders = (ordreStatus?.length ?? 0) > 0
 
-  if (isPending) {
+  if (isPending || isKommunerPending) {
     return (
       <Flex alignItems="center" justifyContent="center" height="240px">
         <Spinner size="xl" />
@@ -57,9 +60,10 @@ const KommuneOrdreStatus = () => {
       <Table size="md">
         <TableHeader>
           <TableRow>
-            <TableColumnHeader>Ordre ID</TableColumnHeader>
-            <TableColumnHeader>Kommunenummer</TableColumnHeader>
-            <TableColumnHeader>Gårdsnummer</TableColumnHeader>
+            <TableColumnHeader>ID</TableColumnHeader>
+            <TableColumnHeader>Knr</TableColumnHeader>
+            <TableColumnHeader>Gnr</TableColumnHeader>
+            <TableColumnHeader>Kommune</TableColumnHeader>
             <TableColumnHeader>Totalt antall varslinger</TableColumnHeader>
             <TableColumnHeader>Sendt DPI</TableColumnHeader>
             <TableColumnHeader>Sendt SMS</TableColumnHeader>
@@ -74,7 +78,12 @@ const KommuneOrdreStatus = () => {
             <TableRow key={ordre.ordreId}>
               <TableCell>{ordre.ordreId}</TableCell>
               <TableCell>{ordre.kommunenummer}</TableCell>
-              <TableCell>{ordre.gardsnummer ?? "-"}</TableCell>
+              <TableCell textAlign={ordre.gardsnummer ? "left" : "center"}>
+                {ordre.gardsnummer ?? "-"}
+              </TableCell>
+              <TableCell>
+                {kommuner?.find(k => k.kommunenummer === ordre.kommunenummer)?.kommunenavnNorsk}
+              </TableCell>
               <TableCell>{ordre.totaltAntallVarslinger}</TableCell>
               <TableCell>
                 <Tag colorPalette="green" variant="subtle">
