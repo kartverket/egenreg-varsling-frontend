@@ -7,6 +7,7 @@ import {
   FieldRoot,
   Flex,
   Input,
+  InputGroup,
   NativeSelect,
   NativeSelectField,
   Text,
@@ -20,6 +21,7 @@ import { informasjonsbrev_innhold, informasjonsbrev_tittel } from "../../utils/t
 import HtmlPreview from "../CreateOrder/components/Preview"
 import { createKommuneOrder } from "./api/kommuneOrderApi"
 import ForhåndsvisDigitalPost from "./ForhåndsvisDigitalPost"
+import useKommuner from "./hooks/useKommuner"
 
 type FormState = { status: "idle" | "success" | "error"; message?: string }
 
@@ -41,8 +43,11 @@ const CreateKommuneOrder = () => {
     },
   }
 
+  const { data: kommuner } = useKommuner()
+
   const [selectedEformidling, setSelectedEformidling] = useState<string>("")
   const [skipGardsnummer, setSkipGardsnummer] = useState<boolean>(false)
+  const [kommunenummer, setKommunenummer] = useState<string>("")
 
   const { mutateAsync } = useMutation({
     mutationFn: createKommuneOrder,
@@ -111,10 +116,21 @@ const CreateKommuneOrder = () => {
           <Flex direction="column" gap={6}>
             <FieldRoot>
               <FieldLabel>Kommunenummer</FieldLabel>
-              <Input maxLength={4} name="kommunenummer" required />
+              <InputGroup
+                endElement={kommuner?.find(k => k.kommunenummer === kommunenummer)?.kommunenavn}
+              >
+                <Input
+                  maxLength={4}
+                  name="kommunenummer"
+                  required
+                  onChange={e => setKommunenummer(e.target.value)}
+                />
+              </InputGroup>
               {state?.status === "error" && state.message === "Kommunenummer er påkrevd" && (
                 <FieldErrorText>{state.message}</FieldErrorText>
               )}
+
+              <Text></Text>
             </FieldRoot>
 
             <FieldRoot>
