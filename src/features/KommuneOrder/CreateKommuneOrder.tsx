@@ -1,3 +1,5 @@
+// eslint-disable-next-line no-restricted-imports
+import { Combobox, Portal, useFilter, useListCollection } from "@chakra-ui/react"
 import {
   Box,
   Button,
@@ -7,7 +9,6 @@ import {
   FieldRoot,
   Flex,
   Input,
-  InputGroup,
   NativeSelect,
   NativeSelectField,
   Text,
@@ -15,7 +16,7 @@ import {
   toaster,
 } from "@kvib/react"
 import { useMutation } from "@tanstack/react-query"
-import { useActionState, useState } from "react"
+import { useActionState, useEffect, useMemo, useState } from "react"
 import { useFormStatus } from "react-dom"
 import { informasjonsbrev_innhold, informasjonsbrev_tittel } from "../../utils/tekster"
 import HtmlPreview from "../CreateOrder/components/Preview"
@@ -45,9 +46,31 @@ const CreateKommuneOrder = () => {
 
   const { data: kommuner } = useKommuner()
 
+  const kommuneItems = useMemo(
+    () =>
+      (kommuner ?? []).map(kommune => ({
+        label: `${kommune.kommunenavnNorsk || kommune.kommunenavn} (${kommune.kommunenummer})`,
+        value: kommune.kommunenummer,
+      })),
+    [kommuner],
+  )
+
+  const { contains } = useFilter({ sensitivity: "base" })
+  const { collection, filter } = useListCollection({ initialItems: kommuneItems, filter: contains })
+
   const [selectedEformidling, setSelectedEformidling] = useState<string>("")
   const [skipGardsnummer, setSkipGardsnummer] = useState<boolean>(false)
   const [kommunenummer, setKommunenummer] = useState<string>("")
+  const [kommuneSearch, setKommuneSearch] = useState<string>("")
+
+  const selectedKommuneLabel = useMemo(
+    () => kommuneItems.find(item => item.value === kommunenummer)?.label ?? "",
+    [kommuneItems, kommunenummer],
+  )
+
+  useEffect(() => {
+    filter(kommuneSearch)
+  }, [filter, kommuneItems, kommuneSearch])
 
   const { mutateAsync } = useMutation({
     mutationFn: createKommuneOrder,
@@ -116,21 +139,66 @@ const CreateKommuneOrder = () => {
           <Flex direction="column" gap={6}>
             <FieldRoot>
               <FieldLabel>Kommunenummer</FieldLabel>
-              <InputGroup
-                endElement={kommuner?.find(k => k.kommunenummer === kommunenummer)?.kommunenavn}
+              <Combobox.Root
+                collection={collection}
+                inputValue={kommuneSearch}
+                value={kommunenummer ? [kommunenummer] : []}
+                onInputValueChange={event => {
+                  setKommuneSearch(event.inputValue)
+                  filter(event.inputValue)
+                }}
+                onValueChange={details => {
+                  const nextValue = Array.isArray(details.value)
+                    ? (details.value[0] ?? "")
+                    : ((details.value as string) ?? "")
+                  setKommunenummer(nextValue)
+                  const matched = kommuneItems.find(item => item.value === nextValue)
+                  if (matched) {
+                    setKommuneSearch(matched.label)
+                  }
+                }}
+                width="100%"
               >
-                <Input
-                  maxLength={4}
-                  name="kommunenummer"
-                  required
-                  onChange={e => setKommunenummer(e.target.value)}
-                />
-              </InputGroup>
+                <Combobox.Control>
+                  <Combobox.Input placeholder={selectedKommuneLabel || "Søk etter kommune"} />
+                  <Combobox.IndicatorGroup>
+                    <Combobox.ClearTrigger
+                      onClick={() => {
+                        setKommuneSearch("")
+                        setKommunenummer("")
+                        filter("")
+                      }}
+                    />
+                    <Combobox.Trigger />
+                  </Combobox.IndicatorGroup>
+                </Combobox.Control>
+                <Portal>
+                  <Combobox.Positioner>
+                    <Combobox.Content>
+                      <Combobox.Empty>Fant ingen kommuner</Combobox.Empty>
+                      {(kommuneItems.length ? collection.items : []).map(item => (
+                        <Combobox.Item
+                          key={item.value}
+                          item={item}
+                          onClick={() => {
+                            setKommunenummer(item.value)
+                            setKommuneSearch(item.label)
+                          }}
+                        >
+                          {item.label}
+                          <Combobox.ItemIndicator />
+                        </Combobox.Item>
+                      ))}
+                    </Combobox.Content>
+                  </Combobox.Positioner>
+                </Portal>
+              </Combobox.Root>
+
+              <input type="hidden" name="kommunenummer" value={kommunenummer} />
+
               {state?.status === "error" && state.message === "Kommunenummer er påkrevd" && (
                 <FieldErrorText>{state.message}</FieldErrorText>
               )}
-
-              <Text></Text>
             </FieldRoot>
 
             <FieldRoot>
