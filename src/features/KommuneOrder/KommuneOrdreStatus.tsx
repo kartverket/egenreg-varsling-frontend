@@ -26,7 +26,7 @@ const KommuneOrdreStatus = () => {
   const { data: ordreStatus, isPending } = useQuery<KommuneOrder[]>({
     queryKey: ["kommuneOrderStatus"],
     queryFn: getKommuneOrder,
-    refetchInterval: 5000,
+    refetchInterval: 3000,
   })
 
   const { data: kommuner, isPending: isKommunerPending } = useKommuner()
