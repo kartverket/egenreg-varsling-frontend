@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-restricted-imports
 import { Combobox, Heading, Portal, useFilter, useListCollection } from "@chakra-ui/react"
 import {
   Box,
