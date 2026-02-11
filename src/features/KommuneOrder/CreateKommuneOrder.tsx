@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-restricted-imports
-import { Combobox, Portal, useFilter, useListCollection } from "@chakra-ui/react"
+import { Combobox, Heading, Portal, useFilter, useListCollection } from "@chakra-ui/react"
 import {
   Box,
   Button,
@@ -12,19 +12,24 @@ import {
   NativeSelect,
   NativeSelectField,
   Text,
-  Textarea,
   toaster,
 } from "@kvib/react"
 import { useMutation } from "@tanstack/react-query"
-import { useActionState, useEffect, useMemo, useState } from "react"
+import { useActionState, useMemo, useState } from "react"
 import { useFormStatus } from "react-dom"
 import { informasjonsbrev_innhold, informasjonsbrev_tittel } from "../../utils/tekster"
-import HtmlPreview from "../CreateOrder/components/Preview"
 import { createKommuneOrder } from "./api/kommuneOrderApi"
-import ForhåndsvisDigitalPost from "./ForhåndsvisDigitalPost"
 import useKommuner from "./hooks/useKommuner"
 
-type FormState = { status: "idle" | "success" | "error"; message?: string }
+type FormState = {
+  status: "idle" | "success" | "error"
+  fieldErrors?: {
+    kommunenummer?: string
+    gardsnummer?: string
+    dpimelding?: string
+    sms?: string
+  }
+}
 
 const SubmitButton = () => {
   const { pending } = useFormStatus()
@@ -44,6 +49,17 @@ const CreateKommuneOrder = () => {
     },
   }
 
+  const smsOptions: Record<string, string> = {
+    førstegangsvarsling:
+      "Hei! Vi kan ha mangelfulle opplysninger om din bolig eller fritidsbolig. Du kan enkelt se og registrere dem på våre nettsider. Hilsen Kartverket",
+  }
+
+  const [selectedSms, setSelectedSms] = useState("")
+  const [selectedEformidling, setSelectedEformidling] = useState("")
+  const [skipGardsnummer, setSkipGardsnummer] = useState(false)
+  const [kommunenummer, setKommunenummer] = useState("")
+  const [kommuneSearch, setKommuneSearch] = useState("")
+
   const { data: kommuner } = useKommuner()
 
   const kommuneItems = useMemo(
@@ -58,20 +74,6 @@ const CreateKommuneOrder = () => {
   const { contains } = useFilter({ sensitivity: "base" })
   const { collection, filter } = useListCollection({ initialItems: kommuneItems, filter: contains })
 
-  const [selectedEformidling, setSelectedEformidling] = useState<string>("")
-  const [skipGardsnummer, setSkipGardsnummer] = useState<boolean>(false)
-  const [kommunenummer, setKommunenummer] = useState<string>("")
-  const [kommuneSearch, setKommuneSearch] = useState<string>("")
-
-  const selectedKommuneLabel = useMemo(
-    () => kommuneItems.find(item => item.value === kommunenummer)?.label ?? "",
-    [kommuneItems, kommunenummer],
-  )
-
-  useEffect(() => {
-    filter(kommuneSearch)
-  }, [filter, kommuneItems, kommuneSearch])
-
   const { mutateAsync } = useMutation({
     mutationFn: createKommuneOrder,
     onSuccess: () => {
@@ -81,44 +83,62 @@ const CreateKommuneOrder = () => {
       toaster.create({ type: "error", title: "Feil ved opprettelse av ordre med kommunenummer" })
     },
   })
+
   const [state, action] = useActionState<FormState, FormData>(
-    async (_previousState: FormState, formData: FormData): Promise<FormState> => {
+    async (_, formData) => {
+      const fieldErrors: FormState["fieldErrors"] = {}
+
       const kommunenummer = formData.get("kommunenummer")?.toString().trim() ?? ""
       const ignoreGardsnummer = formData.get("ignoreGardsnummer")?.toString() === "on"
       const gardsnummerRaw = ignoreGardsnummer
         ? null
         : formData.get("gardsnummer")?.toString().trim()
-      const smsMelding = formData.get("sms")?.toString().trim() ?? ""
+
+      const selectedSmsKey = formData.get("sms")?.toString().trim() ?? ""
+      const selectedDpiKey = formData.get("dpimelding")?.toString().trim() ?? ""
 
       if (!kommunenummer) {
-        return { status: "error", message: "Kommunenummer er påkrevd" }
+        fieldErrors.kommunenummer = "Kommunenummer er påkrevd"
       }
 
       if (!ignoreGardsnummer && !gardsnummerRaw) {
-        return { status: "error", message: "Gårdsnummer er påkrevd" }
+        fieldErrors.gardsnummer = "Gårdsnummer er påkrevd"
       }
 
       const gardsnummer = gardsnummerRaw ? Number(gardsnummerRaw) : null
 
       if (!ignoreGardsnummer && gardsnummerRaw && Number.isNaN(gardsnummer)) {
-        return { status: "error", message: "Gårdsnummer må være et tall" }
+        fieldErrors.gardsnummer = "Gårdsnummer må være et tall"
+      }
+
+      if (!selectedDpiKey) {
+        fieldErrors.dpimelding = "Digital post-mal må velges"
+      }
+
+      if (!selectedSmsKey) {
+        fieldErrors.sms = "SMS-mal må velges"
+      }
+
+      if (Object.keys(fieldErrors).length > 0) {
+        return { status: "error", fieldErrors }
       }
 
       try {
-        const data = {
+        await mutateAsync({
           kommunenr: kommunenummer,
           gardsnummer,
-          smsmelding: smsMelding,
-          dpimelding: eFormidlingOptions[selectedEformidling],
-        }
-        await mutateAsync(data)
-
-        console.log("data", data)
+          smsmelding: smsOptions[selectedSmsKey],
+          dpimelding: eFormidlingOptions[selectedDpiKey],
+        })
 
         return { status: "success" }
-      } catch (error) {
-        console.error("Failed to create kommune order", error)
-        return { status: "error", message: "Kunne ikke opprette ordre med kommunenummer" }
+      } catch {
+        return {
+          status: "error",
+          fieldErrors: {
+            kommunenummer: "Kunne ikke opprette ordre",
+          },
+        }
       }
     },
     { status: "idle" },
@@ -126,91 +146,67 @@ const CreateKommuneOrder = () => {
 
   return (
     <Box maxW="900px" mx="auto" p={{ base: 4, md: 8 }}>
-      <Text as="h1" fontSize="xl" fontWeight="semibold" mb={2}>
-        Opprett varsling med kommunenummer
-      </Text>
-      <Text color="gray.600" fontSize="sm" mb={6}>
-        Fyll ut informasjonen under for å sende varsler til innbyggere. Velg malverk for digital
-        post og legg inn alternativ SMS-tekst.
-      </Text>
-
-      <Box bg="white" p={{ base: 4, md: 6 }} borderRadius="lg" boxShadow="md" borderWidth="1px">
+      <Flex flexDir={"column"} gap={2} mb={4}>
+        <Heading> Send varsler til innbyggere i ønsket kommune</Heading>
+        <Text fontSize={"sm"}>
+          Fyll ut informasjonen under for å sende varsler til innbyggere som eier i gitt kommune.
+          Velg malverk for digital post og SMS.
+        </Text>
+      </Flex>
+      <Box p={8} borderRadius="lg" boxShadow="md">
         <form action={action}>
-          <Flex direction="column" gap={6}>
-            <FieldRoot>
-              <FieldLabel>Kommunenummer</FieldLabel>
-              <Combobox.Root
-                collection={collection}
-                inputValue={kommuneSearch}
-                value={kommunenummer ? [kommunenummer] : []}
-                onInputValueChange={event => {
-                  setKommuneSearch(event.inputValue)
-                  filter(event.inputValue)
-                }}
-                onValueChange={details => {
-                  const nextValue = Array.isArray(details.value)
-                    ? (details.value[0] ?? "")
-                    : ((details.value as string) ?? "")
-                  setKommunenummer(nextValue)
-                  const matched = kommuneItems.find(item => item.value === nextValue)
-                  if (matched) {
-                    setKommuneSearch(matched.label)
-                  }
-                }}
-                width="100%"
-              >
-                <Combobox.Control>
-                  <Combobox.Input placeholder={selectedKommuneLabel || "Søk etter kommune"} />
-                  <Combobox.IndicatorGroup>
-                    <Combobox.ClearTrigger
-                      onClick={() => {
-                        setKommuneSearch("")
-                        setKommunenummer("")
-                        filter("")
-                      }}
-                    />
+          <Flex direction="column" gap={2}>
+            <Flex direction="column" gap={4} my={6}>
+              <FieldRoot invalid={!!state.fieldErrors?.kommunenummer}>
+                <FieldLabel>Kommunenummer</FieldLabel>
+
+                <Combobox.Root
+                  collection={collection}
+                  inputValue={kommuneSearch}
+                  value={kommunenummer ? [kommunenummer] : []}
+                  onInputValueChange={e => {
+                    setKommuneSearch(e.inputValue)
+                    filter(e.inputValue)
+                  }}
+                  onValueChange={details => {
+                    const next = Array.isArray(details.value)
+                      ? (details.value[0] ?? "")
+                      : (details.value ?? "")
+                    setKommunenummer(next)
+                  }}
+                >
+                  <Combobox.Control>
+                    <Combobox.Input placeholder="Søk etter kommune" />
                     <Combobox.Trigger />
-                  </Combobox.IndicatorGroup>
-                </Combobox.Control>
-                <Portal>
-                  <Combobox.Positioner>
-                    <Combobox.Content>
-                      <Combobox.Empty>Fant ingen kommuner</Combobox.Empty>
-                      {(kommuneItems.length ? collection.items : []).map(item => (
-                        <Combobox.Item
-                          key={item.value}
-                          item={item}
-                          onClick={() => {
-                            setKommunenummer(item.value)
-                            setKommuneSearch(item.label)
-                          }}
-                        >
-                          {item.label}
-                          <Combobox.ItemIndicator />
-                        </Combobox.Item>
-                      ))}
-                    </Combobox.Content>
-                  </Combobox.Positioner>
-                </Portal>
-              </Combobox.Root>
+                  </Combobox.Control>
+                  <Portal>
+                    <Combobox.Positioner>
+                      <Combobox.Content>
+                        {collection.items.map(item => (
+                          <Combobox.Item key={item.value} item={item}>
+                            {item.label}
+                          </Combobox.Item>
+                        ))}
+                      </Combobox.Content>
+                    </Combobox.Positioner>
+                  </Portal>
+                </Combobox.Root>
 
-              <input type="hidden" name="kommunenummer" value={kommunenummer} />
+                <input type="hidden" name="kommunenummer" value={kommunenummer} />
+                {state.fieldErrors?.kommunenummer && (
+                  <FieldErrorText>{state.fieldErrors.kommunenummer}</FieldErrorText>
+                )}
+              </FieldRoot>
 
-              {state?.status === "error" && state.message === "Kommunenummer er påkrevd" && (
-                <FieldErrorText>{state.message}</FieldErrorText>
-              )}
-            </FieldRoot>
-
-            <FieldRoot>
-              <FieldLabel>Gårdsnummer</FieldLabel>
-              <Flex alignItems="center" gap={4} wrap="wrap">
+              <FieldRoot invalid={!!state.fieldErrors?.gardsnummer}>
+                <FieldLabel>Gårdsnummer</FieldLabel>
                 <Input
                   name="gardsnummer"
                   type="number"
                   disabled={skipGardsnummer}
                   required={!skipGardsnummer}
                 />
-                <label style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
+                <label style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
                   <input
                     type="checkbox"
                     name="ignoreGardsnummer"
@@ -218,65 +214,54 @@ const CreateKommuneOrder = () => {
                     onChange={event => setSkipGardsnummer(event.target.checked)}
                     style={{ accentColor: "#16a34a", width: "16px", height: "16px" }}
                   />
-                  <span>Ikke bruk gårdsnummer</span>
+                  Ikke bruk gårdsnummer
                 </label>
-              </Flex>
-              {!skipGardsnummer &&
-                state?.status === "error" &&
-                (state.message === "Gårdsnummer må være et tall" ||
-                  state.message === "Gårdsnummer er påkrevd") && (
-                  <FieldErrorText>{state.message}</FieldErrorText>
+                {state.fieldErrors?.gardsnummer && (
+                  <FieldErrorText>{state.fieldErrors.gardsnummer}</FieldErrorText>
                 )}
-            </FieldRoot>
-
-            <FieldRoot>
-              <FieldLabel>
-                <Text fontWeight="medium" mb={1}>
-                  SMS-varsling
-                </Text>
-                <Text color="gray.600" fontSize="sm">
-                  Systemet forsøker først digital post. Hvis oppslaget feiler sendes SMS i stedet.
-                </Text>
-              </FieldLabel>
-
-              <Textarea required name="sms" minH="140px" />
-            </FieldRoot>
-
-            <FieldRoot invalid={state.status === "error"}>
-              <Field label={<strong>Melding gjennom Digital postkasse</strong>} />
-              <NativeSelect
-                defaultValue=""
-                onChange={event =>
-                  setSelectedEformidling((event.target as HTMLSelectElement).value)
-                }
-              >
-                <NativeSelectField placeholder="Velg malverk">
-                  {Object.entries(eFormidlingOptions).map(([key, value]) => (
-                    <option key={key} value={key}>
-                      {value.tittel}
-                    </option>
-                  ))}
-                </NativeSelectField>
-              </NativeSelect>
-            </FieldRoot>
-            {selectedEformidling && (
-              <Box bg="gray.50" borderRadius="md" borderWidth="1px" p={4}>
-                <Flex alignItems="center" justifyContent="space-between" gap={4} mb={3}>
-                  <Text as="b" fontSize="sm">
-                    Emne: {eFormidlingOptions[selectedEformidling]?.tittel}
-                  </Text>
-
-                  <ForhåndsvisDigitalPost
-                    tittel={"Emne: " + eFormidlingOptions[selectedEformidling]?.tittel}
+              </FieldRoot>
+            </Flex>
+            <Flex direction="column" gap={4} my={6}>
+              <FieldRoot invalid={!!state.fieldErrors?.dpimelding}>
+                <Field label={<strong>Melding gjennom Digital postkasse</strong>} />
+                <NativeSelect>
+                  <NativeSelectField
+                    name="dpimelding"
+                    value={selectedEformidling}
+                    onChange={e => setSelectedEformidling(e.target.value)}
                   >
-                    <HtmlPreview
-                      html={eFormidlingOptions[selectedEformidling]?.body ?? ""}
-                      title="Forhåndsvisning av eFormidling"
-                    />
-                  </ForhåndsvisDigitalPost>
-                </Flex>
-              </Box>
-            )}
+                    <option value="">Velg eFormidling-mal</option>
+                    {Object.entries(eFormidlingOptions).map(([key, value]) => (
+                      <option key={key} value={key}>
+                        {value.tittel}
+                      </option>
+                    ))}
+                  </NativeSelectField>
+                </NativeSelect>
+                {state.fieldErrors?.dpimelding && (
+                  <FieldErrorText>{state.fieldErrors.dpimelding}</FieldErrorText>
+                )}
+              </FieldRoot>
+
+              <FieldRoot invalid={!!state.fieldErrors?.sms}>
+                <Field label={<strong>SMS-varsling</strong>} />
+                <NativeSelect>
+                  <NativeSelectField
+                    name="sms"
+                    value={selectedSms}
+                    onChange={e => setSelectedSms(e.target.value)}
+                  >
+                    <option value="">Velg SMS-mal</option>
+                    {Object.entries(smsOptions).map(([key]) => (
+                      <option key={key} value={key}>
+                        Førstegangsvarsling
+                      </option>
+                    ))}
+                  </NativeSelectField>
+                </NativeSelect>
+                {state.fieldErrors?.sms && <FieldErrorText>{state.fieldErrors.sms}</FieldErrorText>}
+              </FieldRoot>
+            </Flex>
 
             <Flex justifyContent="flex-end">
               <SubmitButton />
