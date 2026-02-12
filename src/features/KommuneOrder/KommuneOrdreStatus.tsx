@@ -76,22 +76,14 @@ const KommuneOrdreStatus = () => {
           {ordreStatus
             ?.sort((a, b) => Number(a.ordreId) - Number(b.ordreId))
             .map(ordre => {
-              const hasRange =
-                ordre.gardsnummerFra !== undefined &&
-                ordre.gardsnummerTil !== undefined &&
-                ordre.gardsnummerFra !== null &&
-                ordre.gardsnummerTil !== null
-
-              const gardsnummerDisplay = hasRange
-                ? `${ordre.gardsnummerFra} - ${ordre.gardsnummerTil}`
-                : (ordre.gardsnummer ?? "-")
-
               return (
                 <TableRow key={ordre.ordreId}>
                   <TableCell>{ordre.ordreId}</TableCell>
                   <TableCell>{ordre.kommunenummer}</TableCell>
-                  <TableCell textAlign={gardsnummerDisplay === "-" ? "center" : "left"}>
-                    {gardsnummerDisplay}
+                  <TableCell textAlign="center">
+                    {ordre.gardsnummer === undefined
+                      ? "-"
+                      : `${ordre.gardsnummer.fra}-${ordre.gardsnummer.til}`}
                   </TableCell>
                   <TableCell>
                     {kommuner?.find(k => k.kommunenummer === ordre.kommunenummer)?.kommunenavnNorsk}

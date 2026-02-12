@@ -45,9 +45,7 @@ export interface CreateKommuneOrderDTO {
 export interface KommuneOrder {
   ordreId: string
   kommunenummer: string
-  gardsnummer?: number | null
-  gardsnummerFra?: number | null
-  gardsnummerTil?: number | null
+  gardsnummer: { fra: number; til: number } | undefined
   status: "KJØRER" | "FERDIG" | "FEILET"
   totaltAntallVarslinger: number
   sendtDPI: number
