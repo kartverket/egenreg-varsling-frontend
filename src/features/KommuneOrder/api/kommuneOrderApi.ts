@@ -34,8 +34,7 @@ export const getKommuneOrder = async () => {
 
 export interface CreateKommuneOrderDTO {
   kommunenr: string
-  gardsnummerFra: number | null
-  gardsnummerTil: number | null
+  gardsnummer: { fra: number; til: number } | null
   smsmelding: string
   dpimelding: {
     tittel: string
