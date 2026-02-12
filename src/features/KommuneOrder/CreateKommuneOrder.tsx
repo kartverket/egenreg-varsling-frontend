@@ -7,17 +7,18 @@ import {
   FieldLabel,
   FieldRoot,
   Flex,
-  Input,
   NativeSelect,
   NativeSelectField,
   Text,
   toaster,
 } from "@kvib/react"
 import { useMutation } from "@tanstack/react-query"
-import { useActionState, useMemo, useState } from "react"
+import { useActionState, useMemo, useRef, useState } from "react"
 import { useFormStatus } from "react-dom"
 import { informasjonsbrev_innhold, informasjonsbrev_tittel } from "../../utils/tekster"
 import { createKommuneOrder } from "./api/kommuneOrderApi"
+import ForhåndsvisDigitalPost from "./ForhåndsvisDigitalPost"
+import Gårdsnummmerserie from "./Gårdsnummerserie"
 import useKommuner from "./hooks/useKommuner"
 
 type FormState = {
@@ -72,6 +73,26 @@ const CreateKommuneOrder = () => {
 
   const { contains } = useFilter({ sensitivity: "base" })
   const { collection, filter } = useListCollection({ initialItems: kommuneItems, filter: contains })
+  const filterRef = useRef(filter)
+
+  const [selectedEformidling, setSelectedEformidling] = useState<string>("")
+  const [skipGardsnummer, setSkipGardsnummer] = useState<boolean>(false)
+  const [kommunenummer, setKommunenummer] = useState<string>("")
+  const [kommuneSearch, setKommuneSearch] = useState<string>("")
+
+  const selectedKommuneLabel = useMemo(
+    () => kommuneItems.find(item => item.value === kommunenummer)?.label ?? "",
+    [kommuneItems, kommunenummer],
+  )
+
+  useEffect(() => {
+    filterRef.current = filter
+  }, [filter])
+
+  useEffect(() => {
+    // Keep list filtering in sync with the current search without re-triggering on changing filter function identity.
+    filterRef.current(kommuneSearch)
+  }, [kommuneItems, kommuneSearch])
 
   const { mutateAsync } = useMutation({
     mutationFn: createKommuneOrder,
@@ -89,9 +110,12 @@ const CreateKommuneOrder = () => {
 
       const kommunenummer = formData.get("kommunenummer")?.toString().trim() ?? ""
       const ignoreGardsnummer = formData.get("ignoreGardsnummer")?.toString() === "on"
-      const gardsnummerRaw = ignoreGardsnummer
+      const gardsnummerStartRaw = ignoreGardsnummer
         ? null
-        : formData.get("gardsnummer")?.toString().trim()
+        : formData.get("gardsnummerStart")?.toString().trim()
+      const gardsnummerEndRaw = ignoreGardsnummer
+        ? null
+        : formData.get("gardsnummerEnd")?.toString().trim()
 
       const selectedSmsKey = formData.get("sms")?.toString().trim() ?? ""
       const selectedDpiKey = formData.get("dpimelding")?.toString().trim() ?? ""
@@ -100,13 +124,14 @@ const CreateKommuneOrder = () => {
         fieldErrors.kommunenummer = "Kommunenummer er påkrevd"
       }
 
-      if (!ignoreGardsnummer && !gardsnummerRaw) {
-        fieldErrors.gardsnummer = "Gårdsnummer er påkrevd"
+      if (!ignoreGardsnummer && (!gardsnummerStartRaw || !gardsnummerEndRaw)) {
+        fieldErrors.gardsnummer = "Gårdsnummer fra og til er påkrevd"
       }
 
-      const gardsnummer = gardsnummerRaw ? Number(gardsnummerRaw) : null
+      const gardsnummerStart = gardsnummerStartRaw ? Number(gardsnummerStartRaw) : null
+      const gardsnummerEnd = gardsnummerEndRaw ? Number(gardsnummerEndRaw) : null
 
-      if (!ignoreGardsnummer && gardsnummerRaw && Number.isNaN(gardsnummer)) {
+      if (!ignoreGardsnummer && (Number.isNaN(gardsnummerStart) || Number.isNaN(gardsnummerEnd))) {
         fieldErrors.gardsnummer = "Gårdsnummer må være et tall"
       }
 
@@ -122,10 +147,29 @@ const CreateKommuneOrder = () => {
         return { status: "error", fieldErrors }
       }
 
+      if (
+        !ignoreGardsnummer &&
+        gardsnummerStart !== null &&
+        gardsnummerEnd !== null &&
+        (gardsnummerStart < 0 || gardsnummerEnd < 0)
+      ) {
+        return { status: "error", message: "Gårdsnummer kan ikke være negativt" }
+      }
+
+      if (
+        !ignoreGardsnummer &&
+        gardsnummerStart !== null &&
+        gardsnummerEnd !== null &&
+        gardsnummerStart > gardsnummerEnd
+      ) {
+        return { status: "error", message: "Startnummer kan ikke være større enn sluttnummer" }
+      }
+
       try {
         await mutateAsync({
           kommunenr: kommunenummer,
-          gardsnummer,
+          gardsnummerFra: ignoreGardsnummer ? null : gardsnummerStart,
+          gardsnummerTil: ignoreGardsnummer ? null : gardsnummerEnd,
           smsmelding: smsOptions[selectedSmsKey],
           dpimelding: eFormidlingOptions[selectedDpiKey],
         })
