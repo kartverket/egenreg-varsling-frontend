@@ -75,50 +75,54 @@ const KommuneOrdreStatus = () => {
         <TableBody>
           {ordreStatus
             ?.sort((a, b) => Number(a.ordreId) - Number(b.ordreId))
-            .map(ordre => (
-              <TableRow key={ordre.ordreId}>
-                <TableCell>{ordre.ordreId}</TableCell>
-                <TableCell>{ordre.kommunenummer}</TableCell>
-                <TableCell textAlign={ordre.gardsnummer ? "left" : "center"}>
-                  {ordre.gardsnummer ?? "-"}
-                </TableCell>
-                <TableCell>
-                  {kommuner?.find(k => k.kommunenummer === ordre.kommunenummer)?.kommunenavnNorsk}
-                </TableCell>
-                <TableCell>{ordre.totaltAntallVarslinger}</TableCell>
-                <TableCell>
-                  <Tag colorPalette="green" variant="subtle">
-                    {ordre.sendtDPI}
-                  </Tag>
-                </TableCell>
-                <TableCell>
-                  <Tag colorPalette="blue" variant="subtle">
-                    {ordre.sendtSMS}
-                  </Tag>
-                </TableCell>
-                <TableCell>
-                  <Tag colorPalette="gray" variant="outline">
-                    {ordre.ikkeTilgjengelig}
-                  </Tag>
-                </TableCell>
-                <TableCell>{dateFormatter(new Date(ordre.startet))}</TableCell>
-                <TableCell>
-                  {ordre.status === "KJØRER" ? (
-                    <Tag colorPalette="yellow" variant="subtle">
-                      KJØRER
-                    </Tag>
-                  ) : ordre.status === "FEILET" ? (
-                    <Tag colorPalette="red" variant="subtle">
-                      FEILET
-                    </Tag>
-                  ) : (
+            .map(ordre => {
+              return (
+                <TableRow key={ordre.ordreId}>
+                  <TableCell>{ordre.ordreId}</TableCell>
+                  <TableCell>{ordre.kommunenummer}</TableCell>
+                  <TableCell textAlign="center">
+                    {ordre.gardsnummer === undefined
+                      ? "-"
+                      : `${ordre.gardsnummer.fra}-${ordre.gardsnummer.til}`}
+                  </TableCell>
+                  <TableCell>
+                    {kommuner?.find(k => k.kommunenummer === ordre.kommunenummer)?.kommunenavnNorsk}
+                  </TableCell>
+                  <TableCell>{ordre.totaltAntallVarslinger}</TableCell>
+                  <TableCell>
                     <Tag colorPalette="green" variant="subtle">
-                      FERDIG
+                      {ordre.sendtDPI}
                     </Tag>
-                  )}
-                </TableCell>
-              </TableRow>
-            ))}
+                  </TableCell>
+                  <TableCell>
+                    <Tag colorPalette="blue" variant="subtle">
+                      {ordre.sendtSMS}
+                    </Tag>
+                  </TableCell>
+                  <TableCell>
+                    <Tag colorPalette="gray" variant="outline">
+                      {ordre.ikkeTilgjengelig}
+                    </Tag>
+                  </TableCell>
+                  <TableCell>{dateFormatter(new Date(ordre.startet))}</TableCell>
+                  <TableCell>
+                    {ordre.status === "KJØRER" ? (
+                      <Tag colorPalette="yellow" variant="subtle">
+                        KJØRER
+                      </Tag>
+                    ) : ordre.status === "FEILET" ? (
+                      <Tag colorPalette="red" variant="subtle">
+                        FEILET
+                      </Tag>
+                    ) : (
+                      <Tag colorPalette="green" variant="subtle">
+                        FERDIG
+                      </Tag>
+                    )}
+                  </TableCell>
+                </TableRow>
+              )
+            })}
         </TableBody>
       </Table>
     </Box>

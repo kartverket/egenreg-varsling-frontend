@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-imports */
 import { Combobox, Heading, Portal, useFilter, useListCollection } from "@chakra-ui/react"
 import {
   Box,
@@ -7,7 +8,6 @@ import {
   FieldLabel,
   FieldRoot,
   Flex,
-  Input,
   NativeSelect,
   NativeSelectField,
   Text,
@@ -18,6 +18,7 @@ import { useActionState, useMemo, useState } from "react"
 import { useFormStatus } from "react-dom"
 import { informasjonsbrev_innhold, informasjonsbrev_tittel } from "../../utils/tekster"
 import { createKommuneOrder } from "./api/kommuneOrderApi"
+import Gårdsnummmerserie from "./Gårdsnummerserie"
 import useKommuner from "./hooks/useKommuner"
 
 type FormState = {
@@ -54,10 +55,6 @@ const CreateKommuneOrder = () => {
   }
 
   const [selectedSms, setSelectedSms] = useState("")
-  const [selectedEformidling, setSelectedEformidling] = useState("")
-  const [skipGardsnummer, setSkipGardsnummer] = useState(false)
-  const [kommunenummer, setKommunenummer] = useState("")
-  const [kommuneSearch, setKommuneSearch] = useState("")
 
   const { data: kommuner } = useKommuner()
 
@@ -72,6 +69,11 @@ const CreateKommuneOrder = () => {
 
   const { contains } = useFilter({ sensitivity: "base" })
   const { collection, filter } = useListCollection({ initialItems: kommuneItems, filter: contains })
+
+  const [selectedEformidling, setSelectedEformidling] = useState<string>("")
+  const [skipGardsnummer, setSkipGardsnummer] = useState<boolean>(false)
+  const [kommunenummer, setKommunenummer] = useState<string>("")
+  const [kommuneSearch, setKommuneSearch] = useState<string>("")
 
   const { mutateAsync } = useMutation({
     mutationFn: createKommuneOrder,
@@ -89,9 +91,8 @@ const CreateKommuneOrder = () => {
 
       const kommunenummer = formData.get("kommunenummer")?.toString().trim() ?? ""
       const ignoreGardsnummer = formData.get("ignoreGardsnummer")?.toString() === "on"
-      const gardsnummerRaw = ignoreGardsnummer
-        ? null
-        : formData.get("gardsnummer")?.toString().trim()
+      const gardsnummerStartRaw = ignoreGardsnummer ? null : formData.get("fra")?.toString().trim()
+      const gardsnummerEndRaw = ignoreGardsnummer ? null : formData.get("til")?.toString().trim()
 
       const selectedSmsKey = formData.get("sms")?.toString().trim() ?? ""
       const selectedDpiKey = formData.get("dpimelding")?.toString().trim() ?? ""
@@ -100,13 +101,14 @@ const CreateKommuneOrder = () => {
         fieldErrors.kommunenummer = "Kommunenummer er påkrevd"
       }
 
-      if (!ignoreGardsnummer && !gardsnummerRaw) {
-        fieldErrors.gardsnummer = "Gårdsnummer er påkrevd"
+      if (!ignoreGardsnummer && (!gardsnummerStartRaw || !gardsnummerEndRaw)) {
+        fieldErrors.gardsnummer = "Gårdsnummer fra og til er påkrevd"
       }
 
-      const gardsnummer = gardsnummerRaw ? Number(gardsnummerRaw) : null
+      const gardsnummerStart = gardsnummerStartRaw ? Number(gardsnummerStartRaw) : null
+      const gardsnummerEnd = gardsnummerEndRaw ? Number(gardsnummerEndRaw) : null
 
-      if (!ignoreGardsnummer && gardsnummerRaw && Number.isNaN(gardsnummer)) {
+      if (!ignoreGardsnummer && (Number.isNaN(gardsnummerStart) || Number.isNaN(gardsnummerEnd))) {
         fieldErrors.gardsnummer = "Gårdsnummer må være et tall"
       }
 
@@ -122,10 +124,34 @@ const CreateKommuneOrder = () => {
         return { status: "error", fieldErrors }
       }
 
+      if (
+        !ignoreGardsnummer &&
+        gardsnummerStart !== null &&
+        gardsnummerEnd !== null &&
+        (gardsnummerStart < 0 || gardsnummerEnd < 0)
+      ) {
+        return {
+          status: "error",
+          fieldErrors: { gardsnummer: "Gårdsnummer kan ikke være negativt" },
+        }
+      }
+
+      if (
+        !ignoreGardsnummer &&
+        gardsnummerStart !== null &&
+        gardsnummerEnd !== null &&
+        gardsnummerStart > gardsnummerEnd
+      ) {
+        return {
+          status: "error",
+          fieldErrors: { gardsnummer: "Startnummer kan ikke være større enn sluttnummer" },
+        }
+      }
+
       try {
         await mutateAsync({
           kommunenr: kommunenummer,
-          gardsnummer,
+          gardsnummer: ignoreGardsnummer ? null : { fra: gardsnummerStart!, til: gardsnummerEnd! },
           smsmelding: smsOptions[selectedSmsKey],
           dpimelding: eFormidlingOptions[selectedDpiKey],
         })
@@ -199,12 +225,7 @@ const CreateKommuneOrder = () => {
 
               <FieldRoot invalid={!!state.fieldErrors?.gardsnummer}>
                 <FieldLabel>Gårdsnummer</FieldLabel>
-                <Input
-                  name="gardsnummer"
-                  type="number"
-                  disabled={skipGardsnummer}
-                  required={!skipGardsnummer}
-                />
+                <Gårdsnummmerserie skipGardsnummer={skipGardsnummer} />
                 <label style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
                   <input
                     type="checkbox"
