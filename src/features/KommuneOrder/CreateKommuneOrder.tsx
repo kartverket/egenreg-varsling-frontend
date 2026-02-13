@@ -14,7 +14,7 @@ import {
   toaster,
 } from "@kvib/react"
 import { useMutation } from "@tanstack/react-query"
-import { useActionState, useMemo, useState } from "react"
+import { useActionState, useEffect, useMemo, useState } from "react"
 import { useFormStatus } from "react-dom"
 import { informasjonsbrev_innhold, informasjonsbrev_tittel } from "../../utils/tekster"
 import HtmlPreview from "../CreateOrder/components/Preview"
@@ -60,7 +60,7 @@ const CreateKommuneOrder = () => {
 
   const { data: kommuner } = useKommuner()
 
-  const kommuneItems = useMemo(
+  const kommuneItems = useMemo<{ label: string; value: string }[]>(
     () =>
       (kommuner ?? []).map(kommune => ({
         label: `${kommune.kommunenavnNorsk || kommune.kommunenavn} (${kommune.kommunenummer})`,
@@ -70,11 +70,14 @@ const CreateKommuneOrder = () => {
   )
 
   const { contains } = useFilter({ sensitivity: "base" })
-  const { collection, filter } = useListCollection({
-    initialItems: kommuneItems,
-    items: kommuneItems,
+  const { collection, filter, set } = useListCollection<{ label: string; value: string }>({
+    initialItems: [],
     filter: contains,
   })
+
+  useEffect(() => {
+    set(kommuneItems)
+  }, [kommuneItems, set])
 
   const [selectedEformidling, setSelectedEformidling] = useState<string>("")
   const [skipGardsnummer, setSkipGardsnummer] = useState<boolean>(false)
