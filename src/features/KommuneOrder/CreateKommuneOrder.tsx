@@ -17,7 +17,9 @@ import { useMutation } from "@tanstack/react-query"
 import { useActionState, useMemo, useState } from "react"
 import { useFormStatus } from "react-dom"
 import { informasjonsbrev_innhold, informasjonsbrev_tittel } from "../../utils/tekster"
+import HtmlPreview from "../CreateOrder/components/Preview"
 import { createKommuneOrder } from "./api/kommuneOrderApi"
+import ForhåndsvisDigitalPost from "./ForhåndsvisDigitalPost"
 import Gårdsnummmerserie from "./Gårdsnummerserie"
 import useKommuner from "./hooks/useKommuner"
 
@@ -263,6 +265,25 @@ const CreateKommuneOrder = () => {
                 )}
               </FieldRoot>
 
+              {selectedEformidling && (
+                <Box bg="gray.50" borderRadius="md" borderWidth="1px" p={4}>
+                  <Flex alignItems="center" justifyContent="space-between" gap={4} mb={3}>
+                    <Text as="b" fontSize="sm">
+                      Emne: {eFormidlingOptions[selectedEformidling]?.tittel}
+                    </Text>
+
+                    <ForhåndsvisDigitalPost
+                      tittel={"Emne: " + eFormidlingOptions[selectedEformidling]?.tittel}
+                    >
+                      <HtmlPreview
+                        html={eFormidlingOptions[selectedEformidling]?.body ?? ""}
+                        title="Forhåndsvisning av eFormidling"
+                      />
+                    </ForhåndsvisDigitalPost>
+                  </Flex>
+                </Box>
+              )}
+
               <FieldRoot invalid={!!state.fieldErrors?.sms}>
                 <Field label={<strong>SMS-varsling</strong>} />
                 <NativeSelect>
@@ -282,7 +303,6 @@ const CreateKommuneOrder = () => {
                 {state.fieldErrors?.sms && <FieldErrorText>{state.fieldErrors.sms}</FieldErrorText>}
               </FieldRoot>
             </Flex>
-
             <Flex justifyContent="flex-end">
               <SubmitButton />
             </Flex>
