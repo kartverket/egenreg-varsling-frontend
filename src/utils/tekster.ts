@@ -152,7 +152,7 @@ export const informasjonsbrev_epost_hvaler_innhold = `<!DOCTYPE html>
 </html>
 `
 
-export const informasjonsbrev_tittel = "Registrer opplysninger i Eiendomsregisteret"
+export const informasjonsbrev_tittel = "Registrer opplysninger om egen eiendom"
 export const informasjonsbrev_innhold = `<!DOCTYPE html>
 <html lang="nb">
   <head>
@@ -161,7 +161,7 @@ export const informasjonsbrev_innhold = `<!DOCTYPE html>
       content="width&#61;device-width, initial-scale&#61;1"
     />
     <meta charset="UTF-8" />
-    <title>Registrer opplysninger i Eiendomsregisteret</title>
+    <title>Du kan registrere opplysninger om egen eiendom</title>
     <style>
       div,
       span,
@@ -312,17 +312,14 @@ export const informasjonsbrev_innhold = `<!DOCTYPE html>
         </div>
         <div class="cta-box">
           <p>
-            Kartverket kan ha mangelfulle opplysninger om din bolig eller
-            fritidsbolig. Som eier eller fester kan du nå
-            registrere opplysninger i Eiendomsregisteret.
+            Registrerte opplysninger om din bolig eller fritidsbolig kan være mangelfulle. Som eier eller fester kan du nå selv registrere opplysninger.
           </p>
 
           <p>
-            Et riktig Eiendomsregister gir bedre tjenester og trygghet for deg
-            som eier.
+            Riktige opplysninger gir bedre tjenester og trygghet for deg som eier.
           </p>
 
-          <a href="https://mineiendom.kartverket.no/egenregistreringer?from=dpi"
+          <a href="https://mineiendom.kartverket.no/egenregistrering?from=dpi"
             >Logg inn og gå til registrering</a
           ><br />
         </div>
@@ -330,59 +327,40 @@ export const informasjonsbrev_innhold = `<!DOCTYPE html>
         <div class="content">
           <div class="sub-heading">Hvorfor er egenregistrering viktig?</div>
           <p>
-            Eiendomsregisteret er det offisielle registeret over norske
-            eiendommer. Registeret inneholder viktig informasjon om dine
-            eiendommer som kan være mangelfull eller utdatert.
+            Opplysningene om din eiendom kan være mangelfulle eller utdaterte. Derfor åpner vi nå for at du som eier eller fester kan registrere opplysninger om din bolig eller fritidsbolig, jf. matrikkelloven § 27.
           </p>
           <p>
-            Egenregistrering er et supplement til andre registrerte
-            opplysninger.
+            Registreringen gjennomføres i tjenesten Eiendomsregisteret, og opplysningene inngår i matrikkelen som et tillegg til andre registrerte opplysninger. 
           </p>
           <p>
-            Registreringen bidrar til at offentlige og private aktører kan bruke
-            riktig informasjon i samfunnskritiske tjenester:
+            Din registrering skal bidra til at offentlige og private aktører kan bruke riktig informasjon i samfunnskritiske tjenester:
           </p>
           <ul>
             <li>
-              <b>Lån og forsikring:</b> Banker og forsikringsselskaper kan hente
-              opplysninger for å sikre at du får riktige betingelser.
+              <b>Lån og forsikring:</b> Banker og forsikringsselskaper kan hente opplysninger for å sikre at du får riktige betingelser.
             </li>
             <li>
-              <b>Kjøp og salg:</b> Riktige opplysninger bidrar til en trygg og
-              forutsigbar salgsprosess.
+              <b>Kjøp og salg:</b> Riktige opplysninger bidrar til en trygg og forutsigbar salgsprosess.
             </li>
             <li>
               <b>Skatt og avgifter:</b>
-              Opplysningene kan brukes som grunnlag for beregning av skatter og
-              avgifter.
+              Opplysningene kan brukes som grunnlag for beregning av skatter og avgifter.
             </li>
           </ul>
         </div>
         <div class="content">
           <div class="sub-heading">Hvordan registrerer du opplysningene?</div>
           <p>
-            Ved å logge inn på Eiendomsregisteret kan du se og registrere
-            opplysninger om dine eiendommer. Du kan registrere byggeår,
-            bruksareal, vann, avløp, energi- og oppvarmingskilde om din bolig
-            eller fritidsbolig.
+            Ved å logge inn på Kartverkets nettsider kan du se og registrere opplysninger om din eiendom. Du kan inntil videre registrere byggeår, bruksareal, vann og avløp samt energi- og oppvarmingskilder.
           </p>
           <p>
-            Du kan finne informasjonen i for eksempel salgsoppgaver,
-            takstrapporter eller bruke din egen kjennskap. Du vil ikke bli bedt
-            om å laste opp dokumentasjon.
+            Du kan oppgi om opplysningene er basert på dokumentasjon eller egen kjennskap. Dokumentasjonen skal ikke lastes opp.
           </p>
           <p>
-            Mer informasjon om Eiendomsregisteret og egenregistrering finner du
-            på
-            <a href="https://kartverket.no/Eiendomsregisteret"
-              >kartverket.no/eiendomsregisteret</a
-            >.
-          </p>
-          <p>
-            Du kan også gå direkte til registreringen gjennom følgende lenke:
-            <a href="https://mineiendom.kartverket.no/egenregistreringer?from=dpi"
-              >mineiendom.kartverket.no/egenregistreringer</a
-            >.
+            Mer informasjon om egenregistrering finner du på 
+            <a href="https://mineiendom.kartverket.no/egenregistrering?from=dpi"
+              >kartverket.no/egenregistrering</a
+            >
           </p>
         </div>
         <div class="content-end">

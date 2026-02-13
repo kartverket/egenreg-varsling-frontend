@@ -70,7 +70,11 @@ const CreateKommuneOrder = () => {
   )
 
   const { contains } = useFilter({ sensitivity: "base" })
-  const { collection, filter } = useListCollection({ initialItems: kommuneItems, filter: contains })
+  const { collection, filter } = useListCollection({
+    initialItems: kommuneItems,
+    items: kommuneItems,
+    filter: contains,
+  })
 
   const [selectedEformidling, setSelectedEformidling] = useState<string>("")
   const [skipGardsnummer, setSkipGardsnummer] = useState<boolean>(false)
