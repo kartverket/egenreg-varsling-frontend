@@ -308,7 +308,7 @@ export const informasjonsbrev_innhold = `<!DOCTYPE html>
       </div>
       <div>
         <div class="heading">
-          Du kan registrere opplysninger om egen eiendom
+          Du kan registrere opplysninger om egen eiendom 
         </div>
         <div class="cta-box">
           <p>
@@ -319,28 +319,28 @@ export const informasjonsbrev_innhold = `<!DOCTYPE html>
             Riktige opplysninger gir bedre tjenester og trygghet for deg som eier.
           </p>
 
-          <a href="https://mineiendom.kartverket.no/egenregistrering?from=dpi"
-            >Logg inn og gå til registrering</a
+          <a href="https://kartverket.no/egenregistrering"
+            >Les mer og gå til registrering </a
           ><br />
         </div>
 
         <div class="content">
           <div class="sub-heading">Hvorfor er egenregistrering viktig?</div>
           <p>
-            Opplysningene om din eiendom kan være mangelfulle eller utdaterte. Derfor åpner vi nå for at du som eier eller fester kan registrere opplysninger om din bolig eller fritidsbolig, jf. matrikkelloven § 27.
+           Opplysningene om din eiendom kan være mangelfulle eller utdaterte. Derfor åpner vi nå for at du som eier eller fester kan registrere opplysninger om din bolig eller fritidsbolig, jf. matrikkelloven § 27.
           </p>
           <p>
-            Registreringen gjennomføres i tjenesten Eiendomsregisteret, og opplysningene inngår i matrikkelen som et tillegg til andre registrerte opplysninger. 
+            Registreringen gjennomføres i tjenesten Eiendomsregisteret, og opplysningene inngår i matrikkelen som et tillegg til andre registrerte opplysninger.
           </p>
           <p>
-            Din registrering skal bidra til at offentlige og private aktører kan bruke riktig informasjon i samfunnskritiske tjenester:
+            Din registrering skal bidra til at offentlige og private aktører kan bruke riktig informasjon i samfunnskritiske tjenester: 
           </p>
           <ul>
             <li>
-              <b>Lån og forsikring:</b> Banker og forsikringsselskaper kan hente opplysninger for å sikre at du får riktige betingelser.
+              <b>Kjøp og salg:</b> Riktige opplysninger gir en tryggere salgsprosess og lavere risiko for uenigheter i etterkant.
             </li>
             <li>
-              <b>Kjøp og salg:</b> Riktige opplysninger bidrar til en trygg og forutsigbar salgsprosess.
+              <b>Lån og forsikring:</b> Banker og forsikringsselskaper kan hente opplysninger for å sikre at du får riktige betingelser.
             </li>
             <li>
               <b>Skatt og avgifter:</b>
@@ -357,11 +357,12 @@ export const informasjonsbrev_innhold = `<!DOCTYPE html>
             Du kan oppgi om opplysningene er basert på dokumentasjon eller egen kjennskap. Dokumentasjonen skal ikke lastes opp.
           </p>
           <p>
-            Mer informasjon om egenregistrering finner du på 
+            Registreringen gjennomføres på 
             <a href="https://mineiendom.kartverket.no/egenregistrering?from=dpi"
               >kartverket.no/egenregistrering</a
             >
           </p>
+          <p>Her finner du også mer informasjon om tjenesten.</p>
         </div>
         <div class="content-end">
           <p>Takk for at du bidrar til et riktig og oppdatert register!</p>

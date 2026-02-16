@@ -64,7 +64,8 @@ const KommuneOrdreStatus = () => {
             <TableColumnHeader>Knr</TableColumnHeader>
             <TableColumnHeader>Gnr</TableColumnHeader>
             <TableColumnHeader>Kommune</TableColumnHeader>
-            <TableColumnHeader>Totalt antall varslinger</TableColumnHeader>
+            <TableColumnHeader>Innbyggere forsøkt varslet</TableColumnHeader>
+            <TableColumnHeader>Matrikkelenheter forsøkt varslet</TableColumnHeader>
             <TableColumnHeader>Sendt DPI</TableColumnHeader>
             <TableColumnHeader>Sendt SMS</TableColumnHeader>
             <TableColumnHeader>Ikke tilgjengelig</TableColumnHeader>
@@ -89,6 +90,7 @@ const KommuneOrdreStatus = () => {
                     {kommuner?.find(k => k.kommunenummer === ordre.kommunenummer)?.kommunenavnNorsk}
                   </TableCell>
                   <TableCell>{ordre.totaltAntallVarslinger}</TableCell>
+                  <TableCell>{ordre.antallMatrikkelenheterForsoktVarslet ?? "-"}</TableCell>
                   <TableCell>
                     <Tag colorPalette="green" variant="subtle">
                       {ordre.sendtDPI}
