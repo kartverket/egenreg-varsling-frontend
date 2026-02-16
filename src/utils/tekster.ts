@@ -273,7 +273,7 @@ export const informasjonsbrev_innhold = `<!DOCTYPE html>
       }
 
       .content-end {
-        margin-top: 4rem;
+        margin-top: 1rem;
         margin-bottom: 3rem;
       }
 
@@ -319,7 +319,7 @@ export const informasjonsbrev_innhold = `<!DOCTYPE html>
             Riktige opplysninger gir bedre tjenester og trygghet for deg som eier.
           </p>
 
-          <a href="https://kartverket.no/egenregistrering"
+          <a href="https://mineiendom.kartverket.no/egenregistrering?from=dpi"
             >Les mer og gå til registrering </a
           ><br />
         </div>
@@ -359,7 +359,7 @@ export const informasjonsbrev_innhold = `<!DOCTYPE html>
           <p>
             Registreringen gjennomføres på 
             <a href="https://mineiendom.kartverket.no/egenregistrering?from=dpi"
-              >kartverket.no/egenregistrering</a
+              >https://mineiendom.kartverket.no/egenregistrering</a
             >
           </p>
           <p>Her finner du også mer informasjon om tjenesten.</p>
