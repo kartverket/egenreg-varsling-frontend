@@ -36,6 +36,7 @@ import {
   revarsling_epost_innhold,
   revarsling_sms,
 } from "../../utils/tekster.ts"
+import SMSPreview from "../Previews/SMSPreview.tsx"
 import { ChannelTooltip } from "./components/ChannelTooltip.tsx"
 import { ConfirmDialog } from "./components/ConfirmDialog.tsx"
 import HtmlPreview from "./components/Preview.tsx"
@@ -156,27 +157,7 @@ export const CreateOrder = () => {
                       </NativeSelect>
                       {form.errors.smsBody && <Alert status="error" title={form.errors.smsBody} />}
 
-                      {form.values.smsBody && (
-                        <Box mt={4}>
-                          <Text fontSize="sm" mb={2}>
-                            Tekst som blir sendt i SMS:
-                          </Text>
-                          <Box
-                            maxW="320px"
-                            p={4}
-                            bg="gray.100"
-                            borderRadius="lg"
-                            boxShadow="md"
-                            border="1px solid"
-                            borderColor="gray.300"
-                            fontSize="sm"
-                            lineHeight="1.4"
-                            whiteSpace="pre-wrap"
-                          >
-                            {form.values.smsBody}
-                          </Box>
-                        </Box>
-                      )}
+                      {form.values.smsBody && <SMSPreview smsText={form.values.smsBody} />}
                     </Field>
                   </Grid>
                   {/* E-post */}
@@ -250,9 +231,7 @@ export const CreateOrder = () => {
                       }}
                     >
                       <NativeSelectField placeholder="Velg malverk">
-                        <option value="førstegangsvarsling">
-                          Førstegangsvarsling
-                        </option>
+                        <option value="førstegangsvarsling">Førstegangsvarsling</option>
                       </NativeSelectField>
                     </NativeSelect>
 

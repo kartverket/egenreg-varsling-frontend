@@ -18,6 +18,7 @@ import { useActionState, useEffect, useMemo, useState } from "react"
 import { useFormStatus } from "react-dom"
 import { informasjonsbrev_innhold, informasjonsbrev_tittel } from "../../utils/tekster"
 import HtmlPreview from "../CreateOrder/components/Preview"
+import SMSPreview from "../Previews/SMSPreview"
 import { createKommuneOrder } from "./api/kommuneOrderApi"
 import ForhåndsvisDigitalPost from "./ForhåndsvisDigitalPost"
 import Gårdsnummmerserie from "./Gårdsnummerserie"
@@ -309,6 +310,8 @@ const CreateKommuneOrder = () => {
                 </NativeSelect>
                 {state.fieldErrors?.sms && <FieldErrorText>{state.fieldErrors.sms}</FieldErrorText>}
               </FieldRoot>
+
+              {smsOptions[selectedSms] && <SMSPreview smsText={smsOptions[selectedSms]} />}
             </Flex>
             <Flex justifyContent="flex-end">
               <SubmitButton />
