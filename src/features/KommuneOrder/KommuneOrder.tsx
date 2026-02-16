@@ -1,4 +1,4 @@
-import { Box, Heading } from "@kvib/react"
+import { Heading, Stack } from "@kvib/react"
 import CreateKommuneOrder from "./CreateKommuneOrder"
 
 const KommuneOrder = () => {
@@ -18,10 +18,10 @@ const KommuneOrder = () => {
   }
 
   return (
-    <Box>
-      <Heading>Du er nå i {env()}</Heading>
+    <Stack align="center" justify="center" padding="4">
+      <Heading color={env() != "prod" ? "blue" : "red"}>Du er nå i {env()}</Heading>
       <CreateKommuneOrder />
-    </Box>
+    </Stack>
   )
 }
 
