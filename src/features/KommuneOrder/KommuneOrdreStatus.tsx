@@ -57,7 +57,7 @@ const KommuneOrdreStatus = () => {
       <Heading size="md" mb={4}>
         Kommuneordre status
       </Heading>
-      <Table size="md">
+      <Table size="md" variant="outline" interactive>
         <TableHeader>
           <TableRow>
             <TableColumnHeader>ID</TableColumnHeader>
@@ -75,7 +75,7 @@ const KommuneOrdreStatus = () => {
         </TableHeader>
         <TableBody>
           {ordreStatus
-            ?.sort((a, b) => Number(a.ordreId) - Number(b.ordreId))
+            ?.sort((a, b) => Number(b.ordreId) - Number(a.ordreId))
             .map(ordre => {
               return (
                 <TableRow key={ordre.ordreId}>
