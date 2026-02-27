@@ -1,9 +1,9 @@
 import axios from "axios"
-import { getAccessToken } from "../features/Orders/api/getToken"
+import { getAccessToken } from "../auth/getToken"
 
 export const apiRoute = "/api"
 
-export const api = axios.create({
+const api = axios.create({
   baseURL: apiRoute,
   headers: {
     "Content-Type": "application/json",

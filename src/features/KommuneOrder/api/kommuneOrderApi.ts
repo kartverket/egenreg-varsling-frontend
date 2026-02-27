@@ -32,7 +32,7 @@ export const getKommuneOrder = async () => {
   return data
 }
 
-export interface CreateKommuneOrderDTO {
+interface CreateKommuneOrderDTO {
   kommunenr: string
   gardsnummer: { fra: number; til: number } | null
   smsmelding: string
