@@ -17,8 +17,6 @@ import { ErrorElement } from "./components/ErrorElement.tsx"
 import { router } from "./router.tsx"
 import "./zodConfig.ts"
 
-export const SENDERS_REF = "Kartverket Egenregistrering"
-
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {

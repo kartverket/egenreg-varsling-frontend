@@ -14,10 +14,8 @@ import { Outlet, useNavigate } from "react-router-dom"
 import { getAuthState } from "./auth/authState"
 
 const tabs = [
-  { label: "Varsling med innbyggeridentifikator", url: "/" },
-  { label: "Oversikt", url: `/orders` },
-  { label: "Varsling med kommunenummer", url: `opprett` },
-  { label: "Kommuneordre status", url: `status` },
+  { label: "Send varsler til kommune", url: `opprett` },
+  { label: "Status på varsler", url: `status` },
 ]
 
 export const Layout = () => {
@@ -28,12 +26,10 @@ export const Layout = () => {
   return (
     <Flex direction="column" minHeight="100vh">
       <header>
-        <Flex bg="gray.100" p={8} justifyContent="space-between" alignItems="center">
-          <Logo />
-          <Heading size="3xl">Varslingstjeneste for egenregistrering</Heading>
-          <Flex alignItems="center" justifyContent="space-between">
-            <Icon icon="person" />
-            <Text>{name}</Text>
+        <Flex bg="gray.100" p={6} justifyContent="space-evenly" alignItems="center">
+          <Logo variant="horizontal" />
+          <Heading size="xl">Varslingstjeneste for egenregistrering</Heading>
+          <Flex alignItems="center" justifyContent="space-between" gap={10}>
             <Tabs ml={8} size="lg" defaultValue="0">
               <Flex>
                 {tabs.map((tab, index) => (
@@ -45,6 +41,10 @@ export const Layout = () => {
                 ))}
               </Flex>
             </Tabs>
+            <Flex gap={2}>
+              <Icon icon="person" />
+              <Text>{name}</Text>
+            </Flex>
           </Flex>
         </Flex>
       </header>

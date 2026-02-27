@@ -1,6 +1,6 @@
 // src/lib/auth/getAccessToken.ts
 import { AccountInfo } from "@azure/msal-browser"
-import { getAuthState } from "../../../auth/authState"
+import { getAuthState } from "./authState"
 
 export const getAccessToken = async (): Promise<string> => {
   const { msalInstance, scopes } = getAuthState()
