@@ -1,5 +1,4 @@
 /* eslint-disable no-restricted-imports */
-import { Combobox, Heading, Portal, useFilter, useListCollection } from "@chakra-ui/react"
 import {
   Box,
   Button,
@@ -8,13 +7,14 @@ import {
   FieldLabel,
   FieldRoot,
   Flex,
+  Heading,
   NativeSelect,
   NativeSelectField,
   Text,
   toaster,
 } from "@kvib/react"
 import { useMutation } from "@tanstack/react-query"
-import { useActionState, useEffect, useMemo, useState } from "react"
+import { useActionState, useMemo, useState } from "react"
 import { useFormStatus } from "react-dom"
 import { informasjonsbrev_innhold, informasjonsbrev_tittel } from "../../utils/tekster"
 import HtmlPreview from "../Previews/HtmlPreview"
@@ -70,16 +70,6 @@ const CreateKommuneOrder = () => {
     [kommuner],
   )
 
-  const { contains } = useFilter({ sensitivity: "base" })
-  const { collection, filter, set } = useListCollection<{ label: string; value: string }>({
-    initialItems: [],
-    filter: contains,
-  })
-
-  useEffect(() => {
-    set(kommuneItems)
-  }, [kommuneItems, set])
-
   const [selectedEformidling, setSelectedEformidling] = useState<string>("")
   const [skipGardsnummer, setSkipGardsnummer] = useState<boolean>(false)
   const [kommunenummer, setKommunenummer] = useState<string>("")
@@ -94,6 +84,14 @@ const CreateKommuneOrder = () => {
       toaster.create({ type: "error", title: "Feil ved opprettelse av ordre med kommunenummer" })
     },
   })
+
+  const filteredKommuner = useMemo(() => {
+    if (!kommuneSearch.trim()) return kommuneItems
+
+    return kommuneItems.filter(item =>
+      item.label.toLowerCase().includes(kommuneSearch.toLowerCase()),
+    )
+  }, [kommuneItems, kommuneSearch])
 
   const [state, action] = useActionState<FormState, FormData>(
     async (_, formData) => {
@@ -195,39 +193,36 @@ const CreateKommuneOrder = () => {
               <FieldRoot invalid={!!state.fieldErrors?.kommunenummer}>
                 <FieldLabel>Kommunenummer</FieldLabel>
 
-                <Combobox.Root
-                  collection={collection}
-                  inputValue={kommuneSearch}
-                  value={kommunenummer ? [kommunenummer] : []}
-                  onInputValueChange={e => {
-                    setKommuneSearch(e.inputValue)
-                    filter(e.inputValue)
-                  }}
-                  onValueChange={details => {
-                    const next = Array.isArray(details.value)
-                      ? (details.value[0] ?? "")
-                      : (details.value ?? "")
-                    setKommunenummer(next)
-                  }}
-                >
-                  <Combobox.Control>
-                    <Combobox.Input placeholder="Søk etter kommune" />
-                    <Combobox.Trigger />
-                  </Combobox.Control>
-                  <Portal>
-                    <Combobox.Positioner>
-                      <Combobox.Content>
-                        {collection.items.map(item => (
-                          <Combobox.Item key={item.value} item={item}>
-                            {item.label}
-                          </Combobox.Item>
-                        ))}
-                      </Combobox.Content>
-                    </Combobox.Positioner>
-                  </Portal>
-                </Combobox.Root>
+                <Box mb={2}>
+                  <input
+                    type="text"
+                    placeholder="Søk etter kommune"
+                    value={kommuneSearch}
+                    onChange={e => setKommuneSearch(e.target.value)}
+                    style={{
+                      width: "100%",
+                      padding: "8px",
+                      borderRadius: "6px",
+                      border: "1px solid #d1d5db",
+                    }}
+                  />
+                </Box>
 
-                <input type="hidden" name="kommunenummer" value={kommunenummer} />
+                <NativeSelect>
+                  <NativeSelectField
+                    name="kommunenummer"
+                    value={kommunenummer}
+                    onChange={e => setKommunenummer(e.target.value)}
+                  >
+                    <option value="">Velg kommune</option>
+                    {filteredKommuner.map(item => (
+                      <option key={item.value} value={item.value}>
+                        {item.label}
+                      </option>
+                    ))}
+                  </NativeSelectField>
+                </NativeSelect>
+
                 {state.fieldErrors?.kommunenummer && (
                   <FieldErrorText>{state.fieldErrors.kommunenummer}</FieldErrorText>
                 )}
