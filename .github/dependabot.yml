@@ -35,6 +35,7 @@ updates:
           - "react"
           - "@types/react"
           - "react-dom"
+          - "@types/react-dom"
       i18next:
         patterns:
           - "i18next"
