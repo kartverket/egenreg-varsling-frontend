@@ -154,29 +154,30 @@ export const informasjonsbrev_innhold = `<!DOCTYPE html>
       </div>
       <div>
         <div class="heading">
-          Du kan registrere opplysninger om egen eiendom 
+          Oppdater informasjon om din eiendom
         </div>
         <div class="cta-box">
           <p>
-            Registrerte opplysninger om din bolig eller fritidsbolig kan være mangelfulle. Som eier eller fester kan du nå selv registrere opplysninger.
+            Kartverket og kommunene forvalter det offisielle registeret over norske eiendommer. Informasjonen brukes i en rekke samfunnsviktige tjenester.
           </p>
 
           <p>
-            Riktige opplysninger gir bedre tjenester og trygghet for deg som eier.
+            Riktig eiendomsinformasjon gir bedre tjenester og trygghet for deg som eier.
+            Du kan nå enkelt sjekke og oppdatere opplysningene selv.
           </p>
 
           <a href="https://mineiendom.kartverket.no/egenregistrering?from=dpi"
-            >Les mer og gå til registrering </a
+            >Les mer og oppdater opplysningene dine</a
           ><br />
         </div>
 
         <div class="content">
-          <div class="sub-heading">Hvorfor er egenregistrering viktig?</div>
+          <div class="sub-heading">Hvorfor er det viktig at det er riktig?</div>
           <p>
-           Opplysningene om din eiendom kan være mangelfulle eller utdaterte. Derfor åpner vi nå for at du som eier eller fester kan registrere opplysninger om din bolig eller fritidsbolig, jf. matrikkelloven § 27.
+           Opplysningene om din eiendom kan være mangelfulle eller utdaterte. Derfor har vi gjort det enkelt for deg å oppdatere informasjon om din bolig eller fritidsbolig, jf. matrikkelloven § 27.
           </p>
           <p>
-            Registreringen gjennomføres i tjenesten Eiendomsregisteret, og opplysningene inngår i matrikkelen som et tillegg til andre registrerte opplysninger.
+            Registreringen gjennomføres i tjenesten Eiendomsregisteret, og opplysningene inngår i matrikkelen som et tillegg til offentlig registrerte opplysninger. 
           </p>
           <p>
             Din registrering skal bidra til at offentlige og private aktører kan bruke riktig informasjon i samfunnskritiske tjenester: 
@@ -190,17 +191,17 @@ export const informasjonsbrev_innhold = `<!DOCTYPE html>
             </li>
             <li>
               <b>Skatt og avgifter:</b>
-              Opplysningene kan brukes som grunnlag for beregning av skatter og avgifter.
+              Opplysningene kan brukes som grunnlag for riktig beregning av skatter og avgifter.
             </li>
           </ul>
         </div>
         <div class="content">
-          <div class="sub-heading">Hvordan registrerer du opplysningene?</div>
+          <div class="sub-heading">Hva kan du oppdatere?</div>
           <p>
-            Ved å logge inn på Kartverkets nettsider kan du se og registrere opplysninger om din eiendom. Du kan inntil videre registrere byggeår, bruksareal, vann og avløp samt energi- og oppvarmingskilder.
+            Ved å logge inn på Kartverkets nettsider kan du se og oppdatere opplysninger om din bolig eller fritidsbolig. Du kan inntil videre oppdatere byggeår, bruksareal, vann og avløp samt energi- og oppvarmingskilder.
           </p>
           <p>
-            Du kan oppgi om opplysningene er basert på dokumentasjon eller egen kjennskap. Dokumentasjonen skal ikke lastes opp.
+            Du kan basere deg på opplysninger fra dokumenter som salgsoppgaver og byggesaksdokumenter, eller fra egen kunnskap. Dokumentasjon skal ikke lastes opp.
           </p>
           <p>
             Registreringen gjennomføres på 
