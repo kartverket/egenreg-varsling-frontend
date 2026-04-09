@@ -166,8 +166,8 @@ export const informasjonsbrev_innhold = `<!DOCTYPE html>
             Du kan nå enkelt sjekke og oppdatere opplysningene selv.
           </p>
 
-          <a href="https://mineiendom.kartverket.no/egenregistrering?from=dpi"
-            >Les mer og oppdater opplysningene dine</a
+          <a href="https://mineiendom.kartverket.no/egenregistrering/oversikt?from=dpi2"
+            >Logg inn og oppdater opplysningene dine</a
           ><br />
         </div>
 
@@ -201,11 +201,14 @@ export const informasjonsbrev_innhold = `<!DOCTYPE html>
             Ved å logge inn på Kartverkets nettsider kan du se og oppdatere opplysninger om din bolig eller fritidsbolig. Du kan inntil videre oppdatere byggeår, bruksareal, vann og avløp samt energi- og oppvarmingskilder.
           </p>
           <p>
+            Det er frivillig å egenregistrere, og du velger selv hvilke opplysninger du vil oppgi.
+          </p>
+          <p>
             Du kan basere deg på opplysninger fra dokumenter som salgsoppgaver og byggesaksdokumenter, eller fra egen kunnskap. Dokumentasjon skal ikke lastes opp.
           </p>
           <p>
-            Registreringen gjennomføres på 
-            <a href="https://mineiendom.kartverket.no/egenregistrering?from=dpi"
+            Du kan gjennomføre registreringen på
+            <a href="https://mineiendom.kartverket.no/egenregistrering/oversikt?from=dpi2"
               >https://mineiendom.kartverket.no/egenregistrering</a
             >
           </p>
