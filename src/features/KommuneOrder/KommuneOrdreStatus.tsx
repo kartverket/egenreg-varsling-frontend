@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Flex,
   Heading,
   Spinner,
@@ -15,6 +16,7 @@ import {
 import { useQuery } from "@tanstack/react-query"
 import { getKommuneOrder, type KommuneOrder } from "./api/kommuneOrderApi"
 import useKommuner from "./hooks/useKommuner"
+import { exportToCsv } from "../../utils/exportCsv.ts"
 
 const dateFormatter = (date: Date) =>
   new Intl.DateTimeFormat("nb-NO", {
@@ -54,9 +56,15 @@ const KommuneOrdreStatus = () => {
 
   return (
     <Box borderWidth="1px" borderRadius="md" p={6} bg="white" shadow="sm">
-      <Heading size="md" mb={4}>
-        Kommuneordre status
-      </Heading>
+      <Flex justifyContent="space-between" alignItems="center" mb={4}>
+        <Heading size="md">Kommuneordre status</Heading>
+        <Button
+          size="sm"
+          onClick={() => exportToCsv(ordreStatus ?? [], kommuner)}
+        >
+          Eksporter til CSV
+        </Button>
+      </Flex>
       <Table size="md" variant="outline" interactive>
         <TableHeader>
           <TableRow>
