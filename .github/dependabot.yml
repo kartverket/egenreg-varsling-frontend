@@ -46,6 +46,3 @@ updates:
       azure:
         patterns:
           - "@azure/*"
-      zod:
-        patterns:
-          - "zod*"

@@ -15,7 +15,6 @@ import "./App.css"
 import { initAuth } from "./auth/msal.ts"
 import { ErrorElement } from "./components/ErrorElement.tsx"
 import { router } from "./router.tsx"
-import "./zodConfig.ts"
 
 const queryClient = new QueryClient({
   defaultOptions: {
