@@ -54,9 +54,9 @@ const CreateKommuneOrder = () => {
 
   const smsOptions: Record<string, string> = {
     førstegangsvarsling:
-      "Hei!\nKartverket og kommunene forvalter informasjon om din eiendom. Opplysningene kan være mangelfulle eller utdatert. " +
-      "Derfor har vi gjort det enkelt for deg å oppdatere informasjonen selv. Logg inn og sjekk at alt stemmer på våre nettsider. " +
-      "Hilsen Kartverket",
+      "Hei!\nKartverket og kommunene forvalter informasjon om din eiendom." +
+      "Opplysningene kan være mangelfulle eller utdaterte. Derfor har vi gjort det enkelt for deg å oppdatere informasjonen selv." +
+      "Logg inn og sjekk at alt stemmer på våre nettsider.\nHilsen Kartverket",
   }
 
   const [selectedSms, setSelectedSms] = useState("")

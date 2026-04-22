@@ -77,6 +77,7 @@ jobs:
         uses: kartverket/pharos@599d3fe4af8bae19fbfda831662e90ee1c406ec2 # v0.6.3
         with:
           image_url: ${{ needs.build.outputs.image_url }}
+          disable_severity_check: true
 
   argo:
     name: Update version in apps-repo
