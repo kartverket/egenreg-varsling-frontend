@@ -14,9 +14,9 @@ import {
   Text,
 } from "@kvib/react"
 import { useQuery } from "@tanstack/react-query"
+import { exportToCsv } from "../../utils/exportCsv.ts"
 import { getKommuneOrder, type KommuneOrder } from "./api/kommuneOrderApi"
 import useKommuner from "./hooks/useKommuner"
-import { exportToCsv } from "../../utils/exportCsv.ts"
 
 const dateFormatter = (date: Date) =>
   new Intl.DateTimeFormat("nb-NO", {
@@ -57,11 +57,8 @@ const KommuneOrdreStatus = () => {
   return (
     <Box borderWidth="1px" borderRadius="md" p={6} bg="white" shadow="sm">
       <Flex justifyContent="space-between" alignItems="center" mb={4}>
-        <Heading size="md">Kommuneordre status</Heading>
-        <Button
-          size="sm"
-          onClick={() => exportToCsv(ordreStatus ?? [], kommuner)}
-        >
+        <Heading size="md">Kommuneordre sendt siste 2 ukene</Heading>
+        <Button size="sm" onClick={() => exportToCsv(ordreStatus ?? [], kommuner)}>
           Eksporter til CSV
         </Button>
       </Flex>
