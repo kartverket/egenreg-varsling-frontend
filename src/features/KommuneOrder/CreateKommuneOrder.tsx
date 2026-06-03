@@ -50,12 +50,17 @@ const SubmitButton = () => {
 }
 
 const CreateKommuneOrder = () => {
-  const eFormidlingOptions: Record<string, { tittel: string; body: string }> = {
+  const eFormidlingOptions: Record<
+    string,
+    { tittel: string; body: string; presentasjonsverdi: string }
+  > = {
     førstegangsvarsling: {
+      presentasjonsverdi: "Registrer opplysninger i Eiendomsregisteret v1",
       tittel: informasjonsbrev_tittel,
       body: informasjonsbrev_innhold,
     },
     førstegangsvarsling_v2: {
+      presentasjonsverdi: "Registrer opplysninger i Eiendomsregisteret v2",
       tittel: informasjonsbrev_tittel_v2,
       body: informasjonsbrev_innhold_v2,
     },
@@ -269,7 +274,7 @@ const CreateKommuneOrder = () => {
                     <option value="">Velg eFormidling-mal</option>
                     {Object.entries(eFormidlingOptions).map(([key, value]) => (
                       <option key={key} value={key}>
-                        {value.tittel}
+                        {value.presentasjonsverdi}
                       </option>
                     ))}
                   </NativeSelectField>
