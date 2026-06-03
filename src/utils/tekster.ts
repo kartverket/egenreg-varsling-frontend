@@ -167,7 +167,7 @@ export const informasjonsbrev_innhold = `<!DOCTYPE html>
           </p>
 
           <a href="https://mineiendom.kartverket.no/egenregistrering/oversikt?from=dpi2"
-            >Logg inn og oppdater opplysningene dine</a
+            >Logg inn og oppdater opplysningene</a
           ><br />
         </div>
 
@@ -354,10 +354,10 @@ export const informasjonsbrev_innhold_v2 = `<!DOCTYPE html>
         }
 
         .benefits {
-            width: 100%;
+            width: calc(100% + 20px);
             border-collapse: separate;
             border-spacing: 10px 0;
-            margin-top: 20px;
+            margin: 20px -10px 0 -10px;
         }
 
         .benefit {
@@ -426,8 +426,10 @@ export const informasjonsbrev_innhold_v2 = `<!DOCTYPE html>
         }
 
         .callout {
+            margin-top: 24px;
             background-color: #E9F8EB;
-            border-radius: 8px;
+            border-top: 2px solid #156630;
+            border-radius: 0 0 6px 6px;
             padding: 16px 20px;
             color: #000000;
         }
@@ -473,6 +475,7 @@ export const informasjonsbrev_innhold_v2 = `<!DOCTYPE html>
             .benefits {
                 border-spacing: 0;
                 width: 100%;
+                margin: 20px 0 0 0;
             }
 
             .benefit-row {
@@ -483,10 +486,13 @@ export const informasjonsbrev_innhold_v2 = `<!DOCTYPE html>
             .benefit {
                 display: block;
                 width: auto;
-                margin-bottom: 14px;
+                margin: 0;
+            }
+
+            .benefit + .benefit {
+                margin-top: 14px;
             }
         }
-
     </style>
 </head>
 <body>
@@ -506,7 +512,7 @@ export const informasjonsbrev_innhold_v2 = `<!DOCTYPE html>
                 Når opplysningene er feil eller mangelfulle kan det påvirke tjenestene du mottar. Nå kan du enkelt sjekke hva som er registrert og oppdatere det som er feil.
             </p>
             <a class="cta" href="https://mineiendom.kartverket.no/egenregistrering/oversikt?from=dpi3" target="_blank" rel="noopener noreferrer">
-                Logg inn og gå til egenregistrering
+                Logg inn og oppdater opplysningene
             </a>
         </div>
 
@@ -535,7 +541,7 @@ export const informasjonsbrev_innhold_v2 = `<!DOCTYPE html>
         <div class="section">
             <h3>Hva kan du oppdatere?</h3>
             <p>
-                I første omgang kan du oppdatere informasjon om <span class="emphasis">byggeår, bruksareal, vann og avløp og energi og oppvarming</span>.
+                I første omgang kan du oppdatere informasjon om <span class="emphasis">byggeår, bruksareal, vann, avløp, energi</span> og <span class="emphasis">oppvarming</span>.
             </p>
             <p>
                 Før du starter kan det være lurt å ha salgsoppgave, byggesaksdokumenter eller andre relevante dokumenter tilgjengelig. Du trenger ikke laste opp noe, men de kan hjelpe deg å finne riktige opplysninger.
@@ -556,7 +562,7 @@ export const informasjonsbrev_innhold_v2 = `<!DOCTYPE html>
                     <td>
                         <h4>Velg eiendommen du vil oppdatere</h4>
                         <p class="muted">
-                            Registrering kan være tilgjengelig for flere eiendommer. I tjenesten ser du tydelig hvilke som er fullført og ikke.
+                            Eier du flere eiendommer, ønsker vi at du registrerer på alle som er tilgjengelig.
                         </p>
                     </td>
                 </tr>
@@ -589,8 +595,6 @@ export const informasjonsbrev_innhold_v2 = `<!DOCTYPE html>
             <p>Takk for at du bidrar til et riktig og oppdatert eiendomsregister!</p>
             <p>Med vennlig hilsen,</p>
             <p> Kartverket</p>
-
-            <hr class="divider" />
 
             <div class="callout">
                 <p>Det er frivillig å egenregistrere, og du velger selv hvilke opplysninger du oppdaterer.</p>
