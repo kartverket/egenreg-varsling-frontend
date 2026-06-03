@@ -444,6 +444,44 @@ export const informasjonsbrev_innhold_v2 = `<!DOCTYPE html>
         .footer p {
             margin: 0 0 8px 0;
         }
+
+        @media (max-width: 700px) {
+          .logo-bar,
+          .hero,
+          .section,
+          .section-last {
+              padding-left: 20px;
+              padding-right: 20px;
+          }
+
+          .hero h1 {
+              font-size: 24px;
+          }
+
+          .benefits {
+              border-spacing: 0;
+              margin-top: 16px;
+          }
+
+          .benefits,
+          .benefits tbody,
+          .benefits tr,
+          .benefits td {
+              display: block;
+              width: 100%;
+          }
+
+          .benefit {
+              width: 100%;
+              box-sizing: border-box;
+              margin-bottom: 14px;
+          }
+
+          .benefit:last-child {
+              margin-bottom: 0;
+          }
+      }
+
     </style>
 </head>
 <body>
