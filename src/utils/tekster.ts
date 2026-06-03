@@ -232,257 +232,202 @@ export const informasjonsbrev_innhold_v2 = `<!DOCTYPE html>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Egenregistrering - Oppdater opplysninger om din eiendom</title>
     <style>
-        body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 17px;
-            line-height: 1.5;
-            font-weight: 400;
-            background-color: #ffffff;
-            color: #000000;
-        }
+    body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 17px;
+        line-height: 1.5;
+        font-weight: 400;
+        background-color: #ffffff;
+        color: #000000;
+    }
 
-        a:link,
-        a:visited {
-            color: #156630;
-        }
+    a {
+        color: #156630;
+    }
 
-        .container {
-            max-width: 960px;
-            margin: 0 auto;
-            padding: 0;
-        }
+    .container {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 0;
+    }
 
-        .logo-bar {
-            background-color: #eef0f3;
-            padding: 28px 32px;
-        }
+    .logo-bar {
+        background-color: #eef0f3;
+        padding: 28px 32px;
+    }
 
-        .logo {
-            display: block;
-            height: 56px;
-            width: auto;
-        }
+    .logo {
+        display: block;
+        height: 56px;
+        width: auto;
+    }
 
-        .hero {
-            background-color: #ffffff;
-            padding: 32px 32px 36px 32px;
-            border-bottom: 1px solid #e5e7eb;
-        }
+    .hero {
+        background-color: #ffffff;
+        padding: 32px 32px 36px 32px;
+        border-bottom: 1px solid #e5e7eb;
+    }
 
-        h1, h3, h4 {
-            font-weight: bold;
-            color: #000000;
-            margin: 0;
-        }
+    h1 {
+        font-weight: bold;
+        color: #000000;
+        margin: 0 0 16px 0;
+        font-size: 28px;
+        line-height: 1.2;
+    }
 
-        .eyebrow {
-            color: #156630;
-            font-weight: bold;
-            font-size: 17px;
-            margin: 0 0 8px 0;
-        }
+    h3 {
+        font-weight: bold;
+        color: #000000;
+        margin: 0 0 8px 0;
+        font-size: 20px;
+        line-height: 1.3;
+    }
 
-        .hero h1 {
-            font-size: 28px;
-            line-height: 1.2;
-            margin-bottom: 16px;
-        }
+    h4 {
+        font-weight: bold;
+        color: #000000;
+        margin: 0;
+        font-size: 17px;
+    }
 
-        .hero p {
-            margin: 0 0 16px 0;
-            max-width: 760px;
-        }
+    .eyebrow {
+        color: #156630;
+        font-weight: bold;
+        font-size: 17px;
+        margin: 0 0 8px 0;
+    }
 
-        .cta {
-            display: inline-block;
-            margin-top: 12px;
-            padding: 12px 18px;
-            background-color: #156630;
-            color: #ffffff;
-            text-decoration: none;
-            border-radius: 8px;
-        }
+    .hero p {
+        margin: 0 0 16px 0;
+        max-width: 760px;
+    }
 
-        .cta:link,
-        .cta:visited {
-            color: #ffffff;
-        }
+    .cta {
+        display: inline-block;
+        margin-top: 12px;
+        padding: 12px 18px;
+        background-color: #156630;
+        color: #ffffff;
+        text-decoration: none;
+        border-radius: 8px;
+    }
 
-        .cta:hover {
-            background-color: #0f4c24;
-        }
+    .section {
+        padding: 32px;
+        border-bottom: 1px solid #e5e7eb;
+    }
 
-        .section {
-            padding: 32px;
-            border-bottom: 1px solid #e5e7eb;
-        }
+    .section-last {
+        padding: 32px;
+    }
 
-        .section-last {
-            padding: 32px;
-        }
+    p {
+        margin: 0 0 16px 0;
+    }
 
-        h3 {
-            font-size: 20px;
-            line-height: 1.3;
-            margin-bottom: 8px;
-        }
+    .muted {
+        color: #5A5858;
+    }
 
-        h4 {
-            font-size: 17px;
-        }
+    .muted-italic {
+        color: #5A5858;
+        font-style: italic;
+    }
 
-        p {
-            margin: 0 0 16px 0;
-        }
+    .emphasis {
+        font-weight: 600;
+    }
 
-        .muted {
-            color: #5A5858;
-        }
+    .benefits {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 10px 0;
+        margin-top: 20px;
+    }
 
-        .muted-italic {
-            color: #5A5858;
-            font-style: italic;
-        }
+    .benefit {
+        background-color: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 10px;
+        padding: 20px;
+        vertical-align: top;
+        width: 33%;
+    }
 
-        .emphasis {
-            font-weight: 600;
-        }
+    .benefit h4 {
+        margin-bottom: 12px;
+    }
 
-        .benefits {
-            width: calc(100% + 20px);
-            border-collapse: separate;
-            border-spacing: 10px 0;
-            margin: 20px -10px 0 -10px;
-        }
+    .benefit p {
+        margin: 0;
+    }
 
-        .benefit {
-            background-color: #ffffff;
-            border: 1px solid #e5e7eb;
-            border-radius: 10px;
-            padding: 20px;
-            vertical-align: top;
-            width: 33%;
-        }
+    .steps {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
 
-        .benefit h4 {
-            margin-bottom: 12px;
-        }
+    .steps td {
+        padding-bottom: 20px;
+        vertical-align: top;
+    }
 
-        .benefit p {
-            margin: 0;
-        }
+    .step-number-cell {
+        width: 72px;
+        vertical-align: top;
+    }
 
-        .steps {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
+    .step-number {
+        display: inline-block;
+        width: 56px;
+        height: 56px;
+        line-height: 56px;
+        text-align: center;
+        border-radius: 28px;
+        background-color: #E9F8EB;
+        color: #000000;
+        font-size: 20px;
+        font-weight: bold;
+    }
 
-        .steps td {
-            padding-bottom: 20px;
-            vertical-align: top;
-        }
+    .step h4 {
+        margin: 0 0 8px 0;
+    }
 
-        .step-number-cell {
-            width: 72px;
-            vertical-align: top;
-        }
+    .step p {
+        margin: 0;
+    }
 
-        .step-number {
-            display: inline-block;
-            width: 56px;
-            height: 56px;
-            line-height: 56px;
-            text-align: center;
-            border-radius: 28px;
-            background-color: #E9F8EB;
-            color: #000000;
-            font-size: 20px;
-            font-weight: bold;
-        }
+    .signoff p {
+        margin: 0 0 8px 0;
+    }
 
-        .step h4 {
-            margin: 0 0 8px 0;
-        }
+    .callout {
+        margin-top: 24px;
+        background-color: #E9F8EB;
+        border-top: 2px solid #156630;
+        border-radius: 0 0 6px 6px;
+        padding: 16px 20px;
+        color: #000000;
+    }
 
-        .step p {
-            margin: 0;
-        }
+    .callout p {
+        margin: 0;
+    }
 
-        .signoff p {
-            margin: 0 0 8px 0;
-        }
+    .footer {
+        font-size: 15px;
+        color: #000000;
+    }
 
-        .callout {
-            margin-top: 24px;
-            background-color: #E9F8EB;
-            border-top: 2px solid #156630;
-            border-radius: 0 0 6px 6px;
-            padding: 16px 20px;
-            color: #000000;
-        }
+    .footer p {
+        margin: 0 0 8px 0;
+    }
+</style>
 
-        .callout p {
-            margin: 0;
-        }
-
-        .footer {
-            font-size: 15px;
-            color: #000000;
-        }
-
-        .footer p {
-            margin: 0 0 8px 0;
-        }
-
-        @media only screen and (max-width: 700px) {
-            .logo-bar {
-                padding-left: 20px;
-                padding-right: 20px;
-            }
-
-            .hero {
-                padding-left: 20px;
-                padding-right: 20px;
-            }
-
-            .section {
-                padding-left: 20px;
-                padding-right: 20px;
-            }
-
-            .section-last {
-                padding-left: 20px;
-                padding-right: 20px;
-            }
-
-            .hero h1 {
-                font-size: 24px;
-            }
-
-            .benefits {
-                border-spacing: 0;
-                width: 100%;
-                margin: 20px 0 0 0;
-            }
-
-            .benefit-row {
-                display: block;
-                width: 100%;
-            }
-
-            .benefit {
-                display: block;
-                width: auto;
-                margin: 0;
-            }
-
-            .benefit + .benefit {
-                margin-top: 14px;
-            }
-        }
-    </style>
 </head>
 <body>
     <div class="container">
