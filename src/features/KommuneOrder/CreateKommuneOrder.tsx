@@ -16,7 +16,7 @@ import {
 import { useMutation } from "@tanstack/react-query"
 import { useActionState, useMemo, useState } from "react"
 import { useFormStatus } from "react-dom"
-import { informasjonsbrev_innhold, informasjonsbrev_tittel } from "../../utils/tekster"
+import { informasjonsbrev_innhold, informasjonsbrev_innhold_v2, informasjonsbrev_tittel } from "../../utils/tekster"
 import HtmlPreview from "../Previews/HtmlPreview"
 import SMSPreview from "../Previews/SMSPreview"
 import { createKommuneOrder } from "./api/kommuneOrderApi"
@@ -49,6 +49,10 @@ const CreateKommuneOrder = () => {
     førstegangsvarsling: {
       tittel: informasjonsbrev_tittel,
       body: informasjonsbrev_innhold,
+    },
+    førstegangsvarsling_v2: {
+      tittel: informasjonsbrev_tittel,
+      body: informasjonsbrev_innhold_v2,
     },
   }
 
