@@ -231,36 +231,21 @@ export const informasjonsbrev_innhold_v2 = `<!DOCTYPE html>
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Egenregistrering - Oppdater opplysninger om din eiendom</title>
+    <title>Egenregistrering – Oppdater opplysninger om din eiendom</title>
     <style>
-        :root {
-            --card: #ffffff;
-            --text: #000000;
-            --muted: #5A5858;
-            --primary: #156630;
-            --primary-dark: #0f4c24;
-            --border: #e5e7eb;
-            --accent: #E9F8EB;
-            --logo-bg: #eef0f3;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
         body {
             margin: 0;
             font-family: Arial, Helvetica, sans-serif;
             font-size: 17px;
             line-height: 1.5;
             font-weight: 400;
-            background: #ffffff;
-            color: var(--text);
+            background-color: #ffffff;
+            color: #000000;
         }
 
         a:link,
         a:visited {
-            color: var(--primary);
+            color: #156630;
         }
 
         .container {
@@ -269,12 +254,8 @@ export const informasjonsbrev_innhold_v2 = `<!DOCTYPE html>
             padding: 0;
         }
 
-        .card {
-            background: var(--card);
-        }
-
         .logo-bar {
-            background: var(--logo-bg);
+            background-color: #eef0f3;
             padding: 28px 32px;
         }
 
@@ -285,43 +266,41 @@ export const informasjonsbrev_innhold_v2 = `<!DOCTYPE html>
         }
 
         .hero {
-            background: #ffffff;
-            padding: 32px 32px 36px;
-            border-bottom: 1px solid var(--border);
+            background-color: #ffffff;
+            padding: 32px 32px 36px 32px;
+            border-bottom: 1px solid #e5e7eb;
         }
 
         h1, h2, h3, h4 {
-            font-weight: 700;
+            font-weight: bold;
             color: #000000;
             margin: 0;
         }
 
         .eyebrow {
-            color: var(--primary);
-            font-weight: 700;
+            color: #156630;
+            font-weight: bold;
             font-size: 17px;
-            margin: 0 0 8px;
+            margin: 0 0 8px 0;
         }
 
         .hero h1 {
             font-size: 28px;
             line-height: 1.2;
-            margin-bottom: 1rem;
+            margin-bottom: 16px;
         }
 
         .hero p {
-            margin: 0 0 16px;
+            margin: 0 0 16px 0;
             max-width: 760px;
         }
 
         .cta {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
+            display: inline-block;
             margin-top: 12px;
             padding: 12px 18px;
-            background: var(--primary);
-            color: #fff;
+            background-color: #156630;
+            color: #ffffff;
             text-decoration: none;
             border-radius: 8px;
         }
@@ -332,28 +311,22 @@ export const informasjonsbrev_innhold_v2 = `<!DOCTYPE html>
         }
 
         .cta:hover {
-            background: var(--primary-dark);
-        }
-
-        .cta svg {
-            width: 18px;
-            height: 18px;
-            flex-shrink: 0;
+            background-color: #0f4c24;
         }
 
         .section {
             padding: 32px;
-            border-bottom: 1px solid var(--border);
+            border-bottom: 1px solid #e5e7eb;
         }
 
-        .section:last-child {
-            border-bottom: none;
+        .section-last {
+            padding: 32px;
         }
 
         h3 {
             font-size: 20px;
             line-height: 1.3;
-            margin-bottom: 0.5rem;
+            margin-bottom: 8px;
         }
 
         h4 {
@@ -361,19 +334,19 @@ export const informasjonsbrev_innhold_v2 = `<!DOCTYPE html>
         }
 
         p {
-            margin: 0 0 16px;
+            margin: 0 0 16px 0;
         }
 
         strong, b {
-            font-weight: 700;
+            font-weight: bold;
         }
 
         .muted {
-            color: var(--muted);
+            color: #5A5858;
         }
 
         .muted-italic {
-            color: var(--muted);
+            color: #5A5858;
             font-style: italic;
         }
 
@@ -382,17 +355,19 @@ export const informasjonsbrev_innhold_v2 = `<!DOCTYPE html>
         }
 
         .benefits {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 10px 0;
             margin-top: 20px;
         }
 
         .benefit {
-            background: #ffffff;
-            border: 1px solid var(--border);
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
             border-radius: 10px;
             padding: 20px;
+            vertical-align: top;
+            width: 33%;
         }
 
         .benefit h4 {
@@ -404,51 +379,56 @@ export const informasjonsbrev_innhold_v2 = `<!DOCTYPE html>
         }
 
         .steps {
-            display: grid;
-            gap: 20px;
+            width: 100%;
+            border-collapse: collapse;
             margin-top: 20px;
         }
 
-        .step {
-            display: grid;
-            grid-template-columns: 56px 1fr;
-            gap: 16px;
-            align-items: start;
+        .steps td {
+            padding-bottom: 20px;
+            vertical-align: top;
+        }
+
+        .step-number-cell {
+            width: 72px;
+            vertical-align: top;
         }
 
         .step-number {
+            display: inline-block;
             width: 56px;
             height: 56px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 999px;
-            background: var(--accent);
+            line-height: 56px;
+            text-align: center;
+            border-radius: 28px;
+            background-color: #E9F8EB;
             color: #000000;
             font-size: 20px;
-            font-weight: 700;
-            flex-shrink: 0;
+            font-weight: bold;
         }
 
         .step h4 {
-            margin-bottom: 8px;
+            margin: 0 0 8px 0;
+        }
+
+        .step p {
+            margin: 0;
         }
 
         .signoff p {
-            margin: 0 0 8px;
+            margin: 0 0 8px 0;
         }
 
         .divider {
-            border: none;
-            border-top: 2px solid var(--primary);
-            margin: 24px 0 20px;
+            border: 0;
+            border-top: 2px solid #156630;
+            margin: 24px 0 20px 0;
+            height: 0;
         }
 
         .callout {
-            margin-top: 20px;
-            background: var(--accent);
-            border-radius: 0 0 6px 6px;
-            border-top: 2px solid #156630;
+            background-color: #E9F8EB;
+            border-radius: 8px;
             padding: 16px 20px;
             color: #000000;
         }
@@ -457,184 +437,134 @@ export const informasjonsbrev_innhold_v2 = `<!DOCTYPE html>
             margin: 0;
         }
 
-        .callout p + p {
-            margin-top: 4px;
-        }
-
         .footer {
             font-size: 15px;
             color: #000000;
         }
 
         .footer p {
-            margin: 0 0 8px;
-        }
-
-        .footer p:last-child {
-            margin-bottom: 0;
-        }
-
-        @media (max-width: 800px) {
-            .benefits {
-                grid-template-columns: 1fr;
-            }
-
-            .logo-bar {
-                padding: 20px;
-            }
-
-            .hero,
-            .section {
-                padding: 24px 20px;
-            }
-
-            .step-number {
-                width: 48px;
-                height: 48px;
-                font-size: 18px;
-            }
-
-            .step {
-                grid-template-columns: 48px 1fr;
-            }
+            margin: 0 0 8px 0;
         }
     </style>
 </head>
 <body>
-    <main class="container">
-        <article class="card">
-            <div class="logo-bar">
-                <img
-                    alt="Kartverket sin logo"
-                    class="logo"
-                    src="data:image/png;base64,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"
-                />
-            </div>
+    <div class="container">
+        <div class="logo-bar">
+            <img alt="Kartverket sin logo" class="logo" src="" />
+        </div>
 
-            <header class="hero">
-                <p class="eyebrow">Egenregistrering</p>
-                <h1>Oppdater opplysninger om din eiendom</h1>
-                <p>
-                    Kartverket og kommunene forvalter Norges offisielle eiendomsregister.
-                    Opplysningene danner grunnlaget for samfunnskritiske tjenester fra banker,
-                    forsikringsselskaper og offentlige myndigheter.
-                </p>
-                <p>
-                    Når opplysningene er feil eller mangelfulle kan det påvirke tjenestene du mottar.
-                    Derfor har vi gjort det enkelt å sjekke hva som er registrert og oppdatere det som er feil.
-                </p>
-                <a class="cta" href="https://mineiendom.kartverket.no/egenregistrering/oversikt?from=dpi3" target="_blank" rel="noopener noreferrer">
-                    Logg inn og gå til egenregistrering
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                        <polyline points="15 3 21 3 21 9"></polyline>
-                        <line x1="10" y1="14" x2="21" y2="3"></line>
-                    </svg>
-                </a>
-            </header>
+        <div class="hero">
+            <p class="eyebrow">Egenregistrering</p>
+            <h1>Oppdater opplysninger om din eiendom</h1>
+            <p>
+                Kartverket og kommunene forvalter Norges offisielle eiendomsregister.
+                Opplysningene danner grunnlaget for samfunnskritiske tjenester fra banker,
+                forsikringsselskaper og offentlige myndigheter.
+            </p>
+            <p>
+                Når opplysningene er feil eller mangelfulle kan det påvirke tjenestene du mottar.
+                Derfor har vi gjort det enkelt å sjekke hva som er registrert og oppdatere det som er feil.
+            </p>
+            <a class="cta" href="https://mineiendom.kartverket.no/egenregistrering/oversikt?from=dpi3" target="_blank" rel="noopener noreferrer">
+                Logg inn og gå til egenregistrering &#8599;
+            </a>
+        </div>
 
-            <section class="section">
-                <h3>Hvorfor er det viktig at det er riktig?</h3>
-                <p>
-                    Riktige eiendomsopplysninger gir bedre tjenester og trygghet for deg som boligeier.
-                </p>
+        <div class="section">
+            <h3>Hvorfor er det viktig at det er riktig?</h3>
+            <p>Riktige eiendomsopplysninger gir bedre tjenester og trygghet for deg som boligeier.</p>
 
-                <div class="benefits">
-                    <div class="benefit">
+            <table class="benefits" role="presentation">
+                <tr>
+                    <td class="benefit">
                         <h4>Kjøp og salg</h4>
-                        <p>
-                            Riktige opplysninger gir en tryggere salgsprosess og lavere risiko for uenigheter.
-                        </p>
-                    </div>
-
-                    <div class="benefit">
+                        <p>Riktige opplysninger gir en tryggere salgsprosess og lavere risiko for uenigheter.</p>
+                    </td>
+                    <td class="benefit">
                         <h4>Lån og forsikring</h4>
-                        <p>
-                            Banker og forsikringsselskaper kan hente opplysninger for å sikre at du får riktige betingelser.
-                        </p>
-                    </div>
-
-                    <div class="benefit">
+                        <p>Banker og forsikringsselskaper kan hente opplysninger for å sikre at du får riktige betingelser.</p>
+                    </td>
+                    <td class="benefit">
                         <h4>Skatter og avgifter</h4>
-                        <p>
-                            Opplysningene kan brukes som grunnlag for riktig beregning av skatter og avgifter.
+                        <p>Opplysningene kan brukes som grunnlag for riktig beregning av skatter og avgifter.</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h3>Hva kan du egenregistrere?</h3>
+            <p>
+                I første omgang kan du oppdatere informasjon om <span class="emphasis">byggeår, bruksareal, vann og avløp og energi og oppvarming</span>.
+            </p>
+            <p>
+                Før du starter kan det være lurt å ha salgsoppgave, byggesaksdokumenter eller andre
+                relevante dokumenter tilgjengelig. Du trenger ikke laste opp noe, men de kan hjelpe
+                deg å finne riktige opplysninger.
+            </p>
+            <p class="muted-italic">
+                Finner du andre opplysninger du mener er feil kan du be kommunen om å rette dem.
+            </p>
+        </div>
+
+        <div class="section">
+            <h3>Hvordan gjør du en egenregistrering?</h3>
+
+            <table class="steps" role="presentation">
+                <tr class="step">
+                    <td class="step-number-cell">
+                        <span class="step-number">1</span>
+                    </td>
+                    <td>
+                        <h4>Velg eiendommen du vil oppdatere</h4>
+                        <p class="muted">
+                            Registrering kan være tilgjengelig for flere eiendommer.
+                            I tjenesten ser du tydelig hvilke som er fullført og ikke.
                         </p>
-                    </div>
-                </div>
-            </section>
+                    </td>
+                </tr>
+                <tr class="step">
+                    <td class="step-number-cell">
+                        <span class="step-number">2</span>
+                    </td>
+                    <td>
+                        <h4>Gå gjennom opplysningene</h4>
+                        <p class="muted">
+                            Bekreft det som stemmer, endre det som er feil, eller legg til det som mangler.
+                        </p>
+                    </td>
+                </tr>
+                <tr class="step">
+                    <td class="step-number-cell">
+                        <span class="step-number">3</span>
+                    </td>
+                    <td>
+                        <h4>Send inn</h4>
+                        <p class="muted">
+                            Opplysningene du registrerer inngår som et tillegg til det kommunen allerede har registrert.
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
-            <section class="section">
-                <h3>Hva kan du egenregistrere?</h3>
-                <p>
-                    I første omgang kan du oppdatere informasjon om <span class="emphasis">byggeår, bruksareal, vann og avløp og energi og oppvarming</span>.
-                </p>
-                <p>
-                    Før du starter kan det være lurt å ha salgsoppgave, byggesaksdokumenter eller andre
-                    relevante dokumenter tilgjengelig. Du trenger ikke laste opp noe, men de kan hjelpe
-                    deg å finne riktige opplysninger.
-                </p>
-                <p class="muted-italic">
-                    Finner du andre opplysninger du mener er feil kan du be kommunen om å rette dem.
-                </p>
-            </section>
+        <div class="section signoff">
+            <p>Takk for at du bidrar til et riktig og oppdatert register!</p>
+            <p>Med vennlig hilsen Kartverket</p>
 
-            <section class="section">
-                <h3>Hvordan gjør du en egenregistrering?</h3>
+            <hr class="divider" />
 
-                <div class="steps">
-                    <div class="step">
-                        <div class="step-number">1</div>
-                        <div>
-                            <h4>Velg eiendommen du vil oppdatere</h4>
-                            <p class="muted">
-                                Registrering kan være tilgjengelig for flere eiendommer.
-                                I tjenesten ser du tydelig hvilke som er fullført og ikke.
-                            </p>
-                        </div>
-                    </div>
+            <div class="callout">
+                <p>Egenregistrering er en frivillig tjeneste, og du velger selv hvilke opplysninger du oppdaterer.</p>
+                <p>Det holder at én eier gjennomfører registreringen.</p>
+            </div>
+        </div>
 
-                    <div class="step">
-                        <div class="step-number">2</div>
-                        <div>
-                            <h4>Gå gjennom opplysningene</h4>
-                            <p class="muted">
-                                Bekreft det som stemmer, endre det som er feil, eller legg til det som mangler.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="step">
-                        <div class="step-number">3</div>
-                        <div>
-                            <h4>Send inn</h4>
-                            <p class="muted">
-                                Opplysningene du registrerer inngår som et tillegg til det kommunen allerede har registrert.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="section signoff">
-                <p>Takk for at du bidrar til et riktig og oppdatert register!</p>
-                <p>Med vennlig hilsen Kartverket</p>
-
-                <div class="callout">
-                    <p>Egenregistrering er en frivillig tjeneste, og du velger selv hvilke opplysninger du oppdaterer.</p>
-                    <p>Det holder at én eier gjennomfører registreringen.</p>
-                </div>
-            </section>
-
-            <section class="section footer">
-                <p>
-                    Du mottar dette brevet fordi du er registrert som eier eller fester av en bolig i Norge.
-                </p>
-                <p>
-                    Matrikkelloven § 27 åpner for at eiere selv kan registrere opplysninger om sin eiendom i matrikkelen.
-                </p>
-            </section>
-        </article>
-    </main>
+        <div class="section-last footer">
+            <p>Du mottar dette brevet fordi du er registrert som eier eller fester av en bolig i Norge.</p>
+            <p>Matrikkelloven § 27 åpner for at eiere selv kan registrere opplysninger om sin eiendom i matrikkelen.</p>
+        </div>
+    </div>
 </body>
 </html>
 `
