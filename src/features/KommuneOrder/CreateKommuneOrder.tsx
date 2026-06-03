@@ -177,7 +177,10 @@ const CreateKommuneOrder = () => {
           kommunenr: kommunenummer,
           gardsnummer: ignoreGardsnummer ? null : { fra: gardsnummerStart!, til: gardsnummerEnd! },
           smsmelding: smsOptions[selectedSmsKey],
-          dpimelding: eFormidlingOptions[selectedDpiKey],
+          dpimelding: {
+            tittel: eFormidlingOptions[selectedDpiKey].tittel,
+            body: eFormidlingOptions[selectedDpiKey].body,
+          },
         })
 
         return { status: "success" }
