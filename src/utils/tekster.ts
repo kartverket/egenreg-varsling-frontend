@@ -270,7 +270,7 @@ export const informasjonsbrev_innhold_v2 = `<!DOCTYPE html>
             border-bottom: 1px solid #e5e7eb;
         }
 
-        h1, h2, h3, h4 {
+        h1, h3, h4 {
             font-weight: bold;
             color: #000000;
             margin: 0;
@@ -334,10 +334,6 @@ export const informasjonsbrev_innhold_v2 = `<!DOCTYPE html>
 
         p {
             margin: 0 0 16px 0;
-        }
-
-        strong, b {
-            font-weight: bold;
         }
 
         .muted {
@@ -416,13 +412,6 @@ export const informasjonsbrev_innhold_v2 = `<!DOCTYPE html>
 
         .signoff p {
             margin: 0 0 8px 0;
-        }
-
-        .divider {
-            border: 0;
-            border-top: 2px solid #156630;
-            margin: 24px 0 20px 0;
-            height: 0;
         }
 
         .callout {
