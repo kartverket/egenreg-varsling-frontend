@@ -341,9 +341,6 @@ export const informasjonsbrev_innhold_v2 = `<!DOCTYPE html>
     }
 
     .benefits {
-        width: 100%;
-        border-collapse: separate;
-        border-spacing: 10px 0;
         margin-top: 20px;
     }
 
@@ -352,8 +349,7 @@ export const informasjonsbrev_innhold_v2 = `<!DOCTYPE html>
         border: 1px solid #e5e7eb;
         border-radius: 10px;
         padding: 20px;
-        vertical-align: top;
-        width: 33%;
+        margin-bottom: 12px;
     }
 
     .benefit h4 {
@@ -454,22 +450,20 @@ export const informasjonsbrev_innhold_v2 = `<!DOCTYPE html>
             <h3>Hvorfor er det viktig at det er riktig?</h3>
             <p>Riktige eiendomsopplysninger gir bedre tjenester og trygghet for deg som boligeier.</p>
 
-            <table class="benefits">
-                <tr class="benefit-row">
-                    <td class="benefit">
-                        <h4>Kjøp og salg</h4>
-                        <p>Riktige opplysninger gir en tryggere salgsprosess og lavere risiko for uenigheter.</p>
-                    </td>
-                    <td class="benefit">
-                        <h4>Lån og forsikring</h4>
-                        <p>Banker og forsikringsselskaper kan hente opplysninger for å sikre at du får riktige betingelser.</p>
-                    </td>
-                    <td class="benefit">
-                        <h4>Skatter og avgifter</h4>
-                        <p>Opplysningene kan brukes som grunnlag for riktig beregning av skatter og avgifter.</p>
-                    </td>
-                </tr>
-            </table>
+            <div class="benefits">
+                <div class="benefit">
+                    <h4>Kjøp og salg</h4>
+                    <p>Riktige opplysninger gir en tryggere salgsprosess og lavere risiko for uenigheter.</p>
+                </div>
+                <div class="benefit">
+                    <h4>Lån og forsikring</h4>
+                    <p>Banker og forsikringsselskaper kan hente opplysninger for å sikre at du får riktige betingelser.</p>
+                </div>
+                <div class="benefit">
+                    <h4>Skatter og avgifter</h4>
+                    <p>Opplysningene kan brukes som grunnlag for riktig beregning av skatter og avgifter.</p>
+                </div>
+            </div>
         </div>
 
         <div class="section">
