@@ -445,42 +445,47 @@ export const informasjonsbrev_innhold_v2 = `<!DOCTYPE html>
             margin: 0 0 8px 0;
         }
 
-        @media (max-width: 700px) {
-          .logo-bar,
-          .hero,
-          .section,
-          .section-last {
-              padding-left: 20px;
-              padding-right: 20px;
-          }
+        @media only screen and (max-width: 700px) {
+            .logo-bar {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
 
-          .hero h1 {
-              font-size: 24px;
-          }
+            .hero {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
 
-          .benefits {
-              border-spacing: 0;
-              margin-top: 16px;
-          }
+            .section {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
 
-          .benefits,
-          .benefits tbody,
-          .benefits tr,
-          .benefits td {
-              display: block;
-              width: 100%;
-          }
+            .section-last {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
 
-          .benefit {
-              width: 100%;
-              box-sizing: border-box;
-              margin-bottom: 14px;
-          }
+            .hero h1 {
+                font-size: 24px;
+            }
 
-          .benefit:last-child {
-              margin-bottom: 0;
-          }
-      }
+            .benefits {
+                border-spacing: 0;
+                width: 100%;
+            }
+
+            .benefit-row {
+                display: block;
+                width: 100%;
+            }
+
+            .benefit {
+                display: block;
+                width: auto;
+                margin-bottom: 14px;
+            }
+        }
 
     </style>
 </head>
@@ -510,7 +515,7 @@ export const informasjonsbrev_innhold_v2 = `<!DOCTYPE html>
             <p>Riktige eiendomsopplysninger gir bedre tjenester og trygghet for deg som boligeier.</p>
 
             <table class="benefits">
-                <tr>
+                <tr class="benefit-row">
                     <td class="benefit">
                         <h4>Kjøp og salg</h4>
                         <p>Riktige opplysninger gir en tryggere salgsprosess og lavere risiko for uenigheter.</p>
