@@ -223,6 +223,9 @@ export const informasjonsbrev_innhold = `<!DOCTYPE html>
   </body>
 </html>
 `
+
+export const informasjonsbrev_tittel_v2 = "Registrer opplysninger i Eiendomsregisteret"
+
 export const informasjonsbrev_innhold_v2 = `<!DOCTYPE html>
 <html lang="no">
 <head>
