@@ -121,6 +121,10 @@ const KommuneOrdreStatus = () => {
                       <Tag colorPalette="red" variant="subtle">
                         FEILET
                       </Tag>
+                    ) : ordre.status === "AVBRUTT" ? (
+                      <Tag colorPalette="gray" variant="subtle">
+                        AVBRUTT
+                      </Tag>
                     ) : (
                       <Tag colorPalette="green" variant="subtle">
                         FERDIG
