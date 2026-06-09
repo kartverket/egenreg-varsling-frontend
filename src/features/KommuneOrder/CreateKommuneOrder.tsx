@@ -16,12 +16,7 @@ import {
 import { useMutation } from "@tanstack/react-query"
 import { useActionState, useMemo, useState } from "react"
 import { useFormStatus } from "react-dom"
-import {
-  informasjonsbrev_innhold,
-  informasjonsbrev_innhold_v2,
-  informasjonsbrev_tittel,
-  informasjonsbrev_tittel_v2,
-} from "../../utils/tekster"
+import { informasjonsbrev_innhold_v2, informasjonsbrev_tittel_v2 } from "../../utils/tekster"
 import HtmlPreview from "../Previews/HtmlPreview"
 import SMSPreview from "../Previews/SMSPreview"
 import { createKommuneOrder } from "./api/kommuneOrderApi"
@@ -54,11 +49,6 @@ const CreateKommuneOrder = () => {
     string,
     { tittel: string; body: string; presentasjonsverdi: string }
   > = {
-    førstegangsvarsling: {
-      presentasjonsverdi: "Registrer opplysninger i Eiendomsregisteret v1",
-      tittel: informasjonsbrev_tittel,
-      body: informasjonsbrev_innhold,
-    },
     førstegangsvarsling_v2: {
       presentasjonsverdi: "Registrer opplysninger i Eiendomsregisteret v2",
       tittel: informasjonsbrev_tittel_v2,
