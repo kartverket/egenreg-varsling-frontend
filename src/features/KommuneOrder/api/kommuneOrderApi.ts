@@ -61,7 +61,7 @@ export interface KommuneOrder {
   ordreId: string
   kommunenummer: string
   gardsnummer: { fra: number; til: number } | undefined
-  status: "KJØRER" | "FERDIG" | "FEILET" | "AVBRUTT"
+  status: "KJØRER" | "FERDIG" | "FEILET" | "AVBRUTT" | "STOPPET"
   totaltAntallVarslinger: number
   antallMatrikkelenheterForsoktVarslet?: number
   sendtDPI: number
