@@ -13,9 +13,9 @@ import {
   Tag,
   Text,
 } from "@kvib/react"
-import { useQuery } from "@tanstack/react-query"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { exportToCsv } from "../../utils/exportCsv.ts"
-import { getKommuneOrder, type KommuneOrder } from "./api/kommuneOrderApi"
+import { getKommuneOrder, stopKommuneOrder, type KommuneOrder } from "./api/kommuneOrderApi"
 import useKommuner from "./hooks/useKommuner"
 
 const dateFormatter = (date: Date) =>
@@ -32,6 +32,15 @@ const KommuneOrdreStatus = () => {
   })
 
   const { data: kommuner, isPending: isKommunerPending } = useKommuner()
+
+  const queryClient = useQueryClient()
+
+  const { mutate: stopOrder, isPending: isStopping } = useMutation({
+    mutationFn: stopKommuneOrder,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["kommuneOrderStatus"] })
+    },
+  })
 
   const hasOrders = (ordreStatus?.length ?? 0) > 0
 
@@ -114,9 +123,20 @@ const KommuneOrdreStatus = () => {
                   <TableCell>{dateFormatter(new Date(ordre.startet))}</TableCell>
                   <TableCell>
                     {ordre.status === "KJØRER" ? (
-                      <Tag colorPalette="yellow" variant="subtle">
-                        KJØRER
-                      </Tag>
+                      <Flex alignItems="center" gap={2}>
+                        <Tag colorPalette="yellow" variant="subtle">
+                          KJØRER
+                        </Tag>
+                        <Button
+                          size="xs"
+                          colorPalette="red"
+                          variant="outline"
+                          loading={isStopping}
+                          onClick={() => stopOrder(ordre.ordreId)}
+                        >
+                          Stopp
+                        </Button>
+                      </Flex>
                     ) : ordre.status === "FEILET" ? (
                       <Tag colorPalette="red" variant="subtle">
                         FEILET
@@ -124,6 +144,10 @@ const KommuneOrdreStatus = () => {
                     ) : ordre.status === "AVBRUTT" ? (
                       <Tag colorPalette="gray" variant="subtle">
                         AVBRUTT
+                      </Tag>
+                    ) : ordre.status === "STOPPET" ? (
+                      <Tag colorPalette="red" variant="subtle">
+                        STOPPET
                       </Tag>
                     ) : (
                       <Tag colorPalette="green" variant="subtle">

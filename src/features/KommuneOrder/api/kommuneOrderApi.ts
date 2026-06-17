@@ -32,6 +32,21 @@ export const getKommuneOrder = async () => {
   return data
 }
 
+export const stopKommuneOrder = async (ordreId: string) => {
+  const response = await fetch(`${kommuneApiRoute}/${ordreId}/stop`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+
+  if (!response.ok) {
+    throw new Error("Failed to stop kommune order")
+  }
+
+  return response.ok
+}
+
 interface CreateKommuneOrderDTO {
   kommunenr: string
   gardsnummer: { fra: number; til: number } | null
@@ -46,7 +61,7 @@ export interface KommuneOrder {
   ordreId: string
   kommunenummer: string
   gardsnummer: { fra: number; til: number } | undefined
-  status: "KJØRER" | "FERDIG" | "FEILET" | "AVBRUTT"
+  status: "KJØRER" | "FERDIG" | "FEILET" | "AVBRUTT" | "STOPPET"
   totaltAntallVarslinger: number
   antallMatrikkelenheterForsoktVarslet?: number
   sendtDPI: number
