@@ -8,17 +8,20 @@ updates:
   - package-ecosystem: "github-actions"
     directory: ".github/workflows"
     schedule:
-      interval: "weekly"
+      interval: weekly
+      day: sunday
 
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: weekly
+      day: sunday
 
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: weekly
+      day: sunday
     cooldown:
       default-days: 2
     ignore:
