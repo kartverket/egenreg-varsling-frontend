@@ -34,6 +34,11 @@ updates:
     ignore:
       - dependency-name: "posthog-js"
         update-types: ["version-update:semver-patch"]
+      # eslint-plugin-react støtter ikke eslint v10 ennå. Kan fjernes når støtte er på plass
+      - dependency-name: "eslint"
+        versions: [ ">=10" ]
+      - dependency-name:  "@eslint/js"
+        versions: [ ">=10" ]
     groups:
       devDependencies:
         dependency-type: "development"
