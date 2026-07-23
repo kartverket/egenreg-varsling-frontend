@@ -1,17 +1,11 @@
-FROM caddy:2.11.4-alpine@sha256:5f5c8640aae01df9654968d946d8f1a56c497f1dd5c5cda4cf95ab7c14d58648
-RUN apk update && apk upgrade
+FROM dhi.io/caddy:2@sha256:e29be2c69ea4552edea5fbeb5e81568b6e70fbaa56dec2e49863c872f18aaebcRUN apk update && apk upgrade
 
-ENV USER_ID=150 \
-    USER_NAME=apprunner \
-    TZ=Europe/Oslo
+ENV TZ=Europe/Oslo
 
-RUN addgroup -g ${USER_ID} ${USER_NAME} \
-    && adduser -u ${USER_ID} -G ${USER_NAME} -D ${USER_NAME}
+COPY /dist /srv
+COPY Caddyfile /etc/caddy/Caddyfile
 
-COPY --chown=${USER_ID}:${USER_ID} /dist /srv
-COPY --chown=${USER_ID}:${USER_ID} Caddyfile /etc/caddy/Caddyfile
-
-USER ${USER_NAME}
+USER nonroot
 
 ENV PORT=8080
 
