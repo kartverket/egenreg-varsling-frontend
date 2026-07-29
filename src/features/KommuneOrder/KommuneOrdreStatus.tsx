@@ -56,7 +56,7 @@ const KommuneOrdreStatus = () => {
     return (
       <Box borderWidth="1px" borderRadius="md" p={6} bg="white" shadow="sm">
         <Heading size="md" mb={2}>
-          Kommuneordre status
+          Kommuneordre status (siste 2 ukene)
         </Heading>
         <Text color="gray.600">Ingen kommuneordre å vise enda.</Text>
       </Box>
