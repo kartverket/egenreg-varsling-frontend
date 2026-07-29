@@ -1,10 +1,14 @@
+import { getAccessToken } from "../../../auth/getToken.ts"
+
 const kommuneApiRoute = "/kommuneordre"
 
 export const createKommuneOrder = async (kommuneOrder: CreateKommuneOrderDTO) => {
+  const token = await getAccessToken()
   const response = await fetch(`${kommuneApiRoute}/start`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(kommuneOrder),
   })
@@ -17,10 +21,12 @@ export const createKommuneOrder = async (kommuneOrder: CreateKommuneOrderDTO) =>
 }
 
 export const getKommuneOrder = async () => {
+  const token = await getAccessToken()
   const response = await fetch(`${kommuneApiRoute}/status`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
   })
 
@@ -33,10 +39,12 @@ export const getKommuneOrder = async () => {
 }
 
 export const stopKommuneOrder = async (ordreId: string) => {
+  const token = await getAccessToken()
   const response = await fetch(`${kommuneApiRoute}/${ordreId}/stop`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
   })
 
