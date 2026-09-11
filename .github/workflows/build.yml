@@ -20,6 +20,7 @@ jobs:
 
     outputs:
       image_url: ${{ steps.setOutput.outputs.image_url }}
+      image_tag: ${{ steps.version_tag.outputs.version_tag }}
 
     steps:
       - name: Checkout code
@@ -53,11 +54,12 @@ jobs:
           username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Bump version and push tag
-        id: tag_version
-        uses: mathieudutour/github-tag-action@a22cf08638b34d5badda920f9daf6e72c477b07b # v6.2
-        with:
-          github_token: ${{ github.token }}
+      - name: Set version tag
+        id: version_tag
+        shell: bash
+        run: |
+          DATE=$(date +%Y%m%d)
+          echo "version_tag=v${{ github.run_number }}-${DATE}" >> "$GITHUB_OUTPUT"
 
       - name: Build Docker and push
         id: build
@@ -65,12 +67,23 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ env.registry }}/${{ github.repository }}:${{ steps.tag_version.outputs.new_tag }}
+          tags: ${{ env.registry }}/${{ github.repository }}:${{ steps.version_tag.outputs.version_tag }}
+
+      - name: Create and push git tag
+        if: github.ref_name == 'main'
+        shell: bash
+        run: |
+          git config --global user.email "noreply@kartverket.no"
+          git config --global user.name "Egenreg CI"
+          git tag ${{ steps.version_tag.outputs.version_tag }}
+          git push origin ${{ steps.version_tag.outputs.version_tag }}
 
       - name: Set output with build values
         id: setOutput
         run: |
-          echo "image_url=${{ env.registry }}/${{ github.repository }}:${{ steps.tag_version.outputs.new_tag }}@${{ steps.build.outputs.digest }}" >> $GITHUB_OUTPUT
+          echo "image_url=${{ env.registry }}/${{ github.repository }}:${{ steps.version_tag.outputs.version_tag }}@${{ steps.build.outputs.digest }}" >> $GITHUB_OUTPUT
+          echo "image_tag=${{ steps.version_tag.outputs.version_tag }}" >> $GITHUB_OUTPUT
+
   pharos:
     name: Run Pharos with Required Permissions
     needs: build
@@ -111,5 +124,5 @@ jobs:
           echo "\"${{ needs.build.outputs.image_url }}\"" > "env/atgcp1-dev/egenreg-varsling/varsling-frontend/${{ env.argo_version_file }}"
           git config --global user.email "noreply@kartverket.no"
           git config --global user.name "Egenreg CI"
-          git commit -am "Update Egenreg ${{ env.argo_version_file }}"
+          git commit -am "Update Egenreg ${{ env.argo_version_file }} med tag ${{ needs.build.outputs.image_tag }} i dev"
           git push
