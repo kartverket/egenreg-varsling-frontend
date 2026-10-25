@@ -1,4 +1,4 @@
-FROM dhi.io/caddy:2@sha256:6cff7cb12f5fce38d05d92677f45af923661ff185aa6e1e72505a09cb6882201
+FROM dhi.io/caddy:2@sha256:341b5a19e1b7c233b9bf8836f19b5a69f8a1035373e5a59c44e01be6b536cd6b
 
 ENV TZ=Europe/Oslo
 
